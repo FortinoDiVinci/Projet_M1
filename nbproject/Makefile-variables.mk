@@ -1,0 +1,13 @@
+#
+# Generated - do not edit!
+#
+# NOCDDL
+#
+CND_BASEDIR=`pwd`
+# XC16_24FJ256GA110 configuration
+CND_ARTIFACT_DIR_XC16_24FJ256GA110=dist/XC16_24FJ256GA110/production
+CND_ARTIFACT_NAME_XC16_24FJ256GA110=Projet_M_1_robot_garde_corps.X.production.hex
+CND_ARTIFACT_PATH_XC16_24FJ256GA110=dist/XC16_24FJ256GA110/production/Projet_M_1_robot_garde_corps.X.production.hex
+CND_PACKAGE_DIR_XC16_24FJ256GA110=${CND_DISTDIR}/XC16_24FJ256GA110/package
+CND_PACKAGE_NAME_XC16_24FJ256GA110=projetm1robotgardecorps.x.tar
+CND_PACKAGE_PATH_XC16_24FJ256GA110=${CND_DISTDIR}/XC16_24FJ256GA110/package/projetm1robotgardecorps.x.tar
