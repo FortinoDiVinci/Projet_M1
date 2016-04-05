@@ -40,3 +40,4 @@ AD1CON1bits.ADON = 1;})
 void InitApp(void);         /* I/O and Peripheral Initialization */
 void InitADC();             /* Initialize Analog to Digital Converter */
 void ObjectDetection(int*, int*, int);    /* Detect if an object is seen by one of the infrared */
+void InitPWM(void);

@@ -73,19 +73,19 @@ void ObjectDetection(int* ADCValues, int* average, int count)
         int obstacle[NMB_SENSORS] = {0, 0, 0};
         for(i = 0; i<NMB_SENSORS; i++)
         {
-            if((average[i] <= IR_DISTANCE_80)&&(average[i]) >= IR_DISTANCE_50)
+            if((average[i] <= IR_DISTANCE_80)&&(average[i] >= IR_DISTANCE_50))
             {
                 obstacle[i] = 1;
             }
-            if((average[i] < IR_DISTANCE_50)&&()average[i] >= IR_DISTANCE_40)
+            if((average[i] < IR_DISTANCE_50)&&(average[i] >= IR_DISTANCE_40))
             {
                 obstacle[i] = 2;
             }
-            if((average[i] < IR_DISTANCE_40)&&()average[i] >= IR_DISTANCE_30)
+            if((average[i] < IR_DISTANCE_40)&&(average[i] >= IR_DISTANCE_30))
             {
                 obstacle[i] = 3;
             }
-            if((average[i] < IR_DISTANCE_30)&&()average[i] >= IR_DISTANCE_20)
+            if((average[i] < IR_DISTANCE_30)&&(average[i] >= IR_DISTANCE_20))
             {
                 obstacle[i] = 4;
             }
@@ -93,4 +93,29 @@ void ObjectDetection(int* ADCValues, int* average, int count)
         /* RESET count */
         count = 0;
     }
+}
+
+void InitPWM(void)
+{
+    // Set MCCP operating mode
+    CCP1CON1Lbits.CCSEL = 0; // Set MCCP operating mode (OC mode)
+    CCP1CON1Lbits.MOD = 0b0101; // Set mode (Buffered Dual-Compare/PWM mode)
+    
+    //Configure MCCP Timebase
+    CCP1CON1Lbits.TMR32 = 0; // Set timebase width (16-bit)
+    CCP1CON1Lbits.TMRSYNC = 0; // Set timebase synchronization (Synchronized)
+    CCP1CON1Lbits.CLKSEL = 0b000; // Set the clock source (Tcy)
+    CCP1CON1Lbits.TMRPS = 0b00; // Set the clock pre-scaler (1:1)
+    CCP1CON1Hbits.TRIGEN = 0; // Set Sync/Triggered mode (Synchronous)
+    CCP1CON1Hbits.SYNC = 0b00000; // Select Sync/Trigger source (Self-sync)
+    
+    //Configure MCCP output for PWM signal
+    CCP1CON2Hbits.OCAEN = 1; // Enable desired output signals (OC1A)
+    CCP1CON3Hbits.OUTM = 0b000; // Set advanced output modes (Standard output)
+    CCP1CON3Hbits.POLACE = 0; //Configure output polarity (Active High)
+    CCP1TMRL = 0x0000; //Initialize timer prior to enable module.
+    CCP1PRL = 0xFFFF; //Configure timebase period
+    CCP1RA = 0x1000; // Set the rising edge compare value
+    CCP1RB = 0x8000; // Set the falling edge compare value
+    CCP1CON1Lbits.CCPON = 1; // Turn on MCCP module
 }
