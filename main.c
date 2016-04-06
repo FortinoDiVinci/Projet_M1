@@ -52,7 +52,7 @@ int16_t main(void)
         /* SENSORS SAMPLING */
         for(i=0; i<NMB_SENSORS; i++)
         {
-            ADC(ADC_values, &active_sensor);
+            StartADC(ADC_values, &active_sensor);
         }
     }
 }

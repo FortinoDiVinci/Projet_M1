@@ -103,7 +103,7 @@ External Symbols in Program Memory (by address):
                   0x0002b6                  _InitApp
                   0x0002bc                  _InitADC
                   0x0002dc                  _ObjectDetection
-                  0x00041e                  _ADC
+                  0x00041e                  _StartADC
                   0x0004ee                  _InitPWM
                   0x000540                  _main
                   0x00056e                  ___delay32
@@ -111,12 +111,12 @@ External Symbols in Program Memory (by address):
 
 External Symbols in Program Memory (by name):
 
-                  0x00041e                  _ADC
                   0x00058a                  _ConfigureOscillator
                   0x0002bc                  _InitADC
                   0x0002b6                  _InitApp
                   0x0004ee                  _InitPWM
                   0x0002dc                  _ObjectDetection
+                  0x00041e                  _StartADC
                   0x0002a0                  __AddressError
                   0x0002b2                  __DefaultInterrupt
                   0x0002ac                  __MathError
@@ -230,14 +230,14 @@ __FICD
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x1b48
+.debug_info       0x000000       0x1b4e
  *(.debug_info)
  .debug_info      0x000000         0xa2 build/XC16_24FJ256GA110/production/configuration_bits.o
  .debug_info      0x0000a2        0x10d build/XC16_24FJ256GA110/production/interrupts.o
- .debug_info      0x0001af        0x177 build/XC16_24FJ256GA110/production/main.o
- .debug_info      0x000326        0x12c build/XC16_24FJ256GA110/production/system.o
- .debug_info      0x000452        0x254 build/XC16_24FJ256GA110/production/traps.o
- .debug_info      0x0006a6       0x14a2 build/XC16_24FJ256GA110/production/user.o
+ .debug_info      0x0001af        0x178 build/XC16_24FJ256GA110/production/main.o
+ .debug_info      0x000327        0x12c build/XC16_24FJ256GA110/production/system.o
+ .debug_info      0x000453        0x254 build/XC16_24FJ256GA110/production/traps.o
+ .debug_info      0x0006a7       0x14a7 build/XC16_24FJ256GA110/production/user.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000        0x286
@@ -277,7 +277,7 @@ __FICD
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x104
+                  0x000000        0x109
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0x1b build/XC16_24FJ256GA110/production/main.o
@@ -286,7 +286,7 @@ __FICD
  .debug_pubnames
                   0x000045         0x6d build/XC16_24FJ256GA110/production/traps.o
  .debug_pubnames
-                  0x0000b2         0x52 build/XC16_24FJ256GA110/production/user.o
+                  0x0000b2         0x57 build/XC16_24FJ256GA110/production/user.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -1382,7 +1382,7 @@ __c30_signature
                   0x0002b6                  _InitApp
                   0x0002bc                  _InitADC
                   0x0002dc                  _ObjectDetection
-                  0x00041e                  _ADC
+                  0x00041e                  _StartADC
                   0x0004ee                  _InitPWM
  .text            0x000540         0x2e build/XC16_24FJ256GA110/production/main.o
                   0x000540                  _main

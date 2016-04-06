@@ -97,7 +97,7 @@ void ObjectDetection(int* ADCValues, int* average, int count)
     }
 }
 
-void ADC(int* ADCValues, int* active_sensor)
+void StartADC(int* ADCValues, int* active_sensor)
 {
     if(*active_sensor == IR1)
         {
