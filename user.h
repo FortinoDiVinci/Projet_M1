@@ -1,10 +1,10 @@
 /******************************************************************************/
 /* User Level #define Macros                                                  */
 /******************************************************************************/
-#define IR1 0
-#define IR2 1
-#define IR3 2
-#define US 3
+#define IR1 0 /* First infrared AN2 */
+#define IR2 1 /* Second infrared AN0 */
+#define IR3 2 /* Third infrared AN5 */
+#define US 3 /* Ultrasound AN3 */
 
 #define START_SAMPLING(x)( \
 { if(x==IR2) {AD1CON1bits.ADON = 0; AD1CHSbits.CH0SA = 0X00; } \
@@ -39,5 +39,6 @@ AD1CON1bits.ADON = 1;})
 
 void InitApp(void);         /* I/O and Peripheral Initialization */
 void InitADC();             /* Initialize Analog to Digital Converter */
+void InitPWM(void);         /* Initialize PWM */
+void ADC(int*, int*);        /* Samples et converts the analog inputs */
 void ObjectDetection(int*, int*, int);    /* Detect if an object is seen by one of the infrared */
-void InitPWM(void);

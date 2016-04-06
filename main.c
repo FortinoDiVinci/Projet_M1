@@ -44,52 +44,15 @@ int16_t main(void)
     InitADC();
     
     /* TODO <INSERT USER APPLICATION CODE HERE> */
-    int ADCValues[] = {0,0,0,0};
+    int ADC_values[] = {0,0,0,0};
     int active_sensor = 0;
+    int i;
     while(1)
     {
         /* SENSORS SAMPLING */
-
-        if(active_sensor == IR1)
+        for(i=0; i<NMB_SENSORS; i++)
         {
-            START_SAMPLING(IR1);
+            ADC(ADC_values, &active_sensor);
         }
-        if(active_sensor == IR2)
-        {
-            START_SAMPLING(IR2);
-        }
-        if(active_sensor == IR3)
-        {
-            START_SAMPLING(IR3);
-        }
-        if(active_sensor == US)
-        {
-            START_SAMPLING(US);
-        }
-        /* CONVERSION */
-
-        AD1CON1bits.SAMP = 1; 
-        __delay_ms(1);
-        AD1CON1bits.SAMP = 0;
-        while (!AD1CON1bits.DONE){}; 
-
-        if(active_sensor == IR1)
-        {
-        ADCValues[0] = ADC1BUF0;
-        }
-         if(active_sensor == IR2)
-        {
-        ADCValues[1] = ADC1BUF0;
-        }
-         if(active_sensor == IR3)
-        {
-        ADCValues[2] = ADC1BUF0;
-        }
-         if(active_sensor == US)
-        {
-        ADCValues[3] = ADC1BUF0;
-        }
-        active_sensor = (active_sensor + 1)%4;
-        
     }
 }
