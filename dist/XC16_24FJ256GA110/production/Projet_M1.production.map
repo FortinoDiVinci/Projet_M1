@@ -63,12 +63,12 @@ Program Memory  [Origin = 0x200, Length = 0x2a00]
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200                0xb6           0x111  (273)
-.text                        0x2b6               0x2b8           0x414  (1044)
-.init.delay32                0x56e                0x1c            0x2a  (42)
-.text                        0x58a                 0x6             0x9  (9)
-.dinit                       0x590                 0x2             0x3  (3)
+.text                        0x2b6               0x2ba           0x417  (1047)
+.init.delay32                0x570                0x1c            0x2a  (42)
+.text                        0x58c                 0x6             0x9  (9)
+.dinit                       0x592                 0x2             0x3  (3)
 
-                     Total program memory used (bytes):          0x55b  (1371) 8%
+                     Total program memory used (bytes):          0x55e  (1374) 8%
 
 
 Data Memory  [Origin = 0x800, Length = 0x800]
@@ -106,12 +106,12 @@ External Symbols in Program Memory (by address):
                   0x00041e                  _StartADC
                   0x0004ee                  _InitPWM
                   0x000540                  _main
-                  0x00056e                  ___delay32
-                  0x00058a                  _ConfigureOscillator
+                  0x000570                  ___delay32
+                  0x00058c                  _ConfigureOscillator
 
 External Symbols in Program Memory (by name):
 
-                  0x00058a                  _ConfigureOscillator
+                  0x00058c                  _ConfigureOscillator
                   0x0002bc                  _InitADC
                   0x0002b6                  _InitApp
                   0x0004ee                  _InitPWM
@@ -122,7 +122,7 @@ External Symbols in Program Memory (by name):
                   0x0002ac                  __MathError
                   0x00029a                  __OscillatorFail
                   0x0002a6                  __StackError
-                  0x00056e                  ___delay32
+                  0x000570                  ___delay32
                   0x00023c                  __data_init
                   0x00023c                  __data_init_standard
                   0x00022c                  __psv_init
@@ -249,14 +249,14 @@ __FICD
  .debug_abbrev    0x0000d6         0x7d build/XC16_24FJ256GA110/production/traps.o
  .debug_abbrev    0x000153        0x133 build/XC16_24FJ256GA110/production/user.o
 
-.debug_line       0x000000        0x5b0
+.debug_line       0x000000        0x5b8
  *(.debug_line)
  .debug_line      0x000000         0x24 build/XC16_24FJ256GA110/production/configuration_bits.o
  .debug_line      0x000024         0x24 build/XC16_24FJ256GA110/production/interrupts.o
- .debug_line      0x000048         0xcd build/XC16_24FJ256GA110/production/main.o
- .debug_line      0x000115         0x4a build/XC16_24FJ256GA110/production/system.o
- .debug_line      0x00015f        0x124 build/XC16_24FJ256GA110/production/traps.o
- .debug_line      0x000283        0x32d build/XC16_24FJ256GA110/production/user.o
+ .debug_line      0x000048         0xd5 build/XC16_24FJ256GA110/production/main.o
+ .debug_line      0x00011d         0x4a build/XC16_24FJ256GA110/production/system.o
+ .debug_line      0x000167        0x124 build/XC16_24FJ256GA110/production/traps.o
+ .debug_line      0x00028b        0x32d build/XC16_24FJ256GA110/production/user.o
 
 .debug_frame      0x000000        0x110
  *(.debug_frame)
@@ -1377,23 +1377,23 @@ __c30_signature
 .config_BSS       0xf80000          0x2
  .config_BSS      0xf80000          0x2 build/XC16_24FJ256GA110/production/configuration_bits.o
 
-.text             0x0002b6        0x2b8
+.text             0x0002b6        0x2ba
  .text            0x0002b6        0x28a build/XC16_24FJ256GA110/production/user.o
                   0x0002b6                  _InitApp
                   0x0002bc                  _InitADC
                   0x0002dc                  _ObjectDetection
                   0x00041e                  _StartADC
                   0x0004ee                  _InitPWM
- .text            0x000540         0x2e build/XC16_24FJ256GA110/production/main.o
+ .text            0x000540         0x30 build/XC16_24FJ256GA110/production/main.o
                   0x000540                  _main
 
-.init.delay32     0x00056e         0x1c
- .init.delay32    0x00056e         0x1c /Applications/microchip/xc16/v1.25/bin/bin/../../lib/libpic30-elf.a(delay32.eo)
-                  0x00056e                  ___delay32
+.init.delay32     0x000570         0x1c
+ .init.delay32    0x000570         0x1c /Applications/microchip/xc16/v1.25/bin/bin/../../lib/libpic30-elf.a(delay32.eo)
+                  0x000570                  ___delay32
 
-.text             0x00058a          0x6
- .text            0x00058a          0x6 build/XC16_24FJ256GA110/production/system.o
-                  0x00058a                  _ConfigureOscillator
+.text             0x00058c          0x6
+ .text            0x00058c          0x6 build/XC16_24FJ256GA110/production/system.o
+                  0x00058c                  _ConfigureOscillator
 
-.dinit            0x000590          0x2
- .dinit           0x000590          0x2 data_init
+.dinit            0x000592          0x2
+ .dinit           0x000592          0x2 data_init

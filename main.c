@@ -42,6 +42,7 @@ int16_t main(void)
     /* Initialize IO ports and peripherals */
     InitApp();
     InitADC();
+    InitPWM();
     
     /* TODO <INSERT USER APPLICATION CODE HERE> */
     int ADC_values[] = {0,0,0,0};
