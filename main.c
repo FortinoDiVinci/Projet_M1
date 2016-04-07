@@ -21,6 +21,7 @@
 
 #include "system.h"        /* System funct/params, like osc/peripheral config */
 #include "user.h"          /* User funct/params, such as InitApp              */
+#include "motorControl.h"
 #include <libpic30.h>
 
 /******************************************************************************/
@@ -47,13 +48,29 @@ int16_t main(void)
     /* TODO <INSERT USER APPLICATION CODE HERE> */
     int ADC_values[] = {0,0,0,0};
     int active_sensor = 0;
-    int i;
+    int i,speed;
     while(1)
     {
         /* SENSORS SAMPLING */
         for(i=0; i<NMB_SENSORS; i++)
         {
             StartADC(ADC_values, &active_sensor);
+        }
+        
+        if(ADC_values[US] < D1)
+        {
+            speed=SLOW;
+            moveForward(speed);
+        }
+        else if((ADC_values[US]<D2 )&&( ADC_values[US] > D1))
+        {
+            speed=MEDIUM;
+            moveForward(speed);
+        }
+        else if((ADC_values[US]<D3)&&(ADC_values[US]>D2))
+        {
+            speed=FAST;
+            moveForward(speed);
         }
     }
 }
