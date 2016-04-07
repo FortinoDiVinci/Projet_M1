@@ -34,7 +34,7 @@
 /* Main Program                                                               */
 /******************************************************************************/
 
-int16_t main(void)
+u16 main(void)
 {
 
     /* Configure the oscillator for the device */
@@ -46,15 +46,14 @@ int16_t main(void)
     InitPWM();
     
     /* TODO <INSERT USER APPLICATION CODE HERE> */
-    short ADC_values[] = {0,0,0,0};
-    short active_sensor = 0;
-    char i;
+    u16 ADC_values[] = {0,0,0,0};
+    u8 i;
     while(1)
     {
         /* SENSORS SAMPLING */
         for(i=0; i<NMB_SENSORS; i++)
         {
-            StartADC(ADC_values, &active_sensor);
+            StartADC(ADC_values);
         }
         
         if(ADC_values[US]<D1)

@@ -9,7 +9,7 @@
 #include "xc.h"
 #include "motorControl.h"
 
-void moveForward(char speed)
+void moveForward(u8 speed)
 {
     ANSBbits.ANSB12=0;
     TRISBbits.TRISB12=0;
@@ -38,7 +38,7 @@ void moveForward(char speed)
     CCP2CON1Lbits.CCPON =1; // Turn on MCCP modul                  
 }
 
-void moveBackward(char speed)
+void moveBackward(u8 speed)
 {
     TRISBbits.TRISB11=0;
     LATBbits.LATB11=0;

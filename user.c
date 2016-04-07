@@ -57,8 +57,9 @@ void InitADC()
     AD1CON2 = 0;
 }
 
-void ObjectDetection(short* ADCValues, short* average, char count)
+void ObjectDetection(const u16* ADCValues, u16* average)
 {
+    static u8 count = 0;
     char i;
     count ++;
     for (i=0; i<NMB_SENSORS-1; i++) /* only IR sensors */
@@ -97,21 +98,22 @@ void ObjectDetection(short* ADCValues, short* average, char count)
     }
 }
 
-void StartADC(short* ADCValues, short* active_sensor)
+void StartADC(u16* ADCValues)
 {
-    if(*active_sensor == IR1)
+    static u8 active_sensor = 0;
+    if(active_sensor == IR1)
         {
             START_SAMPLING(IR1);
         }
-        if(*active_sensor == IR2)
+        if(active_sensor == IR2)
         {
             START_SAMPLING(IR2);
         }
-        if(*active_sensor == IR3)
+        if(active_sensor == IR3)
         {
             START_SAMPLING(IR3);
         }
-        if(*active_sensor == US)
+        if(active_sensor == US)
         {
             START_SAMPLING(US);
         }
@@ -122,23 +124,23 @@ void StartADC(short* ADCValues, short* active_sensor)
         AD1CON1bits.SAMP = 0;
         while (!AD1CON1bits.DONE){}; 
 
-        if(*active_sensor == IR1)
+        if(active_sensor == IR1)
         {
         ADCValues[0] = ADC1BUF0;
         }
-         if(*active_sensor == IR2)
+         if(active_sensor == IR2)
         {
         ADCValues[1] = ADC1BUF0;
         }
-         if(*active_sensor == IR3)
+         if(active_sensor == IR3)
         {
         ADCValues[2] = ADC1BUF0;
         }
-         if(*active_sensor == US)
+         if(active_sensor == US)
         {
         ADCValues[3] = ADC1BUF0;
         }
-        *active_sensor = (*active_sensor + 1)%4;
+        active_sensor = (active_sensor + 1)%4;
 }
 
 void InitPWM(void)

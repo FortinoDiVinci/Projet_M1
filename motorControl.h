@@ -32,7 +32,7 @@
 // TODO Insert appropriate #include <>
 
 #include <xc.h> // include processor files - each processor file is guarded.  
-
+#include "user.h"
 /******************************************************************************/
 /* User Level #define Macros                                                  */
 /******************************************************************************/
@@ -51,7 +51,7 @@
 /* User Function Prototypes                                                   */
 /******************************************************************************/
 
-void moveForward(char speed);
-void backForward(char);
+void moveForward(u8 speed);
+void backForward(u8);
 
 #endif	/* MOTOR_CONTROL_H */
