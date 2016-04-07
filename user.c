@@ -57,9 +57,9 @@ void InitADC()
     AD1CON2 = 0;
 }
 
-void ObjectDetection(int* ADCValues, int* average, int count)
+void ObjectDetection(short* ADCValues, short* average, char count)
 {
-    int i;
+    char i;
     count ++;
     for (i=0; i<NMB_SENSORS-1; i++) /* only IR sensors */
     {
@@ -97,7 +97,7 @@ void ObjectDetection(int* ADCValues, int* average, int count)
     }
 }
 
-void StartADC(int* ADCValues, int* active_sensor)
+void StartADC(short* ADCValues, short* active_sensor)
 {
     if(*active_sensor == IR1)
         {

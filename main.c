@@ -46,9 +46,9 @@ int16_t main(void)
     InitPWM();
     
     /* TODO <INSERT USER APPLICATION CODE HERE> */
-    int ADC_values[] = {0,0,0,0};
-    int active_sensor = 0;
-    int i,speed;
+    short ADC_values[] = {0,0,0,0};
+    short active_sensor = 0;
+    char i;
     while(1)
     {
         /* SENSORS SAMPLING */
@@ -57,20 +57,17 @@ int16_t main(void)
             StartADC(ADC_values, &active_sensor);
         }
         
-        if(ADC_values[US] < D1)
+        if(ADC_values[US]<D1)
         {
-            speed=SLOW;
-            moveForward(speed);
+            moveForward(SLOW);
         }
-        else if((ADC_values[US]<D2 )&&( ADC_values[US] > D1))
+        else if((ADC_values[US]<D2 )&&(ADC_values[US]>D1))
         {
-            speed=MEDIUM;
-            moveForward(speed);
+            moveForward(MEDIUM);
         }
         else if((ADC_values[US]<D3)&&(ADC_values[US]>D2))
         {
-            speed=FAST;
-            moveForward(speed);
+            moveForward(FAST);
         }
     }
 }
