@@ -17,7 +17,7 @@
 
 #include <stdint.h>        /* Includes uint16_t definition                    */
 #include <stdbool.h>       /* Includes true/false definition                  */
-//#include <stdlib>
+#include <string.h>        /* Inclues the string library                      */
 
 #include "system.h"        /* System funct/params, like osc/peripheral config */
 #include "user.h"          /* User funct/params, such as InitApp              */
@@ -46,7 +46,8 @@ u16 main(void)
     InitPWM();
     
     /* TODO <INSERT USER APPLICATION CODE HERE> */
-    u16 ADC_values[] = {0,0,0,0};
+    u16 ADC_values[NMB_SENSORS];
+    memset(ADC_values, 0, NMB_SENSORS);
     u8 i;
     while(1)
     {
