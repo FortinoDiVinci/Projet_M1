@@ -6,6 +6,8 @@
                    projectFiles="true">
       <itemPath>system.h</itemPath>
       <itemPath>user.h</itemPath>
+      <itemPath>motorControl.h</itemPath>
+      <itemPath>lcd.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -20,6 +22,8 @@
       <itemPath>system.c</itemPath>
       <itemPath>traps.c</itemPath>
       <itemPath>user.c</itemPath>
+      <itemPath>motorControl.c</itemPath>
+      <itemPath>lcd.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -30,6 +34,9 @@
     <itemPath>legal_disclaimer.txt</itemPath>
     <itemPath>project_information.txt</itemPath>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="XC16_24FJ256GA110" type="2">

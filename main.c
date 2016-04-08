@@ -19,7 +19,7 @@
 #include <stdbool.h>       /* Includes true/false definition                  */
 #include <string.h>        /* Inclues the string library                      */
 #include <stdlib.h>
-
+#include "lcd.h"
 #include "system.h"        /* System funct/params, like osc/peripheral config */
 #include "user.h"          /* User funct/params, such as InitApp              */
 #include "motorControl.h"
@@ -76,4 +76,5 @@ u16 main(void)
             moveForward(FAST);
         }
     }
+    
 }

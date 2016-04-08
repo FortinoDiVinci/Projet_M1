@@ -1,20 +1,20 @@
 Microchip Technology Inc, v1.26 (A)
 
 Tool Name:
-  /Applications/microchip/xc16/v1.26/bin/bin/../bin/elf-ld
+  c:\program files (x86)\microchip\xc16\v1.26\bin\bin\..\bin/elf-ld.exe
 
 Command:
   -p24FV16KM202 \
   -o \
   dist/XC16_24FJ256GA110/production/Projet_M1.production.elf \
-  -L/Applications/microchip/xc16/v1.26/bin/bin/.. \
-  -L/Applications/microchip/xc16/v1.26/bin/bin/../../lib \
-  -L/Applications/microchip/xc16/v1.26/bin/bin/../../support/PIC24E/gld \
-  -L/Applications/microchip/xc16/v1.26/bin/bin/../../support/PIC24F/gld \
-  -L/Applications/microchip/xc16/v1.26/bin/bin/../../support/PIC24H/gld \
-  -L/Applications/microchip/xc16/v1.26/bin/bin/../../support/dsPIC30F/gld \
-  -L/Applications/microchip/xc16/v1.26/bin/bin/../../support/dsPIC33E/gld \
-  -L/Applications/microchip/xc16/v1.26/bin/bin/../../support/dsPIC33F/gld \
+  -Lc:/program files (x86)/microchip/xc16/v1.26/bin/bin/.. \
+  -Lc:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib \
+  -Lc:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../support/PIC24E/gld \
+  -Lc:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../support/PIC24F/gld \
+  -Lc:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../support/PIC24H/gld \
+  -Lc:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../support/dsPIC30F/gld \
+  -Lc:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../support/dsPIC33E/gld \
+  -Lc:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../support/dsPIC33F/gld \
   build/XC16_24FJ256GA110/production/configuration_bits.o \
   build/XC16_24FJ256GA110/production/interrupts.o \
   build/XC16_24FJ256GA110/production/main.o \
@@ -22,6 +22,7 @@ Command:
   build/XC16_24FJ256GA110/production/traps.o \
   build/XC16_24FJ256GA110/production/user.o \
   build/XC16_24FJ256GA110/production/motorControl.o \
+  build/XC16_24FJ256GA110/production/lcd.o \
   --defsym=__MPLAB_BUILD=1 \
   -Tp24FV16KM202.gld.00 \
   --stack=16 \
@@ -49,11 +50,11 @@ Command:
 Optional library libpPIC24Fxxx.a not found
 Archive member included because of file (symbol)
 
-/Applications/microchip/xc16/v1.26/bin/bin/../../lib/libpic30-elf.a(crt0_standard.o)
+c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libpic30-elf.a(crt0_standard.o)
                               (__resetPRI)
-/Applications/microchip/xc16/v1.26/bin/bin/../../lib/libpic30-elf.a(data_init_standard.o)
-                              /Applications/microchip/xc16/v1.26/bin/bin/../../lib/libpic30-elf.a(crt0_standard.o) (__data_init_standard)
-/Applications/microchip/xc16/v1.26/bin/bin/../../lib/libpic30-elf.a(delay32.eo)
+c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libpic30-elf.a(data_init_standard.o)
+                              c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libpic30-elf.a(crt0_standard.o) (__data_init_standard)
+c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libpic30-elf.a(delay32.eo)
                               build/XC16_24FJ256GA110/production/user.o (___delay32)
 
 
@@ -86,13 +87,13 @@ Program Memory  [Origin = 0x200, Length = 0x2a00]
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200                0xc4           0x126  (294)
-.text                        0x2c4               0x34c           0x4f2  (1266)
-.init.delay32                0x610                0x1c            0x2a  (42)
-.dinit                       0x62c                 0x8             0xc  (12)
-.text                        0x634                 0x6             0x9  (9)
-.shared.dinit                0x63a                 0x2             0x3  (3)
+.text                        0x2c4               0x45a           0x687  (1671)
+.init.delay32                0x71e                0x1c            0x2a  (42)
+.dinit                       0x73a                 0x8             0xc  (12)
+.text                        0x742                 0x6             0x9  (9)
+.shared.dinit                0x748                 0x2             0x3  (3)
 
-                 Total program memory used (bytes):          0x65a  (1626) 10%
+                 Total program memory used (bytes):          0x7ef  (2031) 12%
 
 
 Ivt Memory  [Origin = 0x4, Length = 0xfc]
@@ -140,17 +141,23 @@ External Symbols in Program Memory (by address):
                   0x0002ea                  _ObjectDetection
                   0x00042a                  _StartADC
                   0x0004e4                  _InitPWM
-                  0x00053a                  _moveForward
-                  0x000574                  _moveBackward
-                  0x0005ac                  _main
-                  0x000610                  ___delay32
-                  0x000634                  _ConfigureOscillator
+                  0x00053a                  _lcd_write
+                  0x0005c4                  _lcd_clear
+                  0x0005d6                  _lcd_puts
+                  0x0005f2                  _lcd_putch
+                  0x000600                  _lcd_goto
+                  0x000610                  _lcd_init
+                  0x000648                  _moveForward
+                  0x000682                  _moveBackward
+                  0x0006ba                  _main
+                  0x00071e                  ___delay32
+                  0x000742                  _ConfigureOscillator
                   0xf80000                  __FBS.sec
                   0xf80004                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x000634                  _ConfigureOscillator
+                  0x000742                  _ConfigureOscillator
                   0x0002ca                  _InitADC
                   0x0002c4                  _InitApp
                   0x0004e4                  _InitPWM
@@ -163,14 +170,20 @@ External Symbols in Program Memory (by name):
                   0x0002ba                  __MathError
                   0x0002a8                  __OscillatorFail
                   0x0002b4                  __StackError
-                  0x000610                  ___delay32
+                  0x00071e                  ___delay32
                   0x00023c                  __data_init
                   0x00023c                  __data_init_standard
                   0x00022c                  __psv_init
                   0x000200                  __resetPRI
-                  0x0005ac                  _main
-                  0x000574                  _moveBackward
-                  0x00053a                  _moveForward
+                  0x0005c4                  _lcd_clear
+                  0x000600                  _lcd_goto
+                  0x000610                  _lcd_init
+                  0x0005f2                  _lcd_putch
+                  0x0005d6                  _lcd_puts
+                  0x00053a                  _lcd_write
+                  0x0006ba                  _main
+                  0x000682                  _moveBackward
+                  0x000648                  _moveForward
 
 Memory Configuration
 
@@ -200,9 +213,10 @@ LOAD build/XC16_24FJ256GA110/production/system.o
 LOAD build/XC16_24FJ256GA110/production/traps.o
 LOAD build/XC16_24FJ256GA110/production/user.o
 LOAD build/XC16_24FJ256GA110/production/motorControl.o
+LOAD build/XC16_24FJ256GA110/production/lcd.o
                     0x0001                  __MPLAB_BUILD = 0x1
 LOAD pPIC24Fxxx
-LOAD /Applications/microchip/xc16/v1.26/bin/bin/../../lib/libfx-elf.a
+LOAD c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libfx-elf.a
                     0xf80000                  __FBS = 0xf80000
                     0xf80004                  __FGS = 0xf80004
                     0xf80006                  __FOSCSEL = 0xf80006
@@ -226,13 +240,13 @@ LOAD /Applications/microchip/xc16/v1.26/bin/bin/../../lib/libfx-elf.a
 
 .text             0x000200         0xc4
  *(.init)
- .init            0x000200         0x3c /Applications/microchip/xc16/v1.26/bin/bin/../../lib/libpic30-elf.a(crt0_standard.o)
-                  0x000200                  __reset
+ .init            0x000200         0x3c c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libpic30-elf.a(crt0_standard.o)
                   0x000200                  __resetPRI
+                  0x000200                  __reset
                   0x00022c                  __psv_init
- .init            0x00023c         0x6c /Applications/microchip/xc16/v1.26/bin/bin/../../lib/libpic30-elf.a(data_init_standard.o)
-                  0x00023c                  __data_init
+ .init            0x00023c         0x6c c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libpic30-elf.a(data_init_standard.o)
                   0x00023c                  __data_init_standard
+                  0x00023c                  __data_init
  *(.user_init)
  *(.handle)
  *(.isr*)
@@ -278,18 +292,19 @@ __FICD
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x2616
+.debug_info       0x000000       0x2a87
  *(.debug_info)
- .debug_info      0x000000         0xa2 build/XC16_24FJ256GA110/production/configuration_bits.o
- .debug_info      0x0000a2        0x10d build/XC16_24FJ256GA110/production/interrupts.o
- .debug_info      0x0001af        0x167 build/XC16_24FJ256GA110/production/main.o
- .debug_info      0x000316        0x12c build/XC16_24FJ256GA110/production/system.o
- .debug_info      0x000442        0x254 build/XC16_24FJ256GA110/production/traps.o
- .debug_info      0x000696       0x14c1 build/XC16_24FJ256GA110/production/user.o
- .debug_info      0x001b57        0xabf build/XC16_24FJ256GA110/production/motorControl.o
+ .debug_info      0x000000         0xa9 build/XC16_24FJ256GA110/production/configuration_bits.o
+ .debug_info      0x0000a9        0x114 build/XC16_24FJ256GA110/production/interrupts.o
+ .debug_info      0x0001bd        0x183 build/XC16_24FJ256GA110/production/main.o
+ .debug_info      0x000340        0x133 build/XC16_24FJ256GA110/production/system.o
+ .debug_info      0x000473        0x25b build/XC16_24FJ256GA110/production/traps.o
+ .debug_info      0x0006ce       0x14c8 build/XC16_24FJ256GA110/production/user.o
+ .debug_info      0x001b96        0xac6 build/XC16_24FJ256GA110/production/motorControl.o
+ .debug_info      0x00265c        0x42b build/XC16_24FJ256GA110/production/lcd.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x349
+.debug_abbrev     0x000000        0x3f5
  *(.debug_abbrev)
  .debug_abbrev    0x000000         0x1f build/XC16_24FJ256GA110/production/configuration_bits.o
  .debug_abbrev    0x00001f         0x1f build/XC16_24FJ256GA110/production/interrupts.o
@@ -298,30 +313,34 @@ __FICD
  .debug_abbrev    0x0000c9         0x7d build/XC16_24FJ256GA110/production/traps.o
  .debug_abbrev    0x000146        0x13a build/XC16_24FJ256GA110/production/user.o
  .debug_abbrev    0x000280         0xc9 build/XC16_24FJ256GA110/production/motorControl.o
+ .debug_abbrev    0x000349         0xac build/XC16_24FJ256GA110/production/lcd.o
 
-.debug_line       0x000000        0x2e2
+.debug_line       0x000000        0x3b7
  *(.debug_line)
  .debug_line      0x000000         0x1a build/XC16_24FJ256GA110/production/configuration_bits.o
  .debug_line      0x00001a         0x1a build/XC16_24FJ256GA110/production/interrupts.o
  .debug_line      0x000034         0x4a build/XC16_24FJ256GA110/production/main.o
  .debug_line      0x00007e         0x38 build/XC16_24FJ256GA110/production/system.o
- .debug_line      0x0000b6         0x98 build/XC16_24FJ256GA110/production/traps.o
- .debug_line      0x00014e         0xe3 build/XC16_24FJ256GA110/production/user.o
- .debug_line      0x000231         0xb1 build/XC16_24FJ256GA110/production/motorControl.o
+ .debug_line      0x0000b6         0xa1 build/XC16_24FJ256GA110/production/traps.o
+ .debug_line      0x000157         0xec build/XC16_24FJ256GA110/production/user.o
+ .debug_line      0x000243         0xba build/XC16_24FJ256GA110/production/motorControl.o
+ .debug_line      0x0002fd         0xba build/XC16_24FJ256GA110/production/lcd.o
 
-.debug_frame      0x000000        0x1ec
+.debug_frame      0x000000        0x2a8
  *(.debug_frame)
  .debug_frame     0x000000         0x30 build/XC16_24FJ256GA110/production/main.o
  .debug_frame     0x000030         0x30 build/XC16_24FJ256GA110/production/system.o
  .debug_frame     0x000060         0xa0 build/XC16_24FJ256GA110/production/traps.o
  .debug_frame     0x000100         0xa0 build/XC16_24FJ256GA110/production/user.o
  .debug_frame     0x0001a0         0x4c build/XC16_24FJ256GA110/production/motorControl.o
+ .debug_frame     0x0001ec         0xbc build/XC16_24FJ256GA110/production/lcd.o
 
-.debug_str        0x000000         0xde
+.debug_str        0x000000         0xf0
  *(.debug_str)
  .debug_str       0x000000          0xc build/XC16_24FJ256GA110/production/traps.o
  .debug_str       0x00000c         0x91 build/XC16_24FJ256GA110/production/user.o
  .debug_str       0x00009d         0x41 build/XC16_24FJ256GA110/production/motorControl.o
+ .debug_str       0x0000de         0x12 build/XC16_24FJ256GA110/production/lcd.o
 
 .debug_loc
  *(.debug_loc)
@@ -330,7 +349,7 @@ __FICD
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x13c
+                  0x000000        0x19f
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0x1b build/XC16_24FJ256GA110/production/main.o
@@ -342,11 +361,13 @@ __FICD
                   0x0000b2         0x57 build/XC16_24FJ256GA110/production/user.o
  .debug_pubnames
                   0x000109         0x33 build/XC16_24FJ256GA110/production/motorControl.o
+ .debug_pubnames
+                  0x00013c         0x63 build/XC16_24FJ256GA110/production/lcd.o
 
 .debug_ranges
  *(.debug_ranges)
 
-.debug_aranges    0x000000         0x78
+.debug_aranges    0x000000         0x90
  *(.debug_aranges)
  .debug_aranges
                   0x000000         0x18 build/XC16_24FJ256GA110/production/main.o
@@ -358,6 +379,8 @@ __FICD
                   0x000048         0x18 build/XC16_24FJ256GA110/production/user.o
  .debug_aranges
                   0x000060         0x18 build/XC16_24FJ256GA110/production/motorControl.o
+ .debug_aranges
+                  0x000078         0x18 build/XC16_24FJ256GA110/production/lcd.o
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -1113,9 +1136,9 @@ __FICD
                     0x0230                  UART2 = 0x230
                     0x0230                  _UART2 = 0x230
 START GROUP
-LOAD /Applications/microchip/xc16/v1.26/bin/bin/../../lib/libpic30-elf.a
-LOAD /Applications/microchip/xc16/v1.26/bin/bin/../../lib/libm-elf.a
-LOAD /Applications/microchip/xc16/v1.26/bin/bin/../../lib/libc-elf.a
+LOAD c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libpic30-elf.a
+LOAD c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a
+LOAD c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libc-elf.a
 END GROUP
 OUTPUT(dist/XC16_24FJ256GA110/production/Projet_M1.production.elf elf32-pic30)
 LOAD FGS
@@ -1124,44 +1147,48 @@ LOAD data_init
 LOAD shared_data_init
 
 .debug_pubtypes
-                  0x000078        0x2a0
+                  0x000090        0x2ec
  .debug_pubtypes
-                  0x000078         0x12 build/XC16_24FJ256GA110/production/configuration_bits.o
+                  0x000090         0x12 build/XC16_24FJ256GA110/production/configuration_bits.o
  .debug_pubtypes
-                  0x00008a         0x12 build/XC16_24FJ256GA110/production/interrupts.o
+                  0x0000a2         0x12 build/XC16_24FJ256GA110/production/interrupts.o
  .debug_pubtypes
-                  0x00009c         0x12 build/XC16_24FJ256GA110/production/main.o
+                  0x0000b4         0x12 build/XC16_24FJ256GA110/production/main.o
  .debug_pubtypes
-                  0x0000ae         0x12 build/XC16_24FJ256GA110/production/system.o
+                  0x0000c6         0x12 build/XC16_24FJ256GA110/production/system.o
  .debug_pubtypes
-                  0x0000c0         0x35 build/XC16_24FJ256GA110/production/traps.o
+                  0x0000d8         0x35 build/XC16_24FJ256GA110/production/traps.o
  .debug_pubtypes
-                  0x0000f5        0x16a build/XC16_24FJ256GA110/production/user.o
+                  0x00010d        0x16a build/XC16_24FJ256GA110/production/user.o
  .debug_pubtypes
-                  0x00025f         0xb9 build/XC16_24FJ256GA110/production/motorControl.o
+                  0x000277         0xb9 build/XC16_24FJ256GA110/production/motorControl.o
+ .debug_pubtypes
+                  0x000330         0x4c build/XC16_24FJ256GA110/production/lcd.o
 
 __c30_signature
-                  0x000318         0x3c
+                  0x00037c         0x42
  __c30_signature
-                  0x000318          0x6 build/XC16_24FJ256GA110/production/configuration_bits.o
+                  0x00037c          0x6 build/XC16_24FJ256GA110/production/configuration_bits.o
  __c30_signature
-                  0x00031e          0x6 build/XC16_24FJ256GA110/production/interrupts.o
+                  0x000382          0x6 build/XC16_24FJ256GA110/production/interrupts.o
  __c30_signature
-                  0x000324          0x6 build/XC16_24FJ256GA110/production/main.o
+                  0x000388          0x6 build/XC16_24FJ256GA110/production/main.o
  __c30_signature
-                  0x00032a          0x6 build/XC16_24FJ256GA110/production/system.o
+                  0x00038e          0x6 build/XC16_24FJ256GA110/production/system.o
  __c30_signature
-                  0x000330          0x6 build/XC16_24FJ256GA110/production/traps.o
+                  0x000394          0x6 build/XC16_24FJ256GA110/production/traps.o
  __c30_signature
-                  0x000336          0x6 build/XC16_24FJ256GA110/production/user.o
+                  0x00039a          0x6 build/XC16_24FJ256GA110/production/user.o
  __c30_signature
-                  0x00033c          0x6 build/XC16_24FJ256GA110/production/motorControl.o
+                  0x0003a0          0x6 build/XC16_24FJ256GA110/production/motorControl.o
  __c30_signature
-                  0x000342          0x6 /Applications/microchip/xc16/v1.26/bin/bin/../../lib/libpic30-elf.a(crt0_standard.o)
+                  0x0003a6          0x6 build/XC16_24FJ256GA110/production/lcd.o
  __c30_signature
-                  0x000348          0x6 /Applications/microchip/xc16/v1.26/bin/bin/../../lib/libpic30-elf.a(data_init_standard.o)
+                  0x0003ac          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libpic30-elf.a(crt0_standard.o)
  __c30_signature
-                  0x00034e          0x6 /Applications/microchip/xc16/v1.26/bin/bin/../../lib/libpic30-elf.a(delay32.eo)
+                  0x0003b2          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libpic30-elf.a(data_init_standard.o)
+ __c30_signature
+                  0x0003b8          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libpic30-elf.a(delay32.eo)
 
 .nbss               0x0800          0x2
  .nbss              0x0800          0x2 build/XC16_24FJ256GA110/production/user.o
@@ -1202,29 +1229,36 @@ __c30_signature
  .ivt._MathError
                   0x00000c          0x2 build/XC16_24FJ256GA110/production/traps.o
 
-.text             0x0002c4        0x34c
+.text             0x0002c4        0x45a
  .text            0x0002c4        0x276 build/XC16_24FJ256GA110/production/user.o
                   0x0002c4                  _InitApp
                   0x0002ca                  _InitADC
                   0x0002ea                  _ObjectDetection
                   0x00042a                  _StartADC
                   0x0004e4                  _InitPWM
- .text            0x00053a         0x72 build/XC16_24FJ256GA110/production/motorControl.o
-                  0x00053a                  _moveForward
-                  0x000574                  _moveBackward
- .text            0x0005ac         0x64 build/XC16_24FJ256GA110/production/main.o
-                  0x0005ac                  _main
+ .text            0x00053a        0x10e build/XC16_24FJ256GA110/production/lcd.o
+                  0x00053a                  _lcd_write
+                  0x0005c4                  _lcd_clear
+                  0x0005d6                  _lcd_puts
+                  0x0005f2                  _lcd_putch
+                  0x000600                  _lcd_goto
+                  0x000610                  _lcd_init
+ .text            0x000648         0x72 build/XC16_24FJ256GA110/production/motorControl.o
+                  0x000648                  _moveForward
+                  0x000682                  _moveBackward
+ .text            0x0006ba         0x64 build/XC16_24FJ256GA110/production/main.o
+                  0x0006ba                  _main
 
-.init.delay32     0x000610         0x1c
- .init.delay32    0x000610         0x1c /Applications/microchip/xc16/v1.26/bin/bin/../../lib/libpic30-elf.a(delay32.eo)
-                  0x000610                  ___delay32
+.init.delay32     0x00071e         0x1c
+ .init.delay32    0x00071e         0x1c c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libpic30-elf.a(delay32.eo)
+                  0x00071e                  ___delay32
 
-.dinit            0x00062c          0x8
- .dinit           0x00062c          0x8 data_init
+.dinit            0x00073a          0x8
+ .dinit           0x00073a          0x8 data_init
 
-.text             0x000634          0x6
- .text            0x000634          0x6 build/XC16_24FJ256GA110/production/system.o
-                  0x000634                  _ConfigureOscillator
+.text             0x000742          0x6
+ .text            0x000742          0x6 build/XC16_24FJ256GA110/production/system.o
+                  0x000742                  _ConfigureOscillator
 
-.shared.dinit     0x00063a          0x2
- .shared.dinit    0x00063a          0x2 shared_data_init
+.shared.dinit     0x000748          0x2
+ .shared.dinit    0x000748          0x2 shared_data_init
