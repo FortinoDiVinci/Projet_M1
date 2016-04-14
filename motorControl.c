@@ -1,6 +1,6 @@
 /*
  * File:   motorControl.c
- * Author: fabian
+ * Author: Fabian
  *
  * Created on April 6, 2016, 6:38 PM
  */
@@ -9,7 +9,7 @@
 #include "xc.h"
 #include "motorControl.h"
 
-void moveForward(u8 speed)
+void MoveForward(u8 speed)
 {
     ANSBbits.ANSB12=0;
     TRISBbits.TRISB12=0;
@@ -19,26 +19,26 @@ void moveForward(u8 speed)
     switch(speed)
     {
         case SLOW:
-            CCP2TMRL = 0x0000; //Initialize timer prior to enable module.
-            CCP2PRL = 0xFFFF; //Configure timebase period
+            CCP2TMRL = 0x0000; /* Initialize timer prior to enable module. */
+            CCP2PRL = 0xFFFF; /* Configure timebase period */
             break ;
         case MEDIUM :
-            CCP2TMRL = 0x0000; //Initialize timer prior to enable module.
-            CCP2PRL = 0xFFFF; //Configure timebase period
+            CCP2TMRL = 0x0000; /* Initialize timer prior to enable module. */
+            CCP2PRL = 0xFFFF; /* Configure timebase period */
             break ;
         case FAST :
             
-            CCP2TMRL = 0x0000; //Initialize timer prior to enable module.
-            CCP2PRL = 0xFFFF; //Configure timebase period
+            CCP2TMRL = 0x0000; /* Initialize timer prior to enable module. */
+            CCP2PRL = 0xFFFF; /* Configure timebase period */
             break ;
         default :
             break ;
-              // should not happen, show and a LCD an error   
+              /* should not happen, show and a LCD an error */  
     }      
-    CCP2CON1Lbits.CCPON =1; // Turn on MCCP modul                  
+    CCP2CON1Lbits.CCPON =1; /* Turn on MCCP module  */                
 }
 
-void moveBackward(u8 speed)
+void MoveBackward(u8 speed)
 {
     TRISBbits.TRISB11=0;
     LATBbits.LATB11=0;
@@ -47,23 +47,23 @@ void moveBackward(u8 speed)
     switch(speed)
     {
         case SLOW :
-            CCP2TMRL = 0x0000; //Initialize timer prior to enable module.
-            CCP2PRL = 0xFFFF; //Configure timebase period
+            CCP2TMRL = 0x0000; /* Initialize timer prior to enable module. */
+            CCP2PRL = 0xFFFF; /* Configure timebase period */
             break;
         case MEDIUM :
-            CCP2TMRL = 0x0000; //Initialize timer prior to enable module.
-            CCP2PRL = 0xFFFF; //Configure timebase period
+            CCP2TMRL = 0x0000; /* Initialize timer prior to enable module. */
+            CCP2PRL = 0xFFFF; /* Configure timebase period */
             break;
         case FAST :
             
-            CCP2TMRL = 0x0000; //Initialize timer prior to enable module.
-            CCP2PRL = 0xFFFF; //Configure timebase period
+            CCP2TMRL = 0x0000; /* Initialize timer prior to enable module. */
+            CCP2PRL = 0xFFFF; /* Configure timebase period */
             break;
         default :
-             break; // should not happen, show and a LCD an error
+             break; /* should not happen, show and a LCD an error */
     }
             
-    CCP2CON1Lbits.CCPON =1; // Turn on MCCP modul                
+    CCP2CON1Lbits.CCPON =1; /* Turn on MCCP module */            
                     
     
 }

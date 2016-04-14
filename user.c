@@ -100,47 +100,45 @@ void ObjectDetection(const u16* ADCValues, u16* average)
 
 void StartADC(u16* ADCValues)
 {
-    static u8 active_sensor = 0;
-    if(active_sensor == IR1)
-        {
+    static u8 active_sensor = 0; /* The initialization will only occurs once */
+    switch(active_sensor)
+    {
+        case IR1 :
             START_SAMPLING(IR1);
-        }
-        if(active_sensor == IR2)
-        {
+            break;
+        case IR2 :
             START_SAMPLING(IR2);
-        }
-        if(active_sensor == IR3)
-        {
+            break;
+        case IR3 :
             START_SAMPLING(IR3);
-        }
-        if(active_sensor == US)
-        {
+            break;
+        case US :
             START_SAMPLING(US);
-        }
+            break;        
+    }
         /* CONVERSION */
 
-        AD1CON1bits.SAMP = 1; 
-        __delay_ms(1);
-        AD1CON1bits.SAMP = 0;
-        while (!AD1CON1bits.DONE){}; 
-
-        if(active_sensor == IR1)
-        {
-        ADCValues[0] = ADC1BUF0;
-        }
-         if(active_sensor == IR2)
-        {
-        ADCValues[1] = ADC1BUF0;
-        }
-         if(active_sensor == IR3)
-        {
-        ADCValues[2] = ADC1BUF0;
-        }
-         if(active_sensor == US)
-        {
-        ADCValues[3] = ADC1BUF0;
-        }
-        active_sensor = (active_sensor + 1)%4;
+    AD1CON1bits.SAMP = 1; 
+    __delay_ms(1);
+    AD1CON1bits.SAMP = 0;
+    while (!AD1CON1bits.DONE){}; 
+    
+    switch(active_sensor)
+    {
+        case IR1 :
+            ADCValues[0] = ADC1BUF0;
+            break;
+        case IR2 :
+            ADCValues[1] = ADC1BUF0;
+            break;
+        case IR3 :
+            ADCValues[2] = ADC1BUF0;
+            break;
+        case US :
+            ADCValues[3] = ADC1BUF0;
+            break;        
+    }
+    active_sensor = (active_sensor + 1)%4;
 }
 
 void InitPWM(void)

@@ -65,15 +65,15 @@ u16 main(void)
         
         if(ADC_values[US]<D1)
         {
-            moveForward(SLOW);
+            MoveForward(SLOW);
         }
         else if((ADC_values[US]<D2 )&&(ADC_values[US]>D1))
         {
-            moveForward(MEDIUM);
+            MoveForward(MEDIUM);
         }
         else if((ADC_values[US]<D3)&&(ADC_values[US]>D2))
         {
-            moveForward(FAST);
+            MoveForward(FAST);
         }
     }
     

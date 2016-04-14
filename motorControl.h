@@ -52,6 +52,12 @@
 /******************************************************************************/
 
 void moveForward(u8 speed);
+/* moveForward function 
+ -------------------
+ */
 void backForward(u8);
+/* backForward function 
+ -------------------
+ */
 
 #endif	/* MOTOR_CONTROL_H */

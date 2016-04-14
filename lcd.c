@@ -1,5 +1,33 @@
+/*
+ * File:   lcd.c
+ * Author: Cyril
+ *
+ * Created on April 7, 2016, 21:31
+ */
+ 
 #include "lcd.h"
-void lcd_write(U8 c)
+
+/* initialize the LCD - put into 4 bit mode */
+
+void LcdInit()
+{
+	LCD_RS = 0;	// write control bytes
+
+	__delay_ms(30);// power on delay
+
+	LCD_D4 = 1;	// init!	
+	LCD_D5 = 1; //
+	LCD_STROBE;	
+	LcdWrite(0x2C);// Display on, mode 2 lines
+    __delay_us(10);
+	LcdWrite(0x0C);// display on, cursor off, blink off
+    __delay_us(10);
+    LcdWrite(0x01); // send the instruction
+	__delay_ms(2);
+	LcdWrite(0x07);// increment mode on, entire shift on
+}
+
+void LcdWrite(u8 c)
 {
     //Write the letter bit by bit
 	if(c & 0x80) LCD_D7=1; else LCD_D7=0;
@@ -19,30 +47,30 @@ void lcd_write(U8 c)
  * 	Clear and home the LCD
  */
 
-void lcd_clear(void)
+void LcdClear()
 {
 	LCD_RS = 0; //  instruction mode
 
-	lcd_write(0x01); // send the instruction
+	LcdWrite(0x01); // send the instruction
 	__delay_ms(2);
 }
 
 /* write a string of chars to the LCD */
 
-void lcd_puts( U8 * s)
+void LcdPuts( u8 * s)
 {
 	LCD_RS = 1;	// data mode
 
-	while(*s) lcd_write(*s++);
+	while(*s) LcdWrite(*s++);
 }
 
 /* write one character to the LCD */
 
-void lcd_putch(U8 c)
+void LcdPutch(u8 c)
 {
 	LCD_RS = 1;	// data mode
 
-	lcd_write(c);
+	LcdWrite(c);
 }
 
 
@@ -50,30 +78,10 @@ void lcd_putch(U8 c)
  * Go to the specified position
  */
 
-void lcd_goto(U8 pos)
+void LcdGoto(u8 pos)
 {
 	LCD_RS = 0;
 
-	lcd_write(0x80 + pos);
-}
-	
-/* initialise the LCD - put into 4 bit mode */
-
-void lcd_init(void)
-{
-	LCD_RS = 0;	// write control bytes
-
-	__delay_ms(30);// power on delay
-
-	LCD_D4 = 1;	// init!	
-	LCD_D5 = 1; //
-	LCD_STROBE;	
-	lcd_write(0x2C);// Display on, mode 2 lines
-    __delay_us(10);
-	lcd_write(0x0C);// display on, cursor off, blink off
-    __delay_us(10);
-    lcd_write(0x01); // send the instruction
-	__delay_ms(2);
-	lcd_write(0x07);// increment mode on, entire shift on
+	LcdWrite(0x80 + pos);
 }
 
