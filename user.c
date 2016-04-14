@@ -30,16 +30,11 @@
 
 /* TODO Initialize User Ports/Peripherals/Project here */
 
-void InitApp(void)
+void InitGPIO(void)
 {
     /* Setup analog functionality and port direction */
-
-    /* Initialize peripherals */
-}
-
-void InitADC()
-{
-    /* INFRARED SETTING */
+    
+    /* INFRARED SETTINGS */
     TRISAbits.TRISA0 = 1; /* AN0 set as input */
     TRISBbits.TRISB0 = 1; /* AN2 set as input */
     TRISBbits.TRISB1 = 1; /* AN5 set as input */
@@ -47,10 +42,37 @@ void InitADC()
     ANSBbits.ANSB0 = 1; /* AN2 set to analog : IR_1 */
     ANSBbits.ANSB1 = 1; /* AN5 set to analog : IR_3 */
     
-    /* ULTRASOUND SETTING */
+    /* ULTRASOUND SETTINGS */
     TRISBbits.TRISB3 = 1; /* AN3 set as input */
     ANSBbits.ANSB3 = 1; /* AN3 set to analog : US */
     
+    /* PWM SETTINGS */
+        /* MoveForward */
+    TRISBbits.TRISB12 = 0; 
+    ANSBbits.ANSB12 = 0;
+        /* BackForward */
+    TRISBbits.TRISB11 = 0;
+    
+    /* LCD SETTINGS */
+    TRISBbits.TRISB13 =	0;      /* Register select set as output */
+    ANSBbits.ANSB13 = 0;        /*                 set as digital */
+    TRISBbits.TRISB10 = 0;      /* Enable set as output */
+    TRISAbits.TRISA2 = 0;       /* Data bits set as output (only digital) */
+    ANSAbits.ANSA2 = 0;         /*           set as digital */
+    TRISAbits.TRISA3 = 0;       /* Data bits set as output */
+    ANSAbits.ANSA3 = 0;         /*           set as digital */
+    TRISBbits.TRISB4 = 0;       /* Data bits set as output */
+    ANSBbits.ANSB4 = 0;         /*           set as digital */
+    TRISAbits.TRISA4 = 0;       /* Data bits set as output */
+    ANSAbits.ANSA4 = 0;         /*           set as digital */
+
+    
+    /* Initialize peripherals */
+    
+}
+
+void InitADC()
+{    
     AD1CON1 = 0x0000; /* End sampling (clear) */
     AD1CSSL = 0;
     AD1CON3 = 0x0002; /* Manual Sample, Tad = 3Tcy */

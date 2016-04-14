@@ -19,10 +19,11 @@
 #include <stdbool.h>       /* Includes true/false definition                  */
 #include <string.h>        /* Inclues the string library                      */
 #include <stdlib.h>
-#include "lcd.h"
+
 #include "system.h"        /* System funct/params, like osc/peripheral config */
 #include "user.h"          /* User funct/params, such as InitApp              */
 #include "motorControl.h"
+#include "lcd.h"
 #include <libpic30.h>
 
 /******************************************************************************/
@@ -42,7 +43,7 @@ u16 main(void)
     ConfigureOscillator();
 
     /* Initialize IO ports and peripherals */
-    InitApp();
+    InitGPIO();
     InitADC();
     InitPWM();
     
@@ -50,11 +51,12 @@ u16 main(void)
     u16 ADC_values[NMB_SENSORS];
     u8 i;
     
-    //memset(&ADC_values,'0',NMB_SENSORS);
+    memset(ADC_values,0x00,sizeof(ADC_values));
+    /*
     for(i=0; i<NMB_SENSORS; i++) 
     {
         ADC_values[i]=0;
-    }
+    }*/
     while(1)
     {
         /* SENSORS SAMPLING */
@@ -76,5 +78,6 @@ u16 main(void)
             MoveForward(FAST);
         }
     }
-    
+    free(0x7FE);
+    return 0;
 }

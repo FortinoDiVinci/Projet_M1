@@ -46,7 +46,7 @@ AD1CON1bits.ADON = 1;})
 
 /* TODO User level functions prototypes (i.e. InitApp) go here */
 
-void InitApp(void);         /* I/O and Peripheral Initialization */
+void InitGPIO(void);         /* I/O and Peripheral Initialization */
 void InitADC();             /* Initialize Analog to Digital Converter */
 void InitPWM(void);         /* Initialize PWM */
 void StartADC(u16*);        /* Samples et converts the analog inputs */

@@ -28,7 +28,7 @@
 /******************************************************************************/
 /* LCD Level #define Macros                                                   */
 /******************************************************************************/
-#define LCD_RS LATBbits.LATB11	// Register select
+#define LCD_RS LATBbits.LATB13	// Register select
 #define LCD_EN LATBbits.LATB10	// Enable
 #define LCD_D4 LATAbits.LATA2	// Data bits
 #define LCD_D5 LATAbits.LATA3	// Data bits

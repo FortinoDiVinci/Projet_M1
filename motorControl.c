@@ -11,8 +11,6 @@
 
 void MoveForward(u8 speed)
 {
-    ANSBbits.ANSB12=0;
-    TRISBbits.TRISB12=0;
     LATBbits.LATB12=0;
     CCP2CON2Hbits.OCAEN = 1;
     
@@ -40,7 +38,6 @@ void MoveForward(u8 speed)
 
 void MoveBackward(u8 speed)
 {
-    TRISBbits.TRISB11=0;
     LATBbits.LATB11=0;
     CCP2CON2Hbits.OCBEN = 1;
     
