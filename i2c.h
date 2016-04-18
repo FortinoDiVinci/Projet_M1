@@ -31,7 +31,7 @@
 /******************************************************************************/
 void I2cStart(void);
 void I2cStop(void);
-//void I2cInit(u16);
+void I2cInit(void);
 
 
 

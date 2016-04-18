@@ -35,20 +35,20 @@ void InitGPIO(void)
     /* Setup analog functionality and port direction */
     
     /* INFRARED SETTINGS */
-    TRISAbits.TRISA0 = 1; /* AN0 set as input */
-    TRISBbits.TRISB0 = 1; /* AN2 set as input */
-    TRISBbits.TRISB1 = 1; /* AN5 set as input */
-    ANSAbits.ANSA0 = 1; /* AN0 set to analog : IR_2 */
-    ANSBbits.ANSB0 = 1; /* AN2 set to analog : IR_1 */
-    ANSBbits.ANSB1 = 1; /* AN5 set to analog : IR_3 */
+    TRISAbits.TRISA0 = 1;       /* AN0 set as input : IR_2  */
+    TRISBbits.TRISB0 = 1;       /* AN2 set as input : IR_1 */
+    TRISBbits.TRISB1 = 1;       /* AN5 set as input : IR_3 */
+    ANSAbits.ANSA0 = 1;         /* AN0 set to analog : IR_2 */
+    ANSBbits.ANSB0 = 1;         /* AN2 set to analog : IR_1 */
+    ANSBbits.ANSB1 = 1;         /* AN5 set to analog : IR_3 */
     
     /* ULTRASOUND SETTINGS */
-    TRISBbits.TRISB3 = 1; /* AN3 set as input */
-    ANSBbits.ANSB3 = 1; /* AN3 set to analog : US */
+    TRISBbits.TRISB3 = 1;       /* AN3 set as input : US*/
+    ANSBbits.ANSB3 = 1;         /* AN3 set to analog : US */
     
     /* PWM SETTINGS */
         /* MoveForward */
-    TRISBbits.TRISB12 = 0; 
+    TRISBbits.TRISB12 = 0;      
     ANSBbits.ANSB12 = 0;
         /* BackForward */
     TRISBbits.TRISB11 = 0;
@@ -57,7 +57,8 @@ void InitGPIO(void)
     TRISBbits.TRISB13 =	0;      /* Register select set as output */
     ANSBbits.ANSB13 = 0;        /*                 set as digital */
     TRISBbits.TRISB10 = 0;      /* Enable set as output */
-    TRISAbits.TRISA2 = 0;       /* Data bits set as output (only digital) */
+                                /* (only digital) */
+    TRISAbits.TRISA2 = 0;       /* Data bits set as output */
     ANSAbits.ANSA2 = 0;         /*           set as digital */
     TRISAbits.TRISA3 = 0;       /* Data bits set as output */
     ANSAbits.ANSA3 = 0;         /*           set as digital */
@@ -66,6 +67,11 @@ void InitGPIO(void)
     TRISAbits.TRISA4 = 0;       /* Data bits set as output */
     ANSAbits.ANSA4 = 0;         /*           set as digital */
 
+    /* I2C SETTINGS */
+    TRISBbits.TRISB8 = 0;       /* SLC1 set as output */
+    ANSBbits.ANSB8 = 0;         /*      set as digital */
+    TRISBbits.TRISB9 = 0;       /* SDA1 set as output (will change) */
+    ANSBbits.ANSB9 = 0;         /*      set as digital */
     
     /* Initialize peripherals */
     
