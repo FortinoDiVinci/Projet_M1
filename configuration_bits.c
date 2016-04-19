@@ -44,13 +44,13 @@
 
 // FOSCSEL
 #pragma config FNOSC = FRCDIV           // Oscillator Select (8MHz FRC oscillator With Postscaler (FRCDIV))
-#pragma config SOSCSRC = ANA            // SOSC Source Type (Analog Mode for use with crystal)
+#pragma config SOSCSRC = DIG            // SOSC Source Type (Digital Mode for use with external source)
 #pragma config LPRCSEL = HP             // LPRC Oscillator Power and Accuracy (High Power, High Accuracy Mode)
-#pragma config IESO = ON                // Internal External Switch Over bit (Internal External Switchover mode enabled (Two-speed Start-up enabled))
+#pragma config IESO = OFF               // Internal External Switch Over bit (Internal External Switchover mode disabled (Two-speed Start-up disabled))
 
 // FOSC
 #pragma config POSCMOD = NONE           // Primary Oscillator Configuration bits (Primary oscillator disabled)
-#pragma config OSCIOFNC = CLKO          // CLKO Enable Configuration bit (CLKO output signal enabled)
+#pragma config OSCIOFNC = IO            // CLKO Enable Configuration bit (Port I/O enabled (CLKO disabled))
 #pragma config POSCFREQ = HS            // Primary Oscillator Frequency Range Configuration bits (Primary oscillator/external clock input frequency greater than 8MHz)
 #pragma config SOSCSEL = SOSCHP         // SOSC Power Selection Configuration bits (Secondary Oscillator configured for high-power operation)
 #pragma config FCKSM = CSDCMD           // Clock Switching and Monitor Selection (Both Clock Switching and Fail-safe Clock Monitor are disabled)
@@ -58,7 +58,7 @@
 // FWDT
 #pragma config WDTPS = PS32768          // Watchdog Timer Postscale Select bits (1:32768)
 #pragma config FWPSA = PR128            // WDT Prescaler bit (WDT prescaler ratio of 1:128)
-#pragma config FWDTEN = ON              // Watchdog Timer Enable bits (WDT enabled in hardware)
+#pragma config FWDTEN = OFF              // Watchdog Timer Enable bits (WDT enabled in hardware)
 #pragma config WINDIS = OFF             // Windowed Watchdog Timer Disable bit (Standard WDT selected(windowed WDT disabled))
 
 // FPOR

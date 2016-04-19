@@ -46,6 +46,9 @@ u16 main(void)
     InitGPIO();
     InitADC();
     InitPWM();
+    LcdInit();
+    LcdClear();
+    LcdPuts("Vini, Vidi, Vici");
     
     /* TODO <INSERT USER APPLICATION CODE HERE> */
     u16 ADC_values[NMB_SENSORS];
@@ -57,8 +60,10 @@ u16 main(void)
     {
         ADC_values[i]=0;
     }*/
+
     while(1)
     {
+        
         /* SENSORS SAMPLING */
         for(i=0; i<NMB_SENSORS; i++)
         {
@@ -78,6 +83,5 @@ u16 main(void)
             MoveForward(FAST);
         }
     }
-    free(0x7FE);
     return 0;
 }

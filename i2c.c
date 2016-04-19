@@ -3,7 +3,14 @@
 
 void I2cStart(void)
 {
-    SSP1CON2bits.SEN = 1;       /* Initiate start condition */
+    SSP1CON2bits.SEN = 1;           /* Initiate start condition */
+    /* SSP1IF is set The MSSP module will wait the required 
+     * start time before any other operation takes place. */
+    /*
+    SSP1BUF = 0x00;                 // loads the slave address to transmit 
+    while(SSP1CON2bits.ACKSTAT);    // waits until acknowledge is received by slave 
+    */
+    
 }
 
 

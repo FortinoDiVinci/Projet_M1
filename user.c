@@ -36,12 +36,12 @@ void InitGPIO(void)
     
     /* INFRARED SETTINGS */
     TRISAbits.TRISA0 = 1;       /* AN0 set as input : IR_2  */
+    ANSAbits.ANSA0 = 1;         /*     set to analog : IR_2 */
     TRISBbits.TRISB0 = 1;       /* AN2 set as input : IR_1 */
+    ANSBbits.ANSB0 = 1;         /*     set to analog : IR_1 */
     TRISBbits.TRISB1 = 1;       /* AN5 set as input : IR_3 */
-    ANSAbits.ANSA0 = 1;         /* AN0 set to analog : IR_2 */
-    ANSBbits.ANSB0 = 1;         /* AN2 set to analog : IR_1 */
-    ANSBbits.ANSB1 = 1;         /* AN5 set to analog : IR_3 */
-    
+    ANSBbits.ANSB1 = 1;         /*     set to analog : IR_3 */
+
     /* ULTRASOUND SETTINGS */
     TRISBbits.TRISB3 = 1;       /* AN3 set as input : US*/
     ANSBbits.ANSB3 = 1;         /* AN3 set to analog : US */
