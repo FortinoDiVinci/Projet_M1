@@ -47,8 +47,14 @@ void LcdClear();
 /*lcd_clear function 
  -------------------
  */
-void LcdWrite(u8);
-/*lcd_write function 
+
+void LcdWriteCtrl(u8);
+/*lcd_write function for instruction
+ -------------------
+ */
+
+void LcdWriteData(u8);
+/*lcd_write function for data 
  -------------------
  */
 void LcdPuts(u8*);

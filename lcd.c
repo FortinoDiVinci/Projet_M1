@@ -27,7 +27,7 @@ void LcdInit()
 	LcdWrite(0x07);// increment mode on, entire shift on
 }*/
 
-LcdInit(void)
+void LcdInit(void)
 {
     LCD_RS = 0;	// write control bytes
     __delay_ms(15);	// power on delay
@@ -47,15 +47,16 @@ LcdInit(void)
     LCD_D4 = 0;
     LCD_STROBE;
     __delay_ms(40);
-    LcdWrite(0x28);	// 4 bit mode, 1/16 duty, 5x8 font
-    LcdWrite(0x08);	// display off
-    LcdWrite(0x0F);	// display on, blink cursor on
-    LcdWrite(0x06);	// entry mode
+    LcdWriteCtrl(0x28);	// 4 bit mode, 1/16 duty, 5x8 font
+    LcdWriteCtrl(0x08);	// display off
+    LcdWriteCtrl(0x01);	// display on, blink cursor off
+    LcdWriteCtrl(0x0C);	// entry mode cursor off
 }
 
-void LcdWrite(u8 c)
+void LcdWriteCtrl(u8 c)
 
 {
+    LCD_RS=0; //Instruction mode
     //Write the letter bit by bit
 	if(c & 0x80) LCD_D7=1; else LCD_D7=0;
 	if(c & 0x40) LCD_D6=1; else LCD_D6=0;
@@ -69,16 +70,30 @@ void LcdWrite(u8 c)
 	LCD_STROBE;	
 	__delay_us(40);
 }
+void LcdWriteData(u8 d)
 
+{
+    LCD_RS=1; //Data mode
+    //Write the letter bit by bit
+	if(d & 0x80) LCD_D7=1; else LCD_D7=0;
+	if(d & 0x40) LCD_D6=1; else LCD_D6=0;
+	if(d & 0x20) LCD_D5=1; else LCD_D5=0;
+	if(d & 0x10) LCD_D4=1; else LCD_D4=0;
+	LCD_STROBE;
+	if(d & 0x08) LCD_D7=1; else LCD_D7=0;
+	if(d & 0x04) LCD_D6=1; else LCD_D6=0;
+	if(d & 0x02) LCD_D5=1; else LCD_D5=0;
+	if(d & 0x01) LCD_D4=1; else LCD_D4=0;
+	LCD_STROBE;	
+	__delay_us(40);
+}
 /*
  * 	Clear and home the LCD
  */
 
 void LcdClear()
 {
-	LCD_RS = 0; //  instruction mode
-
-	LcdWrite(0x01); // send the instruction
+	LcdWriteCtrl(0x01); // send the instruction
 	__delay_ms(2);
 }
 
@@ -86,18 +101,15 @@ void LcdClear()
 
 void LcdPuts( u8 * s)
 {
-	LCD_RS = 1;	// data mode
-
 	while(*s!='\0')
     {
        if(*s=='\r')
        {
             LcdGoto(1,2);
-            LCD_RS = 1;
        }
        else
        {
-            LcdWrite(*s); //écriture sur le LCD d'un caractère du message.
+            LcdWriteData(*s); //écriture sur le LCD d'un caractère du message.
        }
         s++;
     }
@@ -108,9 +120,7 @@ void LcdPuts( u8 * s)
 
 void LcdPutch(u8 c)
 {
-	LCD_RS = 1;	// data mode
-
-	LcdWrite(c);
+	LcdWriteData(c);
 }
 
 
@@ -120,26 +130,26 @@ void LcdPutch(u8 c)
 
 void LcdGoto(u8 posX, u8 posY)
 {
-	LCD_RS = 0;
+	
     if (posY==1)
-        LcdWrite(0x80+posX-1); //positionne la ligne 1 aux coordonnées (x, 1).
+        LcdWriteCtrl(0x80+posX-1); //positionne la ligne 1 aux coordonnées (x, 1).
     if (posY==2)
-        LcdWrite(0xC0+posX-1); //positionne la ligne 2 aux coordonnées (x, 2).
+        LcdWriteCtrl(0xC0+posX-1); //positionne la ligne 2 aux coordonnées (x, 2).
 }
 
 void LcdOnOff(u8 onoff)
 {
-    LCD_RS=0;
+    
     if(onoff==1)
     {       
         /* LCD on */
-        LcdWrite(0x0C);
+        LcdWriteCtrl(0x0C);
         
     }
     else
     {
          /* LCD off */
-         LcdWrite(0x08);
+         LcdWriteCtrl(0x08);
     }
     
 }
