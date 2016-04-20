@@ -59,12 +59,8 @@ void LcdPutch(u8);
 /*lcd_putch function 
  -------------------
  */
-void LcdGoto(u8, u8);
+void LcdGoto(u8);
 /*lcd_goto function 
- -------------------
- */
-void LcdOnOff(u8);
-/*lcd_On_Off function 
  -------------------
  */
 

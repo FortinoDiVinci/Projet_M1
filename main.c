@@ -48,8 +48,7 @@ u16 main(void)
     InitPWM();
     LcdInit();
     LcdClear();
-    LcdPuts("Project in\rprogress... :)");
-    
+    LcdPuts("Vini, Vidi, Vici");
     
     /* TODO <INSERT USER APPLICATION CODE HERE> */
     u16 ADC_values[NMB_SENSORS];
