@@ -88,7 +88,20 @@ void LcdPuts( u8 * s)
 {
 	LCD_RS = 1;	// data mode
 
-	while(*s) LcdWrite(*s++);
+	while(*s!='\0')
+    {
+       if(*s=='\r')
+       {
+            LcdGoto(1,2);
+            LCD_RS = 1;
+       }
+       else
+       {
+            LcdWrite(*s); //écriture sur le LCD d'un caractère du message.
+       }
+        s++;
+    }
+        
 }
 
 /* write one character to the LCD */
@@ -105,10 +118,28 @@ void LcdPutch(u8 c)
  * Go to the specified position
  */
 
-void LcdGoto(u8 pos)
+void LcdGoto(u8 posX, u8 posY)
 {
 	LCD_RS = 0;
-
-	LcdWrite(0x80 + pos);
+    if (posY==1)
+        LcdWrite(0x80+posX-1); //positionne la ligne 1 aux coordonnées (x, 1).
+    if (posY==2)
+        LcdWrite(0xC0+posX-1); //positionne la ligne 2 aux coordonnées (x, 2).
 }
 
+void LcdOnOff(u8 onoff)
+{
+    LCD_RS=0;
+    if(onoff==1)
+    {       
+        /* LCD on */
+        LcdWrite(0x0C);
+        
+    }
+    else
+    {
+         /* LCD off */
+         LcdWrite(0x08);
+    }
+    
+}
