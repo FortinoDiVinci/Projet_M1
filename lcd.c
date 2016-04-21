@@ -49,8 +49,8 @@ void LcdInit(void)
     __delay_ms(40);
     LcdWriteCtrl(0x28);	// 4 bit mode, 1/16 duty, 5x8 font
     LcdWriteCtrl(0x08);	// display off
-    LcdWriteCtrl(0x01);	// display on, blink cursor off
-    LcdWriteCtrl(0x0C);	// entry mode cursor off
+    LcdWriteCtrl(0x0C);	// display on, blink cursor on
+    LcdWriteCtrl(0x06);	// entry mode cursor off
 }
 
 void LcdWriteCtrl(u8 c)
