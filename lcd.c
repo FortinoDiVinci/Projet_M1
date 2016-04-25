@@ -7,25 +7,9 @@
  
 #include "lcd.h"
 
-/* initialize the LCD - put into 4 bit mode */
-/*
-void LcdInit()
-{
-    
-    __delay_ms(40);// power on delay
-	LCD_RS = 0;	// write control bytes
+/* This variable is used for the conversion from hexa to ASCII */
+const char *h="0123456789ABCDEF";
 
-	LCD_D4 = 1;	// initialize
-	LCD_D5 = 1; //
-	LCD_STROBE;	
-	LcdWrite(0x2C); // Display on, mode 2 lines
-    __delay_us(40);
-	LcdWrite(0x0C);// display on, cursor off, blink off
-    __delay_us(40);
-    LcdWrite(0x01); // send the instruction
-	__delay_ms(2);
-	LcdWrite(0x07);// increment mode on, entire shift on
-}*/
 
 void LcdInit(void)
 {
@@ -71,7 +55,6 @@ void LcdWriteCtrl(u8 c)
 	__delay_us(40);
 }
 void LcdWriteData(u8 d)
-
 {
     LCD_RS=1; //Data mode
     //Write the letter bit by bit
@@ -151,5 +134,80 @@ void LcdOnOff(u8 onoff)
          /* LCD off */
          LcdWriteCtrl(0x08);
     }
+    
+}
+void LcdPutFloat(float data,u8 decimal)
+{
+    
+    u8 i;
+    u32 dec, dec10=10;
+    
+    /* Display a sign minus if data is negative and set data as positive */
+    if(data<0)
+    {
+        LcdPutch('-');
+        data*=-1;
+        
+    }
+    /* dec10=10^(decimal+1) */
+    for(i=0;i<decimal;i++)
+    {
+        dec10*=10;
+    }
+    /* Decimal part with (decimal+1) figures */
+    dec=dec10*(data-(u32)data);
+    /* Round to upper value */
+    if(dec%10>=5)
+    {
+        dec+=10;
+    }
+    /* If Overflow, add 1 to the entire part of data and 
+       set the decimal part to 0 */
+    if(dec>dec10-1)
+    {
+        data+=1;
+        dec=0;
+    }
+    /* Display the entire part of data */
+    LcdConvAscii(data);
+    
+    /*In the case  we want to display the decimal part */
+    if(decimal!=0)
+    {
+        /* Display a coma */
+        LcdPutch(',');
+        /* dec10=10^(decimal-1)*/
+        dec10/=100;
+        /* The decimal part of dec is set to (decimal) figures*/
+        dec/=10;
+        while(dec/dec10==0 && decimal>1)
+        {
+            /* Display the zero on the left of the decimal part */
+            LcdPutch('0');
+            dec10/=10;
+            decimal--;
+        }
+        LcdConvAscii(dec);
+    }
+}
+void LcdConvAscii(u32 number)
+{
+    u8 i=0;//counter
+    static u8 buf[32];
+    
+    
+    /* Fill buff with the corresponding  ASCII code of each figure of data */
+    do{
+       /*Conversion Hexa/ASCII from the end to the beginning*/
+        buf[i]=h[number%10];
+        number/=10;
+        i++;
+    }while(number);
+    
+    /* Display the buffer from the end to the beginning */
+    do{
+        i--;
+        LcdPutch(buf[i]);
+    }while(i>0);
     
 }

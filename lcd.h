@@ -22,6 +22,7 @@
 #include "user.h"
 #include <libpic30.h>
 
+
 #ifndef LCD_H
 #define	LCD_H
 
@@ -35,6 +36,7 @@
 #define LCD_D6 LATBbits.LATB4	// Data bits
 #define LCD_D7 LATAbits.LATA4	// Data bits
 #define	LCD_STROBE	((LCD_EN = 1),(LCD_EN=0))
+
 
 /******************************************************************************/
 /* LCD Function Prototypes                                                   */
@@ -73,6 +75,13 @@ void LcdOnOff(u8);
 /*lcd_On_Off function 
  -------------------
  */
-
+void LcdPutFloat(float,u8);
+/*lcd_Put_Float function 
+ -------------------
+ */
+void LcdConvAscii(u32);
+/*lcd_Conversion_Ascii function
+    -------------------
+ */
 #endif	/* LCD_H */
 

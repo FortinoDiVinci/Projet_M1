@@ -18,7 +18,7 @@
 #include <stdint.h>          /* For uint32_t definition */
 #include <stdbool.h>         /* For true/false definition */
 #include <string.h> 
-
+#include "lcd.h"
 #include "user.h"            /* variables/params used by user.c */
 #include "system.h"
 #include <libpic30.h>
@@ -174,10 +174,8 @@ void StartADC(u16* ADCValues)
 void DisplayADCIR(u16 const ADCValue)
 {
     float voltage;
-    char str[16];
     voltage = (ADCValue * PIC_VOLTAGE / 1023);
-    sprintf(str, "%1.3f", voltage);
-    LcdPuts(str);
+    LcdPutFloat(voltage,0);
 }
 
 void InitPWM(void)
