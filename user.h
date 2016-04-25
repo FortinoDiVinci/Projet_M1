@@ -10,6 +10,8 @@
 #define s16 signed short
 #define s32 signed long
 
+#define PIC_VOLTAGE 5.0
+
 #define IR1 0 /* First infrared AN2 */
 #define IR2 1 /* Second infrared AN0 */
 #define IR3 2 /* Third infrared AN5 */
@@ -23,7 +25,7 @@ if(x==US) {AD1CON1bits.ADON = 0; AD1CHSbits.CH0SA = 0x03; } \
 AD1CON1bits.ADON = 1;})
 
 #define NMB_SENSORS 4
-#define NMB_MEASURES 20
+#define NMB_MEASURES 10
 
 /* INFRARED LEVELS */
 #define IR_DISTANCE_6 0x03D /* 3,1V */
@@ -46,8 +48,9 @@ AD1CON1bits.ADON = 1;})
 
 /* TODO User level functions prototypes (i.e. InitApp) go here */
 
-void InitGPIO(void);         /* I/O and Peripheral Initialization */
-void InitADC();             /* Initialize Analog to Digital Converter */
-void InitPWM(void);         /* Initialize PWM */
-void StartADC(u16*);        /* Samples et converts the analog inputs */
+void InitGPIO(void);             /* I/O and Peripheral Initialization */
+void InitADC();                  /* Initialize Analog to Digital Converter */
+void InitPWM(void);              /* Initialize PWM */
+void StartADC(u16*);             /* Samples et converts the analog inputs */
 void ObjectDetection(const u16*, u16*);    /* Detect if an object is seen by one of the infrared */
+void DisplayADCIR(u16);            /* */

@@ -53,9 +53,11 @@ u16 main(void)
     
     /* TODO <INSERT USER APPLICATION CODE HERE> */
     u16 ADC_values[NMB_SENSORS];
+    u16 average[NMB_SENSORS];
     u8 i;
-    
+    u8 j;
     memset(ADC_values,0x00,sizeof(ADC_values));
+    memset(average, 0x00,sizeof(average));
     /*
     for(i=0; i<NMB_SENSORS; i++) 
     {
@@ -64,12 +66,19 @@ u16 main(void)
 
     while(1)
     {
-        
-        /* SENSORS SAMPLING */
-        for(i=0; i<NMB_SENSORS; i++)
+        for(j=0; j<NMB_MEASURES; j++)
         {
-            StartADC(ADC_values);
+            /* SENSORS SAMPLING */
+            for(i=0; i<NMB_SENSORS; i++)
+            {
+                StartADC(ADC_values);
+            }
+            ObjectDetection(ADC_values, average);
         }
+        
+        LcdClear();
+        DisplayADCIR(average[0]);
+        __delay_ms(5);
         
         if(ADC_values[US]<D1)
         {

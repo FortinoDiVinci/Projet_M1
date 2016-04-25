@@ -17,6 +17,7 @@
 
 #include <stdint.h>          /* For uint32_t definition */
 #include <stdbool.h>         /* For true/false definition */
+#include <string.h> 
 
 #include "user.h"            /* variables/params used by user.c */
 #include "system.h"
@@ -97,10 +98,11 @@ void ObjectDetection(const u16* ADCValues, u16* average)
     /* Data is treated every 20 samples */
     if (count == NMB_MEASURES)
     {
-        for(i=0; i<NMB_SENSORS; i++)
+        for(i=0; i<NMB_SENSORS-1; i++)
         {
-            average[i] /= count;
+            average[i] = average[i] / count;
         }
+        /*
         int obstacle[NMB_SENSORS] = {0, 0, 0};
         for(i = 0; i<NMB_SENSORS; i++)
         {
@@ -120,7 +122,7 @@ void ObjectDetection(const u16* ADCValues, u16* average)
             {
                 obstacle[i] = 4;
             }
-        }
+        }*/
         /* RESET count */
         count = 0;
     }
@@ -167,6 +169,15 @@ void StartADC(u16* ADCValues)
             break;        
     }
     active_sensor = (active_sensor + 1)%4;
+}
+
+void DisplayADCIR(u16 const ADCValue)
+{
+    float voltage;
+    char str[16];
+    voltage = (ADCValue * PIC_VOLTAGE / 1023);
+    sprintf(str, "%1.3f", voltage);
+    LcdPuts(str);
 }
 
 void InitPWM(void)
