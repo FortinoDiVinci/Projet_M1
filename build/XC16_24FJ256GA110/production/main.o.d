@@ -3,4 +3,5 @@ main.c  \
 system.h  \
 user.h  \
  motorControl.h  \
-lcd.h 
+lcd.h  \
+i2c.h 

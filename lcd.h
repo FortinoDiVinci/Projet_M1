@@ -42,45 +42,45 @@
 /* LCD Function Prototypes                                                   */
 /******************************************************************************/
 void LcdInit();
-/*lcd_init function 
+/*LcdInit function 
  -------------------
  */
 void LcdClear();
-/*lcd_clear function 
+/*LcdClear function 
  -------------------
  */
 
 void LcdWriteCtrl(u8);
-/*lcd_write function for instruction
+/*LcdWrite function for instruction
  -------------------
  */
 
 void LcdWriteData(u8);
-/*lcd_write function for data 
+/*LcdWrite function for data 
  -------------------
  */
 void LcdPuts(u8*);
-/*lcd_puts function 
+/*LcdPuts function 
  -------------------
  */
 void LcdPutch(u8);
-/*lcd_putch function 
+/*LcdPutch function 
  -------------------
  */
 void LcdGoto(u8, u8);
-/*lcd_goto function 
+/*LcdGoto function 
  -------------------
  */
 void LcdOnOff(u8);
-/*lcd_On_Off function 
+/*LcdOnOff function 
  -------------------
  */
 void LcdPutFloat(float,u8);
-/*lcd_Put_Float function 
+/*LcdPutFloat function 
  -------------------
  */
 void LcdConvAscii(u32);
-/*lcd_Conversion_Ascii function
+/*LcdConversionAscii function
     -------------------
  */
 #endif	/* LCD_H */

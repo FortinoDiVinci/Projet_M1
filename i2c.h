@@ -29,9 +29,20 @@
 /******************************************************************************/
 /* I2C Function Prototypes                                                    */
 /******************************************************************************/
-void I2cStart(void);
-void I2cStop(void);
 void I2cInit(void);
+/*I2cInit function 
+ -------------------
+ */
+void I2cReadData(void);
+/*I2cReadData function 
+ -------------------
+ */
+u8 I2cReadByte(void);
+/*I2cReadByte function 
+ -------------------
+ */
+void I2cStop(void);
+
 
 
 

@@ -8,7 +8,7 @@
 #include "lcd.h"
 
 /* This variable is used for the conversion from hexa to ASCII */
-const char *h="0123456789ABCDEF";
+const char *h="0123456789";
 
 
 void LcdInit(void)

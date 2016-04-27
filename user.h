@@ -10,12 +10,12 @@
 #define s16 signed short
 #define s32 signed long
 
-#define PIC_VOLTAGE 5.0
+#define PIC_VOLTAGE 4.798
 
 #define IR1 0 /* First infrared AN2 */
 #define IR2 1 /* Second infrared AN0 */
 #define IR3 2 /* Third infrared AN5 */
-#define US 3 /* Ultrasound AN3 */
+#define US 3  /* Ultrasound AN3 */
 
 #define START_SAMPLING(x)( \
 { if(x==IR2) {AD1CON1bits.ADON = 0; AD1CHSbits.CH0SA = 0X00; } \

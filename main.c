@@ -24,6 +24,7 @@
 #include "user.h"          /* User funct/params, such as InitApp              */
 #include "motorControl.h"
 #include "lcd.h"
+#include "i2c.h"
 #include <libpic30.h>
 
 /******************************************************************************/
