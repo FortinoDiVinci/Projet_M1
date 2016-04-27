@@ -156,3 +156,15 @@
 /******************************************************************************/
 
 /* TODO Add interrupt routine code here. */
+
+void __attribute__((interrupt,auto_psv))
+_U1RXInterrupt(void)
+{
+    extern char data22;  
+    while((U1STA|0xFFFE)==0xFFFF) /* test if the bit URXDA is set, if it set read 
+                                  * the char in the UART */
+   {
+        data22=GetChar();
+    } 
+    IFS0&=0xF7FF; // clear the U1RXIF bit
+}
