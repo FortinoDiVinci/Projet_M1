@@ -43,7 +43,7 @@
 #pragma config GCP = OFF                // General Segment Code Protect (No Protection)
 
 // FOSCSEL
-#pragma config FNOSC = FRCDIV           // Oscillator Select (8MHz FRC oscillator With Postscaler (FRCDIV))
+#pragma config FNOSC = FRCPLL           // Oscillator Select (32MHz FRC oscillator With Postscaler (FRCPLL))
 #pragma config SOSCSRC = DIG            // SOSC Source Type (Digital Mode for use with external source)
 #pragma config LPRCSEL = HP             // LPRC Oscillator Power and Accuracy (High Power, High Accuracy Mode)
 #pragma config IESO = OFF               // Internal External Switch Over bit (Internal External Switchover mode disabled (Two-speed Start-up disabled))
