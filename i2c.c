@@ -45,9 +45,9 @@ void I2cReadData(void)
 u8 I2cReadByte(void)
 {
     SSP1BUF = 0x1D;                 /* Slave address  + read bit */
-    while(SSP1CON2bits.ACKDT != 1); /* Wait until the ack bit is set */
+    while(SSP1CON2bits.ACKSTAT != 1); /* Wait until the ack bit is set */
     SSP1BUF = 0x01;                 /* 1 byte is read  (which are X values)*/
-    while(SSP1CON2bits.ACKDT != 1); /* Wait until the ack bit is set */
+    while(SSP1CON2bits.ACKSTAT != 1); /* Wait until the ack bit is set */
     return SSP1BUF;
 }
 
@@ -59,31 +59,37 @@ void I2cStop(void)
 void I2cInit()
 {
     SSP1CON1bits.SSPEN = 0;         /* Disable IC2 */
-    SSP1CON1bits.SSPM = 0b0000;     /* SPI Master mode, Clock = FOSC/2 */
-    SSP1ADDbits.I2CADD = 0x0;       /* Set the baud rate speed ??? */
+    SSP1CON1bits.SSPM = 0b1000;     /* SPI Master mode, Clock = FOSC/2 */
+    SSP1ADDbits.I2CADD = 0x27;      /* Set the baud rate speed 100kb */
+    SSP1STATbits.SMP = 1;            /* Slew rate */
+    
     SSP1CON1bits.SSPEN = 1;         /* Enable I2C */
     
     /* Configuration register A */
-    SSP1BUF = 0x1C;                 /* Slave adress  + write bit */
-    while(SSP1CON2bits.ACKDT != 1); /* Wait until the ack bit is set */
-    SSP1BUF = 0x00;                 /* Configuration register A (0x00) */
-    while(SSP1CON2bits.ACKDT != 1); /* Wait until the ack bit is set */
-    SSP1BUF = 0x71;                 /* 8-average, 15 Hz default, positive self test measurement */
-    while(SSP1CON2bits.ACKDT != 1); /* Wait until the ack bit is set */
+    SSP1CON2bits.SEN = 1;                /* Start I2C */
+    while(SSP1CON2bits.SEN);             /* Wait until the start transmit  */
+    SSP1BUF = 0x1C;                      /* Slave address  + write bit */
+    while(SSP1CON2bits.ACKSTAT != 1);    /* Wait until the ack bit is set */
+    SSP1BUF = 0x00;                      /* Configuration register A (0x00) */
+    while(SSP1CON2bits.ACKSTAT != 1);    /* Wait until the ack bit is set */
+    SSP1BUF = 0x71;                      /* 8-average, 15 Hz default, positive self test measurement */
+    while(SSP1CON2bits.ACKSTAT != 1);    /* Wait until the ack bit is set */
     
     /* Configuration register B */
-    SSP1BUF = 0x1C;                 /* Slave adress  + write bit */
-    while(SSP1CON2bits.ACKDT != 1); /* Wait until the ack bit is set */
+    SSP1CON2bits.SEN = 1;           /* Start I2C */
+    SSP1BUF = 0x1C;                 /* Slave address  + write bit */
+    while(SSP1CON2bits.ACKSTAT != 1); /* Wait until the ack bit is set */
     SSP1BUF = 0x01;                 /* Configuration register B (0x01) */
-    while(SSP1CON2bits.ACKDT != 1); /* Wait until the ack bit is set */
+    while(SSP1CON2bits.ACKSTAT != 1); /* Wait until the ack bit is set */
     SSP1BUF = 0xA0;                 /* Gain = 5 */
-    while(SSP1CON2bits.ACKDT != 1); /* Wait until the ack bit is set */
+    while(SSP1CON2bits.ACKSTAT != 1); /* Wait until the ack bit is set */
     
     /* Mode register default value is single-measurement mode 
      * the register 0x02 will have to be initialized for each measurement */
-    SSP1BUF = 0x1C;                 /* Slave adress  + write bit */
-    while(SSP1CON2bits.ACKDT != 1); /* Wait until the ack bit is set */
+    SSP1BUF = 0x1C;                 /* Slave address  + write bit */
+    SSP1CON2bits.SEN = 1;           /* Start I2C */
+    while(SSP1CON2bits.ACKSTAT != 1); /* Wait until the ack bit is set */
     SSP1BUF = 0x02;                 /* Mode register (0x02) */
-    while(SSP1CON2bits.ACKDT != 1); /* Wait until the ack bit is set */
+    while(SSP1CON2bits.ACKSTAT != 1); /* Wait until the ack bit is set */
     SSP1BUF = 0x01;                 /* single mode measurement */
 }

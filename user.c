@@ -76,9 +76,9 @@ void InitGPIO(void)
 
     
     /* I2C SETTINGS */
-    TRISBbits.TRISB8 = 0;       /* SLC1 set as output */
+    TRISBbits.TRISB8 = 1;       /* SLC1 set as input */
     ANSBbits.ANSB8 = 0;         /*      set as digital */
-    TRISBbits.TRISB9 = 0;       /* SDA1 set as output (will change) */
+    TRISBbits.TRISB9 = 1;       /* SDA1 set as input (will change) */
     ANSBbits.ANSB9 = 0;         /*      set as digital */
     
     /* Initialize peripherals */

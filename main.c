@@ -87,14 +87,14 @@ u16 main(void)
         
         /* Object detection */
         
-        if((average[1] * PIC_VOLTAGE / 1023 >= 0.800)&&(average[1] * PIC_VOLTAGE / 1023 <= 1.800) )
+        if((average[1] * PIC_VOLTAGE / 1023 >= 0.400)&&(average[1] * PIC_VOLTAGE / 1023 <= 1.000) )
         {
             /* If the IR detects an object closer than 30 cm, motor slows down */
             LcdGoto(1,2);
             LcdPuts("SLOW...");
             MoveForward(SLOW);
         }
-        else if(average[1] * PIC_VOLTAGE / 1023 >= 1.800)
+        else if(average[1] * PIC_VOLTAGE / 1023 >= 1.000)
         {
             /* If the IR detects an object closer than 10 cm, motor stops */
             LcdGoto(1,2);

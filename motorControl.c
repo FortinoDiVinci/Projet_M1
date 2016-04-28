@@ -18,12 +18,12 @@ void MoveForward(u8 speed)
         //Sets the PWM frequency to 1 kHz.
         case SLOW:
             //Set the PWM duty cycle to ?0%
-            CCP2RA = 9; 
+            CCP2RA = 15; 
             
             break ;
         case MEDIUM :
             //Set the PWM duty cycle to 70%
-           CCP2RA = 7; 
+           CCP2RA = 12; 
             break ;
         case FAST :
             //Set the PWM duty cycle to 80%
@@ -69,7 +69,7 @@ void MoveBackward(u8 speed)
 
 void StopMotor()
 { 
-    LATAbits.LATA7 = 0;      /* PWM disable */
+    LATAbits.LATA7 = 1;      /* PWM disable */
     CCP2CON1Lbits.CCPON = 0;
     CCP2CON2Hbits.OCBEN = 0;
     CCP2CON2Hbits.OCAEN = 0;   
