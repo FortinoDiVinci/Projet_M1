@@ -68,3 +68,10 @@ void MoveBackward(u8 speed)
                     
     
 }
+
+void StopMotor()
+{ 
+    CCP2CON1Lbits.CCPON=0;
+    CCP2CON2Hbits.OCBEN =0;
+    CCP2CON2Hbits.OCAEN =0;   
+}
