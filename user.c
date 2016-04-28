@@ -81,6 +81,13 @@ void InitGPIO(void)
     TRISBbits.TRISB9 = 1;       /* SDA1 set as input (will change) */
     ANSBbits.ANSB9 = 0;         /*      set as digital */
     
+    /* UART SETTINGS*/
+    ANSBbits.ANSB2=0;           /* set RB2 as digital */
+    TRISBbits.TRISB2=1;         /* set RB2 as output */
+    
+    ANSBbits.ANSB7=0;           /* set RB7 as digital */
+    TRISBbits.TRISB7=0;         /* set RB7 as output */
+    
     /* Initialize peripherals */
     
 }
@@ -210,4 +217,23 @@ void InitPWM(void)
     CCP2RA = 0; // Set the rising edge compare value
     CCP2RB = 0; // Set the falling edge compare value
     CCP2CON1Lbits.CCPON = 1; // Turn on MCCP module  
+}
+
+void InitUART(void)
+{
+    U1BRG= 25; //(FCY /(16*38400))-1; //Set the value of Baudrate (38461)
+            
+    IPC3bits.U1TXIP2 = 1; //Set Uart TX Interrupt Priority
+    IPC3bits.U1TXIP1 = 0;
+    IPC3bits.U1TXIP0 = 0;
+    IPC2bits.U1RXIP2 = 1; //Set Uart RX Interrupt Priority
+    IPC2bits.U1RXIP1 = 0;
+    IPC2bits.U1RXIP0 = 0;
+    U1STA = 0;
+    U1MODE = 0x8000; //Enable Uart for 8-bit data
+    //no parity, 1 STOP bit
+    U1MODEbits.UARTEN = 1;
+    U1STAbits.UTXEN = 1; //Enable Transmit
+    //IEC0bits.U1TXIE = 1; //Enable Transmit Interrupt
+    IEC0bits.U1RXIE = 1; //Enable Receive Interrupt
 }

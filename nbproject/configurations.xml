@@ -35,6 +35,8 @@
     <itemPath>getting_started.txt</itemPath>
     <itemPath>legal_disclaimer.txt</itemPath>
     <itemPath>project_information.txt</itemPath>
+    <itemPath>UART.c</itemPath>
+    <itemPath>UART.h</itemPath>
   </logicalFolder>
   <sourceRootList>
     <Elem>.</Elem>
