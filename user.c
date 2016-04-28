@@ -180,6 +180,7 @@ void DisplayADCIR(u16 const ADCValue)
 
 void InitPWM(void)
 {
+    
     // Set MCCP operating mode
     CCP2CON1Lbits.CCSEL = 0; // Set MCCP operating mode (OC mode)
     CCP2CON1Lbits.MOD = 0b0101; // Set mode (Buffered Dual-Compare/PWM mode)
@@ -197,10 +198,11 @@ void InitPWM(void)
     CCP2CON2Hbits.OCBEN = 1;
     CCP2CON3Hbits.OUTM = 0b000; // Set advanced output modes (Standard output)
     CCP2CON3Hbits.POLACE = 0; //Configure output polarity (Active High)
-    CCP2CON3Hbits.POLBDF = 1; // Configure output polarity (Active Low)
+    CCP2CON3Hbits.POLBDF = 0; // Configure output polarity (Active Low)
     CCP2TMRL = 0x0000; //Initialize timer prior to enable module.
-    CCP2PRL = 0xFFFF; //Configure timebase period
-    CCP2RA = 0x1000; // Set the rising edge compare value
-    CCP2RB = 0x8000; // Set the falling edge compare value
+    CCP2PRL = 24; //Configure timebase period
+    CCP2RA = 0; // Set the rising edge compare value
+    CCP2RB = 0; // Set the falling edge compare value
     CCP2CON1Lbits.CCPON = 1; // Turn on MCCP module
+   
 }

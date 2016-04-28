@@ -164,7 +164,7 @@ _U1RXInterrupt(void)
     while((U1STA|0xFFFE)==0xFFFF) /* test if the bit URXDA is set, if it set read 
                                   * the char in the UART */
    {
-        data22=GetChar();
+        //data22=GetChar();
     } 
     IFS0&=0xF7FF; // clear the U1RXIF bit
 }

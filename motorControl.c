@@ -6,60 +6,64 @@
  */
 
 
-#include "xc.h"
+
 #include "motorControl.h"
 
 void MoveForward(u8 speed)
 {
-    LATBbits.LATB12=0;
+   
     CCP2CON2Hbits.OCAEN = 1;
-    
+    CCP2CON2Hbits.OCBEN = 0;
     switch(speed)
     {
+        //Sets the PWM frequency to 1 kHz.
         case SLOW:
-            CCP2TMRL = 0x0000; /* Initialize timer prior to enable module. */
-            CCP2PRL = 0xFFFF; /* Configure timebase period */
+            //Set the PWM duty cycle to 70%
+            CCP2RA = 7; 
+            
             break ;
         case MEDIUM :
-            CCP2TMRL = 0x0000; /* Initialize timer prior to enable module. */
-            CCP2PRL = 0xFFFF; /* Configure timebase period */
+            //Set the PWM duty cycle to 80%
+           CCP2RA = 5; 
             break ;
         case FAST :
-            
-            CCP2TMRL = 0x0000; /* Initialize timer prior to enable module. */
-            CCP2PRL = 0xFFFF; /* Configure timebase period */
+            //Set the PWM duty cycle to 90%
+            CCP2RA = 2; 
             break ;
         default :
             break ;
               /* should not happen, show and a LCD an error */  
-    }      
-    CCP2CON1Lbits.CCPON =1; /* Turn on MCCP module  */                
+    }   
+  
+    CCP2CON1Lbits.CCPON =1; /* Turn on MCCP module  */ 
+     
 }
 
 void MoveBackward(u8 speed)
 {
-    LATBbits.LATB11=0;
+    CCP2CON2Hbits.OCAEN = 0;
     CCP2CON2Hbits.OCBEN = 1;
-    
     switch(speed)
     {
-        case SLOW :
-            CCP2TMRL = 0x0000; /* Initialize timer prior to enable module. */
-            CCP2PRL = 0xFFFF; /* Configure timebase period */
-            break;
+    //Sets the PWM frequency to 1 kHz.
+        case SLOW:
+            //Set the PWM duty cycle to 70%
+            CCP2RB = 7; 
+            
+            break ;
         case MEDIUM :
-            CCP2TMRL = 0x0000; /* Initialize timer prior to enable module. */
-            CCP2PRL = 0xFFFF; /* Configure timebase period */
-            break;
+            //Set the PWM duty cycle to 80%
+           CCP2RB = 5; 
+            break ;
         case FAST :
-            
-            CCP2TMRL = 0x0000; /* Initialize timer prior to enable module. */
-            CCP2PRL = 0xFFFF; /* Configure timebase period */
-            break;
+            //Set the PWM duty cycle to 90%
+            CCP2RB = 3; 
+            break ;
         default :
-             break; /* should not happen, show and a LCD an error */
-    }
-            
+            break ;
+              /* should not happen, show and a LCD an error */  
+
+    }   
     CCP2CON1Lbits.CCPON =1; /* Turn on MCCP module */            
                     
     

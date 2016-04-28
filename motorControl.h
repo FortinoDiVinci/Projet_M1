@@ -33,6 +33,7 @@
 
 #include <xc.h> // include processor files - each processor file is guarded.  
 #include "user.h"
+#include "lcd.h"
 /******************************************************************************/
 /* User Level #define Macros                                                  */
 /******************************************************************************/
@@ -51,11 +52,11 @@
 /* User Function Prototypes                                                   */
 /******************************************************************************/
 
-void moveForward(u8 speed);
+void MoveForward(u8 speed);
 /* moveForward function 
  -------------------
  */
-void backForward(u8);
+void BackForward(u8);
 /* backForward function 
  -------------------
  */

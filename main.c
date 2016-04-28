@@ -48,11 +48,12 @@ u16 main(void)
     InitADC();
     InitPWM();
     LcdInit();
-    LcdClear();
-    LcdPuts("Project in\rprogress... :)");
+    //LcdClear();
+    //LcdPuts("Project in\rprogress... :)");
     
     
     /* TODO <INSERT USER APPLICATION CODE HERE> */
+    /*
     u16 ADC_values[NMB_SENSORS];
     u16 average[NMB_SENSORS];
     u8 i;
@@ -64,12 +65,13 @@ u16 main(void)
     {
         ADC_values[i]=0;
     }*/
-
+    
     while(1)
     {
+        /*
         for(j=0; j<NMB_MEASURES; j++)
         {
-            /* SENSORS SAMPLING */
+            /* SENSORS SAMPLING 
             for(i=0; i<NMB_SENSORS; i++)
             {
                 StartADC(ADC_values);
@@ -93,6 +95,14 @@ u16 main(void)
         {
             MoveForward(FAST);
         }
+        */
+        
+        MoveForward(SLOW);
+        __delay_ms(2000);
+        MoveForward(MEDIUM);
+         __delay_ms(2000);
+        MoveForward(FAST);
+         __delay_ms(2000);
     }
     return 0;
 }
