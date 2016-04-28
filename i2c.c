@@ -14,6 +14,8 @@ void I2cReadData(void)
     static u16 mag_x = 0;
     static u16 mag_y = 0;
     /* Mode register default value is single-measurement mode */
+    SSP1CON2bits.SEN = 1;                /* Start I2C */
+    while(SSP1CON2bits.SEN);             /* Wait until the start transmit  */
     SSP1BUF = 0x1C;                 /* Slave adress  + write bit */
     while(SSP1CON2bits.ACKDT != 1); /* Wait until the ack bit is set */
     SSP1BUF = 0x02;                 /* Mode register (0x02) */
@@ -30,6 +32,8 @@ void I2cReadData(void)
     mag_x += I2cReadByte();         /* Get the least significative 8-bits */
     
     /* Moves data pointer */
+    SSP1CON2bits.SEN = 1;                /* Start I2C */
+    while(SSP1CON2bits.SEN);             /* Wait until the start transmit  */
     SSP1BUF = 0x1C;                 /* Slave address  + write bit */
     while(SSP1CON2bits.ACKDT != 1); /* Wait until the ack bit is set */
     SSP1BUF = 0x06;                 /* Moves the @ pointer to register 6 */
@@ -44,6 +48,8 @@ void I2cReadData(void)
 
 u8 I2cReadByte(void)
 {
+    SSP1CON2bits.SEN = 1;                /* Start I2C */
+    while(SSP1CON2bits.SEN);             /* Wait until the start transmit  */
     SSP1BUF = 0x1D;                 /* Slave address  + read bit */
     while(SSP1CON2bits.ACKSTAT != 1); /* Wait until the ack bit is set */
     SSP1BUF = 0x01;                 /* 1 byte is read  (which are X values)*/
