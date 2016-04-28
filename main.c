@@ -53,7 +53,7 @@ u16 main(void)
     
     
     /* TODO <INSERT USER APPLICATION CODE HERE> */
-    /*
+    
     u16 ADC_values[NMB_SENSORS];
     u16 average[NMB_SENSORS];
     u8 i;
@@ -68,10 +68,10 @@ u16 main(void)
     
     while(1)
     {
-        /*
+        
         for(j=0; j<NMB_MEASURES; j++)
         {
-            /* SENSORS SAMPLING 
+            /* SENSORS SAMPLING */
             for(i=0; i<NMB_SENSORS; i++)
             {
                 StartADC(ADC_values);
@@ -80,9 +80,35 @@ u16 main(void)
         }
         
         LcdClear();
-        DisplayADCIR(average[0]);
+        DisplayADCIR(average[1]);
+        
         __delay_ms(5);
         
+        
+        /* Object detection */
+        
+        if((average[1] * PIC_VOLTAGE / 1023 >= 0.800)&&(average[1] * PIC_VOLTAGE / 1023 <= 1.800) )
+        {
+            /* If the IR detects an object closer than 30 cm, motor slows down */
+            LcdGoto(1,2);
+            LcdPuts("SLOW...");
+            MoveForward(SLOW);
+        }
+        else if(average[1] * PIC_VOLTAGE / 1023 >= 1.800)
+        {
+            /* If the IR detects an object closer than 10 cm, motor stops */
+            LcdGoto(1,2);
+            LcdPuts("STOP !");
+            StopMotor();
+        }
+        else 
+        {
+            LcdGoto(1,2);
+            LcdPuts("Normal speed.");
+            MoveForward(MEDIUM);
+        }
+        
+        /* ULTRASON need to be changed
         if(ADC_values[US]<D1)
         {
             MoveForward(SLOW);
@@ -96,13 +122,6 @@ u16 main(void)
             MoveForward(FAST);
         }
         */
-        
-        MoveForward(SLOW);
-        __delay_ms(2000);
-        MoveForward(MEDIUM);
-         __delay_ms(2000);
-        MoveForward(FAST);
-         __delay_ms(2000);
     }
     return 0;
 }

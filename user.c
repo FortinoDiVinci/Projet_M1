@@ -35,6 +35,7 @@ void InitGPIO(void)
 {
     /* Setup analog functionality and port direction */
     
+    
     /* INFRARED SETTINGS */
     TRISAbits.TRISA0 = 1;       /* AN0 set as input : IR_2  */
     ANSAbits.ANSA0 = 1;         /*     set to analog : IR_2 */
@@ -43,16 +44,21 @@ void InitGPIO(void)
     TRISBbits.TRISB1 = 1;       /* AN5 set as input : IR_3 */
     ANSBbits.ANSB1 = 1;         /*     set to analog : IR_3 */
 
+    
     /* ULTRASOUND SETTINGS */
     TRISBbits.TRISB3 = 1;       /* AN3 set as input : US*/
     ANSBbits.ANSB3 = 1;         /* AN3 set to analog : US */
     
+    
     /* PWM SETTINGS */
         /* MoveForward */
-    TRISBbits.TRISB12 = 0;      
-    ANSBbits.ANSB12 = 0;
+    TRISBbits.TRISB12 = 0;      /* RB13 set as output : PWM -> */     
+    ANSBbits.ANSB12 = 0;        /*      set as digital */
         /* BackForward */
-    TRISBbits.TRISB11 = 0;
+    TRISBbits.TRISB11 = 0;      /* RB11 set as output : PWM <- */
+    
+    TRISAbits.TRISA7 = 0;       /* RA7 set as output : PWM EN */
+    
     
     /* LCD SETTINGS */
     TRISBbits.TRISB13 =	0;      /* Register select set as output */
@@ -68,6 +74,7 @@ void InitGPIO(void)
     TRISAbits.TRISA4 = 0;       /* Data bits set as output */
     ANSAbits.ANSA4 = 0;         /*           set as digital */
 
+    
     /* I2C SETTINGS */
     TRISBbits.TRISB8 = 0;       /* SLC1 set as output */
     ANSBbits.ANSB8 = 0;         /*      set as digital */
@@ -175,12 +182,11 @@ void DisplayADCIR(u16 const ADCValue)
 {
     float voltage;
     voltage = (ADCValue * PIC_VOLTAGE / 1023);
-    LcdPutFloat(voltage,0);
+    LcdPutFloat(voltage,3);
 }
 
 void InitPWM(void)
 {
-    
     // Set MCCP operating mode
     CCP2CON1Lbits.CCSEL = 0; // Set MCCP operating mode (OC mode)
     CCP2CON1Lbits.MOD = 0b0101; // Set mode (Buffered Dual-Compare/PWM mode)
@@ -203,6 +209,5 @@ void InitPWM(void)
     CCP2PRL = 24; //Configure timebase period
     CCP2RA = 0; // Set the rising edge compare value
     CCP2RB = 0; // Set the falling edge compare value
-    CCP2CON1Lbits.CCPON = 1; // Turn on MCCP module
-   
+    CCP2CON1Lbits.CCPON = 1; // Turn on MCCP module  
 }

@@ -11,31 +11,30 @@
 
 void MoveForward(u8 speed)
 {
-   
     CCP2CON2Hbits.OCAEN = 1;
     CCP2CON2Hbits.OCBEN = 0;
     switch(speed)
     {
         //Sets the PWM frequency to 1 kHz.
         case SLOW:
-            //Set the PWM duty cycle to 70%
-            CCP2RA = 7; 
+            //Set the PWM duty cycle to ?0%
+            CCP2RA = 9; 
             
             break ;
         case MEDIUM :
-            //Set the PWM duty cycle to 80%
-           CCP2RA = 5; 
+            //Set the PWM duty cycle to 70%
+           CCP2RA = 7; 
             break ;
         case FAST :
-            //Set the PWM duty cycle to 90%
-            CCP2RA = 2; 
+            //Set the PWM duty cycle to 80%
+            CCP2RA = 5; 
             break ;
         default :
             break ;
               /* should not happen, show and a LCD an error */  
     }   
-  
-    CCP2CON1Lbits.CCPON =1; /* Turn on MCCP module  */ 
+    LATAbits.LATA7 = 1;      /* PWM enable */
+    CCP2CON1Lbits.CCPON = 1; /* Turn on MCCP module  */ 
      
 }
 
@@ -47,31 +46,31 @@ void MoveBackward(u8 speed)
     {
     //Sets the PWM frequency to 1 kHz.
         case SLOW:
-            //Set the PWM duty cycle to 70%
-            CCP2RB = 7; 
+            //Set the PWM duty cycle to ?0%
+            CCP2RB = 15; 
             
             break ;
         case MEDIUM :
-            //Set the PWM duty cycle to 80%
-           CCP2RB = 5; 
+            //Set the PWM duty cycle to 70%
+           CCP2RB = 12; 
             break ;
         case FAST :
-            //Set the PWM duty cycle to 90%
-            CCP2RB = 3; 
+            //Set the PWM duty cycle to 80%
+            CCP2RB = 5; 
             break ;
         default :
             break ;
               /* should not happen, show and a LCD an error */  
 
-    }   
-    CCP2CON1Lbits.CCPON =1; /* Turn on MCCP module */            
-                    
-    
+    }  
+    LATAbits.LATA7 = 1;      /* PWM enable */
+    CCP2CON1Lbits.CCPON = 1; /* Turn on MCCP module */              
 }
 
 void StopMotor()
 { 
-    CCP2CON1Lbits.CCPON=0;
-    CCP2CON2Hbits.OCBEN =0;
-    CCP2CON2Hbits.OCAEN =0;   
+    LATAbits.LATA7 = 0;      /* PWM disable */
+    CCP2CON1Lbits.CCPON = 0;
+    CCP2CON2Hbits.OCBEN = 0;
+    CCP2CON2Hbits.OCAEN = 0;   
 }

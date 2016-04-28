@@ -10,7 +10,7 @@
 #define s16 signed short
 #define s32 signed long
 
-#define PIC_VOLTAGE 4.798
+#define PIC_VOLTAGE 3.25
 
 #define IR1 0 /* First infrared AN2 */
 #define IR2 1 /* Second infrared AN0 */
