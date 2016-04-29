@@ -1,8 +1,8 @@
 /* 
  * File:   i2c.h
- * Author: CYRIM
+ * Author: Vincent
  *
- * Created on 10 avril 2016, 21:11
+ * Created on 10 April 2016, 21:11
  */
 #if defined(__XC16__)
     #include <xc.h>

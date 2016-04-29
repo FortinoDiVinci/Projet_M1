@@ -5,7 +5,7 @@
  * Created on April 19, 2016, 5:54 PM
  */
 
-#include "UART.h"
+#include "uart.h"
 /* the fonction GetChar() has been made to get a char from the UART */
 char GetChar()
 {

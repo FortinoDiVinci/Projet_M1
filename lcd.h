@@ -2,7 +2,7 @@
  * File:   lcd.h
  * Author: Cyril
  *
- * Created on 7 avril 2016, 21:31
+ * Created on 7 April 2016, 21:31
  */
 
 #if defined(__XC16__)

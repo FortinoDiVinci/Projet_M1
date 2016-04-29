@@ -16,7 +16,7 @@ void I2cReadData(void)
     /* Mode register default value is single-measurement mode */
     SSP1CON2bits.SEN = 1;                /* Start I2C */
     while(SSP1CON2bits.SEN);             /* Wait until the start transmit  */
-    SSP1BUF = 0x1C;                 /* Slave adress  + write bit */
+    SSP1BUF = 0x1C;                 /* Slave address  + write bit */
     while(SSP1CON2bits.ACKDT != 1); /* Wait until the ack bit is set */
     SSP1BUF = 0x02;                 /* Mode register (0x02) */
     while(SSP1CON2bits.ACKDT != 1); /* Wait until the ack bit is set */
@@ -66,8 +66,8 @@ void I2cInit()
 {
     SSP1CON1bits.SSPEN = 0;         /* Disable IC2 */
     SSP1CON1bits.SSPM = 0b1000;     /* SPI Master mode, Clock = FOSC/2 */
-    SSP1ADDbits.I2CADD = 0x27;      /* Set the baud rate speed 100kb */
-    SSP1STATbits.SMP = 1;            /* Slew rate */
+    SSP1ADDbits.I2CADD = 0x9F;      /* Set the baud rate speed 100kb (Fosc = 32MHz) */
+    SSP1STATbits.SMP = 1;           /* Slew rate (for 100kb) */
     
     SSP1CON1bits.SSPEN = 1;         /* Enable I2C */
     
