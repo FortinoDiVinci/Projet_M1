@@ -40,6 +40,8 @@ AD1CON1bits.ADON = 1;})
 #define IR_DISTANCE_50 0x00BD /* 0,6V */
 #define IR_DISTANCE_80 0x007E /* 0,4V */
 
+#define PWM_FREQ 80000        /* 80kHz */
+#define PWM_PER_SYS 400
 /* TODO Application specific user parameters used in user.c may go here */
 
 /******************************************************************************/

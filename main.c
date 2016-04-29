@@ -84,19 +84,26 @@ u16 main(void)
         
         __delay_ms(5);
         
+
         
         /* Object detection */
         
-        if((average[1] * PIC_VOLTAGE / 1023 >= 0.400)&&(average[1] * PIC_VOLTAGE / 1023 <= 1.000) )
+        if((average[1] * PIC_VOLTAGE / 1023 >= 0.400)&&(average[1] * PIC_VOLTAGE / 1023 <= 0.800))
+        {
+            LcdGoto(1,2);
+            LcdPuts("Normal speed.");
+            MoveForward(MEDIUM);
+        }
+        else if((average[1] * PIC_VOLTAGE / 1023 >= 0.800)&&(average[1] * PIC_VOLTAGE / 1023 <= 1.300) )
         {
             /* If the IR detects an object closer than 30 cm, motor slows down */
             LcdGoto(1,2);
             LcdPuts("SLOW...");
             MoveForward(SLOW);
         }
-        else if(average[1] * PIC_VOLTAGE / 1023 >= 1.000)
+        else if(average[1] * PIC_VOLTAGE / 1023 >= 1.300)
         {
-            /* If the IR detects an object closer than 10 cm, motor stops */
+            /* If the IR detects an object closer than 10 cm, motor stops  */
             LcdGoto(1,2);
             LcdPuts("STOP !");
             StopMotor();
@@ -104,8 +111,8 @@ u16 main(void)
         else 
         {
             LcdGoto(1,2);
-            LcdPuts("Normal speed.");
-            MoveForward(MEDIUM);
+            LcdPuts("Fast speed baby !");
+            MoveForward(FAST);
         }
         
         /* ULTRASON need to be changed

@@ -3,6 +3,8 @@
  * Author: LAPOTRE Fabian
  * Comments: this file as been created to control the motor
  * Revision history: 
+ * - duty cycle calculation 
+ * - settings
  */
  
 #ifndef MOTOR_CONTROL_H
@@ -26,6 +28,10 @@
 #define SLOW 1
 #define MEDIUM 2
 #define FAST 3
+
+#define DUTY_SLOW 0.15
+#define DUTY_MEDIUM 0.30
+#define DUTY_FAST 0.50
 
 /******************************************************************************/
 /* User Function Prototypes                                                   */

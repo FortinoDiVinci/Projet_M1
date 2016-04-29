@@ -213,7 +213,8 @@ void InitPWM(void)
     CCP2CON3Hbits.POLACE = 0; //Configure output polarity (Active High)
     CCP2CON3Hbits.POLBDF = 0; // Configure output polarity (Active Low)
     CCP2TMRL = 0x0000; //Initialize timer prior to enable module.
-    CCP2PRL = 24; //Configure timebase period
+    CCP2PRL = 99;             //Configure time base period
+    /* (u16)((1/PWM_FREQ)/(4/SYS_FREQ) - 1) = 99 */
     CCP2RA = 0; // Set the rising edge compare value
     CCP2RB = 0; // Set the falling edge compare value
     CCP2CON1Lbits.CCPON = 1; // Turn on MCCP module  
