@@ -148,7 +148,7 @@ void I2cStop(void)
     while(SSP1CON2bits.PEN);             /* Waits until the transmission stops  */    
 }
 
-void I2cInit(void)
+void InitI2c(void)
 {
     //SSP1CON1bits.SSPEN = 0;         /* Disable IC2 */
     SSP1ADDbits.I2CADD = 0x9F;      /* Set the baud rate speed 100kb (Fosc = 32MHz) */
@@ -174,7 +174,7 @@ s8 I2cACK(void)
     else return 0;
 }
 
-void I2cInitCompass(void)
+void InitI2cCompass(void)
 {  
     /* Configuration register A */
     I2cStart();

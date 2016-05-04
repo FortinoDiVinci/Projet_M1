@@ -11,7 +11,7 @@
 const char *h="0123456789";
 
 
-void LcdInit(void)
+void InitLcd(void)
 {
     LCD_RS = 0;	// write control bytes
     __delay_ms(15);	// power on delay

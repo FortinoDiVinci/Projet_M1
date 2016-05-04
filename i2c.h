@@ -29,11 +29,11 @@
 /******************************************************************************/
 /* I2C Function Prototypes                                                    */
 /******************************************************************************/
-void I2cInit(void);
+void InitI2c(void);
 /*I2cInit function 
  -------------------
  */
-void I2cInitCompass(void);
+void InitI2cCompass(void);
 /*I2cInitCompass function
  -------------------
  */

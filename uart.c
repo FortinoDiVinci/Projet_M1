@@ -6,7 +6,7 @@
  */
 
 #include "uart.h"
-/* the fonction GetChar() has been made to get a char from the UART */
+/* the function GetChar() has been made to get a char from the UART */
 char GetChar()
 {
     char c;
@@ -21,14 +21,14 @@ void GetChar(char *c)
 }
  */
 
-/* the fonction PutChar() has been made to send a char trough the UART */
+/* the function PutChar() has been made to send a char trough the UART */
 void PutChar(char c)
 {
     while(U1STAbits.UTXBF == 1);
     U1TXREG=c;
 }
 
-/* the fonction PutString() has been made to send a string trough the UART */
+/* the function PutString() has been made to send a string trough the UART */
 
 void PutString(char *c)
 {

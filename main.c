@@ -47,9 +47,10 @@ u16 main(void)
     InitGPIO();
     InitADC();
     InitPWM();
-    LcdInit();
-    I2cInit();
-    I2cInitCompass();
+    InitUART();
+    InitLcd();
+    InitI2c();
+    InitI2cCompass();
     
     /* TODO <INSERT USER APPLICATION CODE HERE> */
     
@@ -71,7 +72,6 @@ u16 main(void)
     {
         ADC_values[i]=0;
     }*/
-    
     while(1)
     {
         I2cReadData(&x,&y);   
