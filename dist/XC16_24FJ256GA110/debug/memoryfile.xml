@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project>
-  <executable name="dist/XC16_24FJ256GA110/production/Projet_M1.production.elf">
+  <executable name="dist/XC16_24FJ256GA110/debug/Projet_M1.debug.elf">
     <memory name="data">
       <units>bytes</units>
       <length>2048</length>
-      <used>36</used>
-      <free>2012</free>
+      <used>116</used>
+      <free>1932</free>
     </memory>
     <memory name="program">
       <units>bytes</units>

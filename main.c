@@ -48,23 +48,33 @@ u16 main(void)
     InitADC();
     InitPWM();
     LcdInit();
-    //LcdClear();
-    //LcdPuts("Project in\rprogress... :)");
-    
+    I2cInit();
+    I2cInitCompass();
     
     /* TODO <INSERT USER APPLICATION CODE HERE> */
     
     u16 ADC_values[NMB_SENSORS];
     u16 average[NMB_SENSORS];
+    u16* x;
+    u16* y;
     u8 i;
     u8 j;
+    
     memset(ADC_values,0x00,sizeof(ADC_values));
     memset(average, 0x00,sizeof(average));
+    *x = 0;
+    *y = 0;
     /*
     for(i=0; i<NMB_SENSORS; i++) 
     {
         ADC_values[i]=0;
     }*/
+    
+    while(1)
+    {
+        I2cReadData(x,y);   
+        __delay_ms(10);
+    }
     
     while(1)
     {

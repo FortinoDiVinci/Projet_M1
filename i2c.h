@@ -33,22 +33,34 @@ void I2cInit(void);
 /*I2cInit function 
  -------------------
  */
-void I2cReadData(void);
+void I2cInitCompass(void);
+/*I2cInitCompass function
+ -------------------
+ */
+
+void I2cReadData(u16*, u16*);
 /*I2cReadData function 
  -------------------
  */
-u8 I2cReadByte(void);
+void I2cReadByte(u8*);
 /*I2cReadByte function 
  -------------------
  */
 void I2cStop(void);
-
-
-
-
-
-
-
-
+/*I2cStop function 
+ -------------------
+ */
+void I2cIdle(void);
+/*I2cIdle function 
+ -------------------
+ */
+void I2cStart(void);
+/*I2cStart function 
+ -------------------
+ */
+s8 I2cACK(void);
+/*I2cACK function 
+ -------------------
+ */
 #endif	/* I2C_H */
 

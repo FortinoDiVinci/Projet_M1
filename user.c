@@ -83,7 +83,7 @@ void InitGPIO(void)
     
     /* UART SETTINGS*/
     ANSBbits.ANSB2=0;           /* set RB2 as digital */
-    TRISBbits.TRISB2=1;         /* set RB2 as output */
+    TRISBbits.TRISB2=1;         /* set RB2 as input */
     
     ANSBbits.ANSB7=0;           /* set RB7 as digital */
     TRISBbits.TRISB7=0;         /* set RB7 as output */
