@@ -14,14 +14,23 @@ void I2cReadData(u16* mag_x, u16* mag_y)
     u8 coordinates[6];
     memset(coordinates,0x00,sizeof(coordinates));
     
-        /* Read data */    
+        /* Single measurement mode */
+    
+    I2cMode();
+    __delay_ms(6);
+        /* Read data */
+    
     I2cReadByte(coordinates);
     
-    *mag_x = coordinates[0] * 0x100 + coordinates[1];
-    *mag_y = coordinates[4] * 0x100 + coordinates[5];
+    *mag_x = coordinates[0];
+    *mag_x = *mag_x * 0x0100 + coordinates[1];
     
+    *mag_y = coordinates[4];
+    *mag_y = *mag_y * 0x0100 + coordinates[5];  
      
         /* Moves data pointer */
+#if 0
+    
     I2cStart();
     
     SSP1BUF = 0x3C;                      /* Slave address  + write bit */
@@ -36,35 +45,29 @@ void I2cReadData(u16* mag_x, u16* mag_y)
     
     I2cStop();
     
-#if 0    
-    /* Read X MSB */
- //   *mag_x = (u16)I2cReadByte() * 0x100; /* Get the most significative 8-bits */       
- //   I2cStop();
-    
-    /* Read X LSB */
- //   *mag_x += (u16)I2cReadByte();        /* Get the least significative 8-bits */
- //   I2cStop();
-    
-    /* Moves data pointer */
+#endif
+}
+
+void I2cMode(void)
+{
     I2cStart();
+    
     SSP1BUF = 0x3C;                      /* Slave address  + write bit */
     IFS1bits.SSP1IF = 0;                 /* Clears the interruption  */
     while(!IFS1bits.SSP1IF);             /* Waits until the end of transmission */
     if(I2cACK()) return;                 /* detects communication failure */
-    SSP1BUF = 0x06;                      /* Moves the @ pointer to register 6 */
+    
+    SSP1BUF = 0x2;                       /* Register mode */
     IFS1bits.SSP1IF = 0;                 /* Clears the interruption  */
     while(!IFS1bits.SSP1IF);             /* Waits until the end of transmission */
     if(I2cACK()) return;                 /* detects communication failure */
-
     
-    /* Read Y MSB */
-    *mag_y = (u16)I2cReadByte() * 0x100; /* Get the most significative 8-bits */
-    I2cStop();
+    SSP1BUF = 0x1;                       /* Single measurement mode */
+    IFS1bits.SSP1IF = 0;                 /* Clears the interruption  */
+    while(!IFS1bits.SSP1IF);             /* Waits until the end of transmission */
+    if(I2cACK()) return;                 /* detects communication failure */
     
-    /* Read Y LSB */
-    *mag_y += (u16)I2cReadByte();         /* Get the least significative 8-bits */
     I2cStop();
-#endif
 }
 
 void I2cReadByte(u8* T)
@@ -104,6 +107,7 @@ void I2cReadByte(u8* T)
 //           while(!IFS1bits.SSP1IF);         /* Waits until the end of transmission */
              SSP1CON2bits.ACKEN = 1;
              while(SSP1CON2bits.ACKEN);
+             while(SSP1CON1bits.SSPOV);       /* if the buffer is full waits */
         }
 
         T[i] = SSP1BUF;
@@ -185,7 +189,7 @@ void I2cInitCompass(void)
     while(!IFS1bits.SSP1IF);             /* Waits until the end of transmission */
     if(I2cACK()) return;                 /* detects communication failure */
 
-    SSP1BUF = 0x71;                      /* 8-average, 15 Hz default, positive self test measurement */
+    SSP1BUF = 0x70;                      /* 8-average, 15 Hz default, normal measurement */
     IFS1bits.SSP1IF = 0;                 /* Clears the interruption  */
     while(!IFS1bits.SSP1IF);             /* Waits until the end of transmission */
     if(I2cACK()) return;                 /* detects communication failure */
@@ -212,6 +216,7 @@ void I2cInitCompass(void)
 
     I2cStop();
     
+#if 0
     /* Mode register continuous mode */
     I2cStart();
  
@@ -230,5 +235,6 @@ void I2cInitCompass(void)
     while(!IFS1bits.SSP1IF);             /* Waits until the end of transmission */
     if(I2cACK()) return;                 /* detects communication failure */
 
-    I2cStop();    
+    I2cStop();   
+#endif
 }

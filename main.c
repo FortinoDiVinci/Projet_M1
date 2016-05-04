@@ -55,8 +55,8 @@ u16 main(void)
     
     u16 ADC_values[NMB_SENSORS];
     u16 average[NMB_SENSORS];
-    u16* x;
-    u16* y;
+    u16 x;
+    u16 y;
     u8 i;
     u8 j;
     char T[5];
@@ -64,8 +64,8 @@ u16 main(void)
     
     memset(ADC_values,0x00,sizeof(ADC_values));
     memset(average, 0x00,sizeof(average));
-    *x = 0;
-    *y = 0;
+    x = 0;
+    y = 0;
     /*
     for(i=0; i<NMB_SENSORS; i++) 
     {
@@ -74,7 +74,7 @@ u16 main(void)
     
     while(1)
     {
-        I2cReadData(x,y);   
+        I2cReadData(&x,&y);   
         __delay_ms(10);
     }
     
