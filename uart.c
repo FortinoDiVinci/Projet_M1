@@ -29,7 +29,7 @@ void PutChar(char c)
 }
 
 /* the fonction PutString() has been made to send a string trough the UART */
-/*
+
 void PutString(char *c)
 {
     int j=0;
@@ -41,4 +41,3 @@ void PutString(char *c)
         j=j+2;
     }
 }
-*/

@@ -22,7 +22,7 @@
 
 char GetChar();
 void PutChar(char);
-void PutString();
+void PutString(char *);
 
 // Comment a function and leverage automatic documentation with slash star star
 /**

@@ -59,6 +59,8 @@ u16 main(void)
     u16* y;
     u8 i;
     u8 j;
+    char T[5];
+    
     
     memset(ADC_values,0x00,sizeof(ADC_values));
     memset(average, 0x00,sizeof(average));

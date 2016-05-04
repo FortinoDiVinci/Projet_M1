@@ -12,15 +12,16 @@
 void I2cReadData(u16* mag_x, u16* mag_y)
 {
     u8 coordinates[6];
+    memset(coordinates,0x00,sizeof(coordinates));
     
-    /* Read data */
-    
+        /* Read data */    
     I2cReadByte(coordinates);
     
     *mag_x = coordinates[0] * 0x100 + coordinates[1];
     *mag_y = coordinates[4] * 0x100 + coordinates[5];
-
-    /* Moves data pointer */
+    
+     
+        /* Moves data pointer */
     I2cStart();
     
     SSP1BUF = 0x3C;                      /* Slave address  + write bit */
@@ -32,7 +33,9 @@ void I2cReadData(u16* mag_x, u16* mag_y)
     IFS1bits.SSP1IF = 0;                 /* Clears the interruption  */
     while(!IFS1bits.SSP1IF);             /* Waits until the end of transmission */
     if(I2cACK()) return;                 /* detects communication failure */
- 
+    
+    I2cStop();
+    
 #if 0    
     /* Read X MSB */
  //   *mag_x = (u16)I2cReadByte() * 0x100; /* Get the most significative 8-bits */       
@@ -74,25 +77,33 @@ void I2cReadByte(u8* T)
     while(!IFS1bits.SSP1IF);             /* Waits until the end of transmission */
     if(I2cACK()) return;                 /* detects communication failure */
 
-    SSP1BUF = 0x06;                      /* 1 byte is read  (which are X values)*/
-    IFS1bits.SSP1IF = 0;                 /* Clears the interruption  */
-    while(!IFS1bits.SSP1IF);             /* Waits until the end of transmission */
-    if(I2cACK()) return;                 /* detects communication failure */
-
     for(i=0; i<6; i++)
     {
+        I2cIdle();
+        IFS1bits.SSP1IF = 0;             /* Clears the interruption  */
         SSP1CON2bits.RCEN = 1;               /*  */
-        IFS1bits.SSP1IF = 0;                 /* Clears the interruption  */
         while(!IFS1bits.SSP1IF);             /* Waits until the end of transmission */
+//        while(SSP1CON2bits.RCEN);             /* Waits until the end of transmission */
+        while(!SSP1STATbits.BF);             /* Waits until the end of transmission */
+
+
         if(i==5)
         {
-            SSP1CON2bits.ACKDT = 1;
+            I2cIdle();
+//            IFS1bits.SSP1IF = 0;             /* Clears the interruption  */
+             SSP1CON2bits.ACKDT = 1;
+//            while(!IFS1bits.SSP1IF);         /* Waits until the end of transmission */
+             SSP1CON2bits.ACKEN = 1;
+             while(SSP1CON2bits.ACKEN);
         }
         else
         {
-            SSP1CON2bits.ACKDT = 0;
-            IFS1bits.SSP1IF = 0;             /* Clears the interruption  */
-            while(!IFS1bits.SSP1IF);         /* Waits until the end of transmission */
+            I2cIdle();
+//            IFS1bits.SSP1IF = 0;             /* Clears the interruption  */
+             SSP1CON2bits.ACKDT = 0;
+//           while(!IFS1bits.SSP1IF);         /* Waits until the end of transmission */
+             SSP1CON2bits.ACKEN = 1;
+             while(SSP1CON2bits.ACKEN);
         }
 
         T[i] = SSP1BUF;
