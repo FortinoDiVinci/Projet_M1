@@ -67,8 +67,6 @@ c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(feqltle
                               build/XC16_24FJ256GA110/production/lcd.o (___ltsf2)
 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
                               build/XC16_24FJ256GA110/production/motorControl.o (___fixunssfsi)
-c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatsisf.eo)
-                              build/XC16_24FJ256GA110/production/servomotor.o (___floatsisf)
 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
                               build/XC16_24FJ256GA110/production/user.o (___floatunsisf)
 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fpack.eo)
@@ -87,8 +85,6 @@ c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(umodsi3
                               build/XC16_24FJ256GA110/production/lcd.o (___umodsi3)
 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fcompare.eo)
                               c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(feqltle.eo) (__fcompare)
-c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatdisf.eo)
-                              c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatsisf.eo) (___floatdisf)
 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
                               c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatunsisf.eo) (___floatundisf)
 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libc-elf.a(memset.eo)
@@ -125,15 +121,15 @@ Program Memory  [Origin = 0x200, Length = 0x2a00]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x200               0x4a2           0x6f3  (1779)
-.const                       0x6a2                 0xc            0x12  (18)
-.text                        0x6ae               0x986           0xe49  (3657)
-.init.delay32               0x1034                0x1c            0x2a  (42)
-.dinit                      0x1050                0x1c            0x2a  (42)
-.text                       0x106c                0x10            0x18  (24)
-.shared.dinit               0x107c                 0x2             0x3  (3)
+.text                        0x200               0x47c           0x6ba  (1722)
+.const                       0x67c                 0xc            0x12  (18)
+.text                        0x688               0x962           0xe13  (3603)
+.init.delay32                0xfea                0x1c            0x2a  (42)
+.dinit                      0x1006                0x1c            0x2a  (42)
+.text                       0x1022                0x28            0x3c  (60)
+.shared.dinit               0x104a                 0x2             0x3  (3)
 
-                 Total program memory used (bytes):         0x15bd  (5565) 34%
+                 Total program memory used (bytes):         0x1572  (5490) 34%
 
 
 Ivt Memory  [Origin = 0x4, Length = 0xfc]
@@ -183,8 +179,8 @@ External Symbols in Program Memory (by address):
 
                   0x000200                  __resetPRI
                   0x00022c                  __psv_init
-                  0x00023c                  __data_init
                   0x00023c                  __data_init_standard
+                  0x00023c                  __data_init
                   0x0002ac                  __U1RXInterrupt
                   0x0002d2                  __T1Interrupt
                   0x000300                  __OscillatorFail
@@ -195,103 +191,101 @@ External Symbols in Program Memory (by address):
                   0x00031c                  ___subsf3
                   0x00031e                  ___addsf3
                   0x0003d8                  ___divsf3
-                  0x00045c                  ___ltsf2
                   0x00045c                  ___eqsf2
                   0x00045c                  ___lesf2
+                  0x00045c                  ___ltsf2
                   0x000460                  ___fixunssfsi
-                  0x000496                  ___floatsisf
-                  0x00049c                  ___floatunsisf
-                  0x0004a0                  __fpack
-                  0x0004ec                  __funpack
-                  0x000516                  __funpack2
-                  0x000526                  __fPropagateNaN
-                  0x000538                  __fbopExit
-                  0x000540                  __fbopReturnNaN
-                  0x000546                  ___mulsf3
-                  0x0005ae                  ___udivsi3
-                  0x0005ce                  ___umodsi3
-                  0x0005d4                  __fcompare
-                  0x00060a                  ___floatdisf
-                  0x00062a                  ___floatundisf
-                  0x000688                  _memset
-                  0x000696                  _strlen
-                  0x0006ae                  _InitLcd
-                  0x000704                  _LcdWriteCtrl
-                  0x000790                  _LcdWriteData
-                  0x00081c                  _LcdClear
-                  0x00082c                  _LcdPuts
-                  0x000856                  _LcdPutch
-                  0x000862                  _LcdGoto
-                  0x000884                  _LcdOnOff
-                  0x00089c                  _LcdPutFloat
-                  0x0009d6                  _LcdConvAscii
-                  0x000a30                  _InitGPIO
-                  0x000a74                  _InitADC
-                  0x000a84                  _ObjectDetection
-                  0x000afa                  _StartADC
-                  0x000bcc                  _DisplayADCIR
-                  0x000bee                  _InitPWM
-                  0x000c40                  _InitUART
-                  0x000c62                  _InitTimerServo
-                  0x000c8c                  _I2cReadData
-                  0x000cdc                  _I2cMode
-                  0x000d34                  _I2cReadByte
-                  0x000dc2                  _I2cIdle
-                  0x000dda                  _I2cStart
-                  0x000df2                  _I2cStop
-                  0x000e04                  _InitI2c
-                  0x000e28                  _I2cACK
-                  0x000e3e                  _InitI2cCompass
-                  0x000ee6                  _MoveForward
-                  0x000f42                  _MoveBackward
-                  0x000f74                  _StopMotor
-                  0x000f82                  _GetChar
-                  0x000f8e                  _PutChar
-                  0x000fa6                  _PutString
-                  0x000fd8                  _main
-                  0x001010                  _TurnWheels
-                  0x001034                  ___delay32
-                  0x00106c                  _ConfigureOscillator
+                  0x000496                  ___floatunsisf
+                  0x00049a                  __fpack
+                  0x0004e6                  __funpack
+                  0x000510                  __funpack2
+                  0x000520                  __fPropagateNaN
+                  0x000532                  __fbopExit
+                  0x00053a                  __fbopReturnNaN
+                  0x000540                  ___mulsf3
+                  0x0005a8                  ___udivsi3
+                  0x0005c8                  ___umodsi3
+                  0x0005ce                  __fcompare
+                  0x000604                  ___floatundisf
+                  0x000662                  _memset
+                  0x000670                  _strlen
+                  0x000688                  _InitLcd
+                  0x0006de                  _LcdWriteCtrl
+                  0x00076a                  _LcdWriteData
+                  0x0007f6                  _LcdClear
+                  0x000806                  _LcdPuts
+                  0x000830                  _LcdPutch
+                  0x00083c                  _LcdGoto
+                  0x00085e                  _LcdOnOff
+                  0x000876                  _LcdPutFloat
+                  0x0009b0                  _LcdConvAscii
+                  0x000a0a                  _InitGPIO
+                  0x000a4e                  _InitADC
+                  0x000a5e                  _ObjectDetection
+                  0x000ad4                  _StartADC
+                  0x000ba6                  _DisplayADCIR
+                  0x000bc8                  _InitPWM
+                  0x000c1a                  _InitUART
+                  0x000c3c                  _InitTimerServo
+                  0x000c66                  _I2cReadData
+                  0x000cb6                  _I2cMode
+                  0x000d0e                  _I2cReadByte
+                  0x000d9c                  _I2cIdle
+                  0x000db4                  _I2cStart
+                  0x000dcc                  _I2cStop
+                  0x000dde                  _InitI2c
+                  0x000e02                  _I2cACK
+                  0x000e18                  _InitI2cCompass
+                  0x000ec0                  _MoveForward
+                  0x000f1c                  _MoveBackward
+                  0x000f4e                  _StopMotor
+                  0x000f5c                  _GetChar
+                  0x000f68                  _PutChar
+                  0x000f80                  _PutString
+                  0x000fb2                  _main
+                  0x000fea                  ___delay32
+                  0x001022                  _TurnWheels
+                  0x00103a                  _ConfigureOscillator
                   0xf80000                  __FBS.sec
                   0xf80004                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x00106c                  _ConfigureOscillator
-                  0x000bcc                  _DisplayADCIR
-                  0x000f82                  _GetChar
-                  0x000e28                  _I2cACK
-                  0x000dc2                  _I2cIdle
-                  0x000cdc                  _I2cMode
-                  0x000d34                  _I2cReadByte
-                  0x000c8c                  _I2cReadData
-                  0x000dda                  _I2cStart
-                  0x000df2                  _I2cStop
-                  0x000a74                  _InitADC
-                  0x000a30                  _InitGPIO
-                  0x000e04                  _InitI2c
-                  0x000e3e                  _InitI2cCompass
-                  0x0006ae                  _InitLcd
-                  0x000bee                  _InitPWM
-                  0x000c62                  _InitTimerServo
-                  0x000c40                  _InitUART
-                  0x00081c                  _LcdClear
-                  0x0009d6                  _LcdConvAscii
-                  0x000862                  _LcdGoto
-                  0x000884                  _LcdOnOff
-                  0x00089c                  _LcdPutFloat
-                  0x000856                  _LcdPutch
-                  0x00082c                  _LcdPuts
-                  0x000704                  _LcdWriteCtrl
-                  0x000790                  _LcdWriteData
-                  0x000f42                  _MoveBackward
-                  0x000ee6                  _MoveForward
-                  0x000a84                  _ObjectDetection
-                  0x000f8e                  _PutChar
-                  0x000fa6                  _PutString
-                  0x000afa                  _StartADC
-                  0x000f74                  _StopMotor
-                  0x001010                  _TurnWheels
+                  0x00103a                  _ConfigureOscillator
+                  0x000ba6                  _DisplayADCIR
+                  0x000f5c                  _GetChar
+                  0x000e02                  _I2cACK
+                  0x000d9c                  _I2cIdle
+                  0x000cb6                  _I2cMode
+                  0x000d0e                  _I2cReadByte
+                  0x000c66                  _I2cReadData
+                  0x000db4                  _I2cStart
+                  0x000dcc                  _I2cStop
+                  0x000a4e                  _InitADC
+                  0x000a0a                  _InitGPIO
+                  0x000dde                  _InitI2c
+                  0x000e18                  _InitI2cCompass
+                  0x000688                  _InitLcd
+                  0x000bc8                  _InitPWM
+                  0x000c3c                  _InitTimerServo
+                  0x000c1a                  _InitUART
+                  0x0007f6                  _LcdClear
+                  0x0009b0                  _LcdConvAscii
+                  0x00083c                  _LcdGoto
+                  0x00085e                  _LcdOnOff
+                  0x000876                  _LcdPutFloat
+                  0x000830                  _LcdPutch
+                  0x000806                  _LcdPuts
+                  0x0006de                  _LcdWriteCtrl
+                  0x00076a                  _LcdWriteData
+                  0x000f1c                  _MoveBackward
+                  0x000ec0                  _MoveForward
+                  0x000a5e                  _ObjectDetection
+                  0x000f68                  _PutChar
+                  0x000f80                  _PutString
+                  0x000ad4                  _StartADC
+                  0x000f4e                  _StopMotor
+                  0x001022                  _TurnWheels
                   0x000306                  __AddressError
                   0x000318                  __DefaultInterrupt
                   0xf80000                  __FBS.sec
@@ -302,34 +296,32 @@ External Symbols in Program Memory (by name):
                   0x0002d2                  __T1Interrupt
                   0x0002ac                  __U1RXInterrupt
                   0x00031e                  ___addsf3
-                  0x001034                  ___delay32
+                  0x000fea                  ___delay32
                   0x0003d8                  ___divsf3
                   0x00045c                  ___eqsf2
                   0x000460                  ___fixunssfsi
-                  0x00060a                  ___floatdisf
-                  0x000496                  ___floatsisf
-                  0x00062a                  ___floatundisf
-                  0x00049c                  ___floatunsisf
+                  0x000604                  ___floatundisf
+                  0x000496                  ___floatunsisf
                   0x00045c                  ___lesf2
                   0x00045c                  ___ltsf2
-                  0x000546                  ___mulsf3
+                  0x000540                  ___mulsf3
                   0x00031c                  ___subsf3
-                  0x0005ae                  ___udivsi3
-                  0x0005ce                  ___umodsi3
+                  0x0005a8                  ___udivsi3
+                  0x0005c8                  ___umodsi3
                   0x00023c                  __data_init
                   0x00023c                  __data_init_standard
-                  0x000526                  __fPropagateNaN
-                  0x000538                  __fbopExit
-                  0x000540                  __fbopReturnNaN
-                  0x0005d4                  __fcompare
-                  0x0004a0                  __fpack
-                  0x0004ec                  __funpack
-                  0x000516                  __funpack2
+                  0x000520                  __fPropagateNaN
+                  0x000532                  __fbopExit
+                  0x00053a                  __fbopReturnNaN
+                  0x0005ce                  __fcompare
+                  0x00049a                  __fpack
+                  0x0004e6                  __funpack
+                  0x000510                  __funpack2
                   0x00022c                  __psv_init
                   0x000200                  __resetPRI
-                  0x000fd8                  _main
-                  0x000688                  _memset
-                  0x000696                  _strlen
+                  0x000fb2                  _main
+                  0x000662                  _memset
+                  0x000670                  _strlen
 
 Memory Configuration
 
@@ -387,7 +379,7 @@ LOAD c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libfx-elf.a
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000200        0x4a2
+.text             0x000200        0x47c
  *(.init)
  .init            0x000200         0x3c c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libpic30-elf.a(crt0_standard.o)
                   0x000200                  __resetPRI
@@ -424,47 +416,41 @@ LOAD c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libfx-elf.a
  .libm.fixunssfsi
                   0x000460         0x36 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
                   0x000460                  ___fixunssfsi
- .libm.floatsisf
-                  0x000496          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatsisf.eo)
-                  0x000496                  ___floatsisf
  .libm.floatunsisf
-                  0x00049c          0x4 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
-                  0x00049c                  ___floatunsisf
- .libm.fpack      0x0004a0         0x4c c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fpack.eo)
-                  0x0004a0                  __fpack
- .libm.funpack    0x0004ec         0x2a c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(funpack.eo)
-                  0x0004ec                  __funpack
+                  0x000496          0x4 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
+                  0x000496                  ___floatunsisf
+ .libm.fpack      0x00049a         0x4c c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fpack.eo)
+                  0x00049a                  __fpack
+ .libm.funpack    0x0004e6         0x2a c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(funpack.eo)
+                  0x0004e6                  __funpack
  .libm.funpack2
-                  0x000516         0x10 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(funpack2.eo)
-                  0x000516                  __funpack2
+                  0x000510         0x10 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(funpack2.eo)
+                  0x000510                  __funpack2
  .libm.fPropagateNaN
-                  0x000526         0x12 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(futil.eo)
-                  0x000526                  __fPropagateNaN
+                  0x000520         0x12 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x000520                  __fPropagateNaN
  .libm.fbobExit
-                  0x000538          0x8 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(futil.eo)
-                  0x000538                  __fbopExit
+                  0x000532          0x8 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x000532                  __fbopExit
  .libm.fbopReturnNaN
-                  0x000540          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(futil.eo)
-                  0x000540                  __fbopReturnNaN
- .libm.mulsf3     0x000546         0x68 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
-                  0x000546                  ___mulsf3
- .libm.udivsi3    0x0005ae         0x20 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
-                  0x0005ae                  ___udivsi3
- .libm.umodsi3    0x0005ce          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(umodsi3.eo)
-                  0x0005ce                  ___umodsi3
+                  0x00053a          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x00053a                  __fbopReturnNaN
+ .libm.mulsf3     0x000540         0x68 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
+                  0x000540                  ___mulsf3
+ .libm.udivsi3    0x0005a8         0x20 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
+                  0x0005a8                  ___udivsi3
+ .libm.umodsi3    0x0005c8          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(umodsi3.eo)
+                  0x0005c8                  ___umodsi3
  .libm.fcompare
-                  0x0005d4         0x36 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fcompare.eo)
-                  0x0005d4                  __fcompare
- .libm.floatdisf
-                  0x00060a         0x20 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatdisf.eo)
-                  0x00060a                  ___floatdisf
+                  0x0005ce         0x36 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fcompare.eo)
+                  0x0005ce                  __fcompare
  .libm.floatundisf
-                  0x00062a         0x5e c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
-                  0x00062a                  ___floatundisf
- .libc.memset     0x000688          0xe c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libc-elf.a(memset.eo)
-                  0x000688                  _memset
- .libc.strlen     0x000696          0xc c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libc-elf.a(strlen.eo)
-                  0x000696                  _strlen
+                  0x000604         0x5e c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
+                  0x000604                  ___floatundisf
+ .libc.memset     0x000662          0xe c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libc-elf.a(memset.eo)
+                  0x000662                  _memset
+ .libc.strlen     0x000670          0xc c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libc-elf.a(strlen.eo)
+                  0x000670                  _strlen
 
 usercode
  *(usercode)
@@ -526,7 +512,7 @@ __FICD
  .debug_abbrev    0x0006fc         0xf8 build/XC16_24FJ256GA110/production/uart.o
  .debug_abbrev    0x0007f4         0xda build/XC16_24FJ256GA110/production/servomotor.o
 
-.debug_line       0x000000        0x77c
+.debug_line       0x000000        0x77b
  *(.debug_line)
  .debug_line      0x000000         0x1a build/XC16_24FJ256GA110/production/configuration_bits.o
  .debug_line      0x00001a         0xa2 build/XC16_24FJ256GA110/production/interrupts.o
@@ -538,7 +524,7 @@ __FICD
  .debug_line      0x000408        0x10d build/XC16_24FJ256GA110/production/lcd.o
  .debug_line      0x000515        0x12c build/XC16_24FJ256GA110/production/i2c.o
  .debug_line      0x000641         0xa2 build/XC16_24FJ256GA110/production/uart.o
- .debug_line      0x0006e3         0x99 build/XC16_24FJ256GA110/production/servomotor.o
+ .debug_line      0x0006e3         0x98 build/XC16_24FJ256GA110/production/servomotor.o
 
 .debug_frame      0x000000        0x5a4
  *(.debug_frame)
@@ -1412,7 +1398,7 @@ LOAD shared_data_init
                   0x0005dd         0x31 build/XC16_24FJ256GA110/production/servomotor.o
 
 __c30_signature
-                  0x00060e         0xc0
+                  0x00060e         0xb4
  __c30_signature
                   0x00060e          0x6 build/XC16_24FJ256GA110/production/configuration_bits.o
  __c30_signature
@@ -1450,33 +1436,29 @@ __c30_signature
  __c30_signature
                   0x000674          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
  __c30_signature
-                  0x00067a          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatsisf.eo)
+                  0x00067a          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
  __c30_signature
-                  0x000680          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
+                  0x000680          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fpack.eo)
  __c30_signature
-                  0x000686          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fpack.eo)
+                  0x000686          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(funpack.eo)
  __c30_signature
-                  0x00068c          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(funpack.eo)
+                  0x00068c          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(funpack2.eo)
  __c30_signature
-                  0x000692          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(funpack2.eo)
+                  0x000692          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(futil.eo)
  __c30_signature
-                  0x000698          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x000698          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
  __c30_signature
-                  0x00069e          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
+                  0x00069e          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
  __c30_signature
-                  0x0006a4          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
+                  0x0006a4          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(umodsi3.eo)
  __c30_signature
-                  0x0006aa          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(umodsi3.eo)
+                  0x0006aa          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fcompare.eo)
  __c30_signature
-                  0x0006b0          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(fcompare.eo)
+                  0x0006b0          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
  __c30_signature
-                  0x0006b6          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatdisf.eo)
+                  0x0006b6          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libc-elf.a(memset.eo)
  __c30_signature
-                  0x0006bc          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
- __c30_signature
-                  0x0006c2          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libc-elf.a(memset.eo)
- __c30_signature
-                  0x0006c8          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libc-elf.a(strlen.eo)
+                  0x0006bc          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libc-elf.a(strlen.eo)
 
 .nbss               0x0800         0x22
  .nbss              0x0800         0x20 build/XC16_24FJ256GA110/production/lcd.o
@@ -1536,63 +1518,63 @@ __c30_signature
  .ivt._MathError
                   0x00000c          0x2 build/XC16_24FJ256GA110/production/traps.o
 
-.const              0x86a2          0xc load address 0x0006a2  
- .const             0x86a2          0xc build/XC16_24FJ256GA110/production/lcd.o
+.const              0x867c          0xc load address 0x00067c  
+ .const             0x867c          0xc build/XC16_24FJ256GA110/production/lcd.o
 
-.text             0x0006ae        0x986
- .text            0x0006ae        0x382 build/XC16_24FJ256GA110/production/lcd.o
-                  0x0006ae                  _InitLcd
-                  0x000704                  _LcdWriteCtrl
-                  0x000790                  _LcdWriteData
-                  0x00081c                  _LcdClear
-                  0x00082c                  _LcdPuts
-                  0x000856                  _LcdPutch
-                  0x000862                  _LcdGoto
-                  0x000884                  _LcdOnOff
-                  0x00089c                  _LcdPutFloat
-                  0x0009d6                  _LcdConvAscii
- .text            0x000a30        0x25c build/XC16_24FJ256GA110/production/user.o
-                  0x000a30                  _InitGPIO
-                  0x000a74                  _InitADC
-                  0x000a84                  _ObjectDetection
-                  0x000afa                  _StartADC
-                  0x000bcc                  _DisplayADCIR
-                  0x000bee                  _InitPWM
-                  0x000c40                  _InitUART
-                  0x000c62                  _InitTimerServo
- .text            0x000c8c        0x25a build/XC16_24FJ256GA110/production/i2c.o
-                  0x000c8c                  _I2cReadData
-                  0x000cdc                  _I2cMode
-                  0x000d34                  _I2cReadByte
-                  0x000dc2                  _I2cIdle
-                  0x000dda                  _I2cStart
-                  0x000df2                  _I2cStop
-                  0x000e04                  _InitI2c
-                  0x000e28                  _I2cACK
-                  0x000e3e                  _InitI2cCompass
- .text            0x000ee6         0x9c build/XC16_24FJ256GA110/production/motorControl.o
-                  0x000ee6                  _MoveForward
-                  0x000f42                  _MoveBackward
-                  0x000f74                  _StopMotor
- .text            0x000f82         0x56 build/XC16_24FJ256GA110/production/uart.o
-                  0x000f82                  _GetChar
-                  0x000f8e                  _PutChar
-                  0x000fa6                  _PutString
- .text            0x000fd8         0x38 build/XC16_24FJ256GA110/production/main.o
-                  0x000fd8                  _main
- .text            0x001010         0x24 build/XC16_24FJ256GA110/production/servomotor.o
-                  0x001010                  _TurnWheels
+.text             0x000688        0x962
+ .text            0x000688        0x382 build/XC16_24FJ256GA110/production/lcd.o
+                  0x000688                  _InitLcd
+                  0x0006de                  _LcdWriteCtrl
+                  0x00076a                  _LcdWriteData
+                  0x0007f6                  _LcdClear
+                  0x000806                  _LcdPuts
+                  0x000830                  _LcdPutch
+                  0x00083c                  _LcdGoto
+                  0x00085e                  _LcdOnOff
+                  0x000876                  _LcdPutFloat
+                  0x0009b0                  _LcdConvAscii
+ .text            0x000a0a        0x25c build/XC16_24FJ256GA110/production/user.o
+                  0x000a0a                  _InitGPIO
+                  0x000a4e                  _InitADC
+                  0x000a5e                  _ObjectDetection
+                  0x000ad4                  _StartADC
+                  0x000ba6                  _DisplayADCIR
+                  0x000bc8                  _InitPWM
+                  0x000c1a                  _InitUART
+                  0x000c3c                  _InitTimerServo
+ .text            0x000c66        0x25a build/XC16_24FJ256GA110/production/i2c.o
+                  0x000c66                  _I2cReadData
+                  0x000cb6                  _I2cMode
+                  0x000d0e                  _I2cReadByte
+                  0x000d9c                  _I2cIdle
+                  0x000db4                  _I2cStart
+                  0x000dcc                  _I2cStop
+                  0x000dde                  _InitI2c
+                  0x000e02                  _I2cACK
+                  0x000e18                  _InitI2cCompass
+ .text            0x000ec0         0x9c build/XC16_24FJ256GA110/production/motorControl.o
+                  0x000ec0                  _MoveForward
+                  0x000f1c                  _MoveBackward
+                  0x000f4e                  _StopMotor
+ .text            0x000f5c         0x56 build/XC16_24FJ256GA110/production/uart.o
+                  0x000f5c                  _GetChar
+                  0x000f68                  _PutChar
+                  0x000f80                  _PutString
+ .text            0x000fb2         0x38 build/XC16_24FJ256GA110/production/main.o
+                  0x000fb2                  _main
 
-.init.delay32     0x001034         0x1c
- .init.delay32    0x001034         0x1c c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libpic30-elf.a(delay32.eo)
-                  0x001034                  ___delay32
+.init.delay32     0x000fea         0x1c
+ .init.delay32    0x000fea         0x1c c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libpic30-elf.a(delay32.eo)
+                  0x000fea                  ___delay32
 
-.dinit            0x001050         0x1c
- .dinit           0x001050         0x1c data_init
+.dinit            0x001006         0x1c
+ .dinit           0x001006         0x1c data_init
 
-.text             0x00106c         0x10
- .text            0x00106c         0x10 build/XC16_24FJ256GA110/production/system.o
-                  0x00106c                  _ConfigureOscillator
+.text             0x001022         0x28
+ .text            0x001022         0x18 build/XC16_24FJ256GA110/production/servomotor.o
+                  0x001022                  _TurnWheels
+ .text            0x00103a         0x10 build/XC16_24FJ256GA110/production/system.o
+                  0x00103a                  _ConfigureOscillator
 
-.shared.dinit     0x00107c          0x2
- .shared.dinit    0x00107c          0x2 shared_data_init
+.shared.dinit     0x00104a          0x2
+ .shared.dinit    0x00104a          0x2 shared_data_init
