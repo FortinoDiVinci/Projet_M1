@@ -58,10 +58,12 @@ u16 main(void)
     x = 0;
     y = 0;
     
+    u8 i;
+    for(i=0; i<=127; i++)
+       PutChar('G');   
     while(1)
     {
-        I2cReadData(&x,&y);   
-        __delay_ms(10);
+
     }
     
 #endif

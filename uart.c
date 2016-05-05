@@ -32,6 +32,20 @@ void PutChar(char c)
 
 void PutString(char *c)
 {
+    int i = 0;
+    while(c!='\0')
+    {
+        PutChar(*c+i);
+        i++;
+    }
+}
+
+#if 0
+
+/* Fabian weird way of coding */
+
+void PutString(char *c)
+{
     int j=0;
     int i=strlen(c);
     j=-i;
@@ -41,3 +55,5 @@ void PutString(char *c)
         j=j+2;
     }
 }
+
+#endif

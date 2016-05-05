@@ -228,38 +228,21 @@ void InitPWM(void)
     CCP2CON1Lbits.CCPON = 1; // Turn on MCCP module  
 }
 
-void InitTimerServo()
-{
-    extern u16 servoPulseWidth;
-    T1CON = 0x00; //Stops the Timer1 and reset control reg.
-    TMR1 = 0x00; //Clear contents of the timer register
-    T1CONbits.TCKPS=0b01; // Set the prescaler to 1:8
-    PR1 =40083; //Load the Period register with the value for 20 ms signal
-    servoPulseWidth=3006; //Load the period of the pulse for 1.5 ms
-    IPC0bits.T1IP = 0x01; //Setup Timer1 interrupt priority level 1
-    IFS0bits.T1IF = 0; //Clear the Timer1 interrupt status flag
-    IEC0bits.T1IE = 1; //Enable Timer1 interrupts
-    T1CONbits.TON = 1; //Start Timer1 with prescaler settings at 1:8 and
-    //clock source set to the internal instruction cycle
-}
+
 
 #endif
 
 void InitUART(void)
 {
     U1BRG= 25; //(FCY /(16*38400))-1; //Set the value of Baudrate (38461)
-            
-    IPC3bits.U1TXIP2 = 1; //Set Uart TX Interrupt Priority
-    IPC3bits.U1TXIP1 = 0;
-    IPC3bits.U1TXIP0 = 0;
-    IPC2bits.U1RXIP2 = 1; //Set Uart RX Interrupt Priority
-    IPC2bits.U1RXIP1 = 0;
-    IPC2bits.U1RXIP0 = 0;
-    U1STA = 0;
-    U1MODE = 0x8000; //Enable Uart for 8-bit data
-    //no parity, 1 STOP bit
+
+    IPC3bits.U1TXIP = 0x4;      /* Set Uart TX Interrupt Priority */
+    IPC2bits.U1RXIP = 0x4;      /* Set Uart RX Interrupt Priority */
+    
+    U1STA = 0x0;
+    U1MODE = 0x0;               /* no parity, 1 STOP bit */
+    
     U1MODEbits.UARTEN = 1;
-    U1STAbits.UTXEN = 1; //Enable Transmit
-    //IEC0bits.U1TXIE = 1; //Enable Transmit Interrupt
-    IEC0bits.U1RXIE = 1; //Enable Receive Interrupt
+    U1STAbits.UTXEN = 1;        /* Enable Transmit */
+    IEC0bits.U1RXIE = 1;        /* Enable Receive Interrupt */
 }
