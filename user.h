@@ -1,6 +1,17 @@
 /******************************************************************************/
 /* User Level #define Macros                                                  */
 /******************************************************************************/
+
+#ifndef USER_H
+#define	USER_H
+
+/* If body_guard car define BODY_GUARD
+ * If person to protect define PROTECTED 
+ * DO NOT DO BOTH */
+
+#define BODY_GUARD
+// #define PROTECTED
+
 /* Variables types simplification */
 
 #define u8 unsigned char
@@ -58,3 +69,5 @@ void ObjectDetection(const u16*, u16*);    /* Detect if an object is seen by one
 void DisplayADCIR(u16);            /* */
 
 void InitTimerServo();           /* Initialization of the timer for the servomotor */
+
+#endif USER_H

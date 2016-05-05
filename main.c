@@ -39,9 +39,37 @@
 
 u16 main(void)
 {
-
     /* Configure the oscillator for the device */
     ConfigureOscillator();
+   
+    /* Program for the bracelet */
+    
+#ifdef PROTECTED
+    
+    /* Initialize IO ports and peripherals */
+    InitGPIO();
+    InitUART();
+    InitI2c();
+    InitI2cCompass();
+    
+    u16 x;
+    u16 y;
+    
+    x = 0;
+    y = 0;
+    
+    while(1)
+    {
+        I2cReadData(&x,&y);   
+        __delay_ms(10);
+    }
+    
+#endif
+    
+    /* Program for the bodyguard*/
+    
+#ifdef BODY_GUARD
+    
 
     /* Initialize IO ports and peripherals */
     InitGPIO();
@@ -49,15 +77,12 @@ u16 main(void)
     InitPWM();
     InitUART();
     InitLcd();
-    InitI2c();
-    InitI2cCompass();
+
     
     /* TODO <INSERT USER APPLICATION CODE HERE> */
     
     u16 ADC_values[NMB_SENSORS];
     u16 average[NMB_SENSORS];
-    u16 x;
-    u16 y;
     u8 i;
     u8 j;
     char T[5];
@@ -65,18 +90,13 @@ u16 main(void)
     
     memset(ADC_values,0x00,sizeof(ADC_values));
     memset(average, 0x00,sizeof(average));
-    x = 0;
-    y = 0;
+
     /*
     for(i=0; i<NMB_SENSORS; i++) 
     {
         ADC_values[i]=0;
     }*/
-    while(1)
-    {
-        I2cReadData(&x,&y);   
-        __delay_ms(10);
-    }
+
     
     while(1)
     {
@@ -142,5 +162,6 @@ u16 main(void)
         }
         */
     }
+#endif
     return 0;
 }

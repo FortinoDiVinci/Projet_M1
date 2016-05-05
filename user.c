@@ -36,6 +36,7 @@ void InitGPIO(void)
 {
     /* Setup analog functionality and port direction */
     
+#ifdef BODY_GUARD
     
     /* INFRARED SETTINGS */
     TRISAbits.TRISA0 = 1;       /* AN0 set as input : IR_2  */
@@ -75,12 +76,16 @@ void InitGPIO(void)
     TRISAbits.TRISA4 = 0;       /* Data bits set as output */
     ANSAbits.ANSA4 = 0;         /*           set as digital */
 
+#endif
+#ifdef PROTECTED
     
     /* I2C SETTINGS */
     TRISBbits.TRISB8 = 1;       /* SLC1 set as input */
     ANSBbits.ANSB8 = 0;         /*      set as digital */
     TRISBbits.TRISB9 = 1;       /* SDA1 set as input (will change) */
     ANSBbits.ANSB9 = 0;         /*      set as digital */
+    
+#endif
     
     /* UART SETTINGS*/
     ANSBbits.ANSB2=0;           /* set RB2 as digital */
@@ -92,6 +97,8 @@ void InitGPIO(void)
     /* Initialize peripherals */
     
 }
+
+#ifdef BODY_GUARD
 
 void InitADC()
 {    
@@ -221,6 +228,23 @@ void InitPWM(void)
     CCP2CON1Lbits.CCPON = 1; // Turn on MCCP module  
 }
 
+void InitTimerServo()
+{
+    extern u16 servoPulseWidth;
+    T1CON = 0x00; //Stops the Timer1 and reset control reg.
+    TMR1 = 0x00; //Clear contents of the timer register
+    T1CONbits.TCKPS=0b01; // Set the prescaler to 1:8
+    PR1 =40083; //Load the Period register with the value for 20 ms signal
+    servoPulseWidth=3006; //Load the period of the pulse for 1.5 ms
+    IPC0bits.T1IP = 0x01; //Setup Timer1 interrupt priority level 1
+    IFS0bits.T1IF = 0; //Clear the Timer1 interrupt status flag
+    IEC0bits.T1IE = 1; //Enable Timer1 interrupts
+    T1CONbits.TON = 1; //Start Timer1 with prescaler settings at 1:8 and
+    //clock source set to the internal instruction cycle
+}
+
+#endif
+
 void InitUART(void)
 {
     U1BRG= 25; //(FCY /(16*38400))-1; //Set the value of Baudrate (38461)
@@ -238,18 +262,4 @@ void InitUART(void)
     U1STAbits.UTXEN = 1; //Enable Transmit
     //IEC0bits.U1TXIE = 1; //Enable Transmit Interrupt
     IEC0bits.U1RXIE = 1; //Enable Receive Interrupt
-}
-void InitTimerServo()
-{
-    extern u16 servoPulseWidth;
-    T1CON = 0x00; //Stops the Timer1 and reset control reg.
-    TMR1 = 0x00; //Clear contents of the timer register
-    T1CONbits.TCKPS=0b01; // Set the prescaler to 1:8
-    PR1 =40083; //Load the Period register with the value for 20 ms signal
-    servoPulseWidth=3006; //Load the period of the pulse for 1.5 ms
-    IPC0bits.T1IP = 0x01; //Setup Timer1 interrupt priority level 1
-    IFS0bits.T1IF = 0; //Clear the Timer1 interrupt status flag
-    IEC0bits.T1IE = 1; //Enable Timer1 interrupts
-    T1CONbits.TON = 1; //Start Timer1 with prescaler settings at 1:8 and
-    //clock source set to the internal instruction cycle
 }
