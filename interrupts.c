@@ -17,6 +17,7 @@
 
 #include <stdint.h>        /* Includes uint16_t definition */
 #include <stdbool.h>       /* Includes true/false definition */
+#include "servomotor.h"
 
 /******************************************************************************/
 /* Interrupt Vector Options                                                   */
@@ -167,4 +168,21 @@ _U1RXInterrupt(void)
         //data22=GetChar();
     } 
     IFS0&=0xF7FF; // clear the U1RXIF bit
+}
+
+void __attribute__((interrupt,auto_psv)) _T1Interrupt(void)
+{
+    extern u16 servoPulseWidth;
+    if(SERVO_PIN==0)
+    {
+        SERVO_PIN=1;
+        PR1 = servoPulseWidth;
+        
+    }
+    else
+    {
+       SERVO_PIN=0;
+       PR1 = SERVO_PERIOD-servoPulseWidth;
+    }
+    IFS0bits.T1IF = 0; //Reset Timer1 interrupt flag and Return from ISR
 }

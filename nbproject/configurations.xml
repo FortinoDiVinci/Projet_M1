@@ -10,6 +10,7 @@
       <itemPath>lcd.h</itemPath>
       <itemPath>i2c.h</itemPath>
       <itemPath>uart.h</itemPath>
+      <itemPath>servomotor.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -28,6 +29,7 @@
       <itemPath>lcd.c</itemPath>
       <itemPath>i2c.c</itemPath>
       <itemPath>uart.c</itemPath>
+      <itemPath>servomotor.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
