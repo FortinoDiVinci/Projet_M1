@@ -113,14 +113,14 @@ void ObjectDetection(const u16* ADCValues, u16* average)
     static u8 count = 0;
     char i;
     count ++;
-    for (i=0; i<NMB_SENSORS-1; i++) /* only IR sensors */
+    for (i=0; i<NMB_SENSORS; i++) /* only IR sensors */
     {
         average[i] += ADCValues[i];
     }
     /* Data is treated every 20 samples */
     if (count == NMB_MEASURES)
     {
-        for(i=0; i<NMB_SENSORS-1; i++)
+        for(i=0; i<NMB_SENSORS; i++)
         {
             average[i] = average[i] / count;
         }
@@ -221,7 +221,7 @@ void InitPWM(void)
     CCP2CON3Hbits.POLACE = 0; //Configure output polarity (Active High)
     CCP2CON3Hbits.POLBDF = 0; // Configure output polarity (Active Low)
     CCP2TMRL = 0x0000; //Initialize timer prior to enable module.
-    CCP2PRL = 99;             //Configure time base period
+    CCP2PRL = 200;             //Configure time base period
     /* (u16)((1/PWM_FREQ)/(4/SYS_FREQ) - 1) = 99 */
     CCP2RA = 0; // Set the rising edge compare value
     CCP2RB = 0; // Set the falling edge compare value

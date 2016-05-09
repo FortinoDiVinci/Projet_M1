@@ -20,18 +20,23 @@
 /******************************************************************************/
 
 /* DISTANCES */
-#define D1 0x000
-#define D2 0x00F
-#define D3 0x0FF
+
+#define D_170_CM 2.3
+#define D_160_CM 1.3
+#define D_130_CM 1.70
+#define D_120_CM 2.7
+#define TARGET_DISTANCE_WITHOUT_DANGER 10 // this value in mV is a distance of 145 cm(value between the first car and the user)
+#define MAX_DISTANCE_WITHOUT_DANGER 1.40 // this value in mV is a distance of 150 cm(value between the first car and the user)
+#define MIN_DISTANCE_WITHOUT_DANGER 1.50 //  this value in mV is a distance of 140 cm(value between the first car and the user)
 
 /* DIFFERENT SPEEDS */
 #define SLOW 1
 #define MEDIUM 2
 #define FAST 3
 
-#define DUTY_SLOW 0.15
-#define DUTY_MEDIUM 0.30
-#define DUTY_FAST 0.50
+#define DUTY_SLOW 0.60
+#define DUTY_MEDIUM 0.60
+#define DUTY_FAST 0.60
 
 /******************************************************************************/
 /* User Function Prototypes                                                   */

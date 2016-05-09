@@ -37,6 +37,7 @@
 /* Main Program                                                               */
 /******************************************************************************/
 
+char data22 ;
 u16 main(void)
 {
     /* Configure the oscillator for the device */
@@ -99,9 +100,8 @@ u16 main(void)
         ADC_values[i]=0;
     }*/
 
-    
     while(1)
-    {
+    { 
         
         for(j=0; j<NMB_MEASURES; j++)
         {
@@ -114,11 +114,69 @@ u16 main(void)
         }
         
         LcdClear();
-        DisplayADCIR(average[1]);
+        DisplayADCIR(average[US]);
+        LcdGoto(0,2);
         
-        __delay_ms(5);
         
-
+        if(average[US] * PIC_VOLTAGE / 1023 < D_170_CM)
+        {
+            LcdPuts("down slow");
+            MoveBackward(SLOW);
+        }
+        
+        else if(average[US] * PIC_VOLTAGE / 1023 > D_120_CM)
+        {
+            MoveForward(SLOW);
+            LcdPuts("UP slow");
+        }
+        else//((average[US]* PIC_VOLTAGE / 1023 < D_120_CM)&&(average[US] * PIC_VOLTAGE / 1023 > D_170_CM))
+        {
+            LcdPuts("stop!");
+           StopMotor(); 
+        }
+        
+        
+#if 0      
+        if(average[US]* PIC_VOLTAGE / 1023 > D_120_CM)
+        {
+            LcdPuts("UP Fast");
+            MoveForward(FAST);
+        }
+        else if((average[US]* PIC_VOLTAGE / 1023 > D_130_CM )&&( average[US]* PIC_VOLTAGE / 1023 < D_120_CM))
+        {
+            LcdPuts("UP Medium");
+            MoveForward(MEDIUM);
+        }
+        else if(average[US]* PIC_VOLTAGE / 1023 > MIN_DISTANCE_WITHOUT_DANGER)
+        {
+            LcdPuts("UP Slow");
+            MoveForward(SLOW);
+        }
+        else if(average[US] * PIC_VOLTAGE / 1023 < D_160_CM)
+        {
+            LcdPuts("down slow");
+            MoveBackward(MEDIUM);
+        }
+        else if((average[US] * PIC_VOLTAGE / 1023 > D_160_CM)&&(average[US] * PIC_VOLTAGE / 1023 < MAX_DISTANCE_WITHOUT_DANGER))
+        {
+            LcdPuts("down medium");
+            MoveBackward(SLOW);
+        }
+        else if((average[US]* PIC_VOLTAGE / 1023 > MAX_DISTANCE_WITHOUT_DANGER)&&(average[US] * PIC_VOLTAGE / 1023 < MIN_DISTANCE_WITHOUT_DANGER))
+        {
+            LcdPuts("stop!");
+           StopMotor(); 
+        }
+        else
+        {
+            LcdPuts("error");
+            /* should not happend :
+             * print error on the LCD
+             */       
+        }
+#endif
+        
+#if 0
         
         /* Object detection */
         
@@ -163,6 +221,7 @@ u16 main(void)
             MoveForward(FAST);
         }
         */
+#endif
     }
 #endif
     return 0;
