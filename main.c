@@ -45,32 +45,36 @@ u16 angle=0;
 
 u16 main(void)
 {
-    /* Configure the oscillator for the device */
+    /* Configure the oscillator both devices */
+    
     ConfigureOscillator();
+    
+    /* Initialize IO ports and peripherals for both devices */
    
+    InitGPIO(); 
+    InitUART();
+    InitI2c();
+    InitI2cCompass();
+    
     /* Program for the bracelet */
     
 #ifdef PROTECTED
     
     /* Initialize IO ports and peripherals */
-    InitGPIO();
-    InitUART();
-    InitI2c();
-    InitI2cCompass();
-    
-    s16 x;
-    s16 y;
-    
-    x = 0;
-    y = 0;
-  
-    
-  
+
+ 
+    /* The values of the magnetic field will be save in x and y */
+    s16 x = 0;
+    s16 y = 0;   
  
     while(1)
     {
        I2cReadData(&x, &y);
        angle=((-atan2(x,y)*180)/3.14)+180;
+        /* Computes the angle using the arctan2 which provides an angle
+        * between -180° and 180°, then converts the result that is in radian
+        * into degree (*180/pi) and in the end add 180° so the angle is between
+        * 0° and 360° */
        PutData16(angle);
        __delay_ms(500);
     }
@@ -83,10 +87,8 @@ u16 main(void)
     
 
     /* Initialize IO ports and peripherals */
-    InitGPIO();
     InitADC();
     InitPWM();
-    InitUART();
     InitLcd();
 
     
@@ -96,6 +98,10 @@ u16 main(void)
     u16 average[NMB_SENSORS];
     u8 i;
     u8 j;
+    
+    /* The values of the magnetic field will be save in x and y */
+    s16 x = 0;
+    s16 y = 0;  
     
     char T[5];
     
@@ -185,7 +191,7 @@ u16 main(void)
         else
         {
             LcdPuts("error");
-            /* should not happend :
+            /* should not happened :
              * print error on the LCD
              */       
         }
@@ -221,21 +227,7 @@ u16 main(void)
             LcdPuts("Fast speed baby !");
             MoveForward(FAST);
         }
-        
-        /* ULTRASON need to be changed
-        if(ADC_values[US]<D1)
-        {
-            MoveForward(SLOW);
-        }
-        else if((ADC_values[US]<D2 )&&(ADC_values[US]>D1))
-        {
-            MoveForward(MEDIUM);
-        }
-        else if((ADC_values[US]<D3)&&(ADC_values[US]>D2))
-        {
-            MoveForward(FAST);
-        }
-        */
+
 #endif
     }
 #endif

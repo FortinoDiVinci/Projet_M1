@@ -3,4 +3,5 @@ user.c  \
 lcd.h  \
 system.h  \
 user.h  \
- servomotor.h 
+ servomotor.h  \
+motorControl.h 

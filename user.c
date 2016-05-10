@@ -22,7 +22,10 @@
 #include "user.h"            /* variables/params used by user.c */
 #include "system.h"
 #include "servomotor.h"
+#include "motorControl.h"
 #include <libpic30.h>
+
+struct flag flags = {0, 0, 0, 0, 0, 0};
 
 /******************************************************************************/
 /* User Functions                                                             */
@@ -77,7 +80,6 @@ void InitGPIO(void)
     ANSAbits.ANSA4 = 0;         /*           set as digital */
 
 #endif
-#ifdef PROTECTED
     
     /* I2C SETTINGS */
     TRISBbits.TRISB8 = 1;       /* SLC1 set as input */
@@ -85,7 +87,6 @@ void InitGPIO(void)
     TRISBbits.TRISB9 = 1;       /* SDA1 set as input (will change) */
     ANSBbits.ANSB9 = 0;         /*      set as digital */
     
-#endif
     
     /* UART SETTINGS*/
     ANSBbits.ANSB2=0;           /* set RB2 as digital */
@@ -124,30 +125,30 @@ void ObjectDetection(const u16* ADCValues, u16* average)
         {
             average[i] = average[i] / count;
         }
-        /*
-        int obstacle[NMB_SENSORS] = {0, 0, 0};
-        for(i = 0; i<NMB_SENSORS; i++)
-        {
-            if((average[i] <= IR_DISTANCE_80)&&(average[i] >= IR_DISTANCE_50))
-            {
-                obstacle[i] = 1;
-            }
-            if((average[i] < IR_DISTANCE_50)&&(average[i] >= IR_DISTANCE_40))
-            {
-                obstacle[i] = 2;
-            }
-            if((average[i] < IR_DISTANCE_40)&&(average[i] >= IR_DISTANCE_30))
-            {
-                obstacle[i] = 3;
-            }
-            if((average[i] < IR_DISTANCE_30)&&(average[i] >= IR_DISTANCE_20))
-            {
-                obstacle[i] = 4;
-            }
-        }*/
         /* RESET count */
         count = 0;
     }
+    ObjectReaction(average);
+}
+
+void ObjectReaction(const u16* average)
+{
+
+        if(average[0] * PIC_VOLTAGE / 1023 >= 1.300) 
+        {
+            /* If the left IR detects an object closer than x cm */
+            flags.IR_l = 1;
+        }
+        if(average[1] * PIC_VOLTAGE / 1023 >= 1.300)
+        {
+            /* If the front IR detects an object closer than x cm */
+            flags.IR_c = 1;
+        }
+        if(average[2] * PIC_VOLTAGE / 1023 >= 1.300)
+        {
+            /* If the right IR detects an object closer than x cm */
+            flags.IR_r = 1;
+        }
 }
 
 void StartADC(u16* ADCValues)

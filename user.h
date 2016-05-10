@@ -9,8 +9,8 @@
  * If person to protect define PROTECTED 
  * DO NOT DO BOTH */
 
-//#define BODY_GUARD
-#define PROTECTED
+#define BODY_GUARD
+//#define PROTECTED
 
 /* Variables types simplification */
 
@@ -60,6 +60,16 @@ AD1CON1bits.ADON = 1;})
 #define PWM_PER_SYS 400
 /* TODO Application specific user parameters used in user.c may go here */
 
+struct flag{
+    u8 IR_l : 1; /* 1 bit for the left IR */
+    u8 IR_c : 1; /* 1 bit for the front IR */
+    u8 IR_r : 1; /* 1 bit for the right IR */
+    /* 3 bits for the distance detected by the ultrasound sensor */
+    u8 US_f : 1; /* Target is too close, needs to move Forward */
+    u8 US_m : 1; /* Target is at a correct Middle position keep speed */
+    u8 US_b : 1; /* Target is too far, needs to move Backward */
+};
+
 /******************************************************************************/
 /* User Function Prototypes                                                   */
 /******************************************************************************/
@@ -67,12 +77,13 @@ AD1CON1bits.ADON = 1;})
 /* TODO User level functions prototypes (i.e. InitApp) go here */
 
 void InitGPIO(void);             /* I/O and Peripheral Initialization */
-void InitADC();                  /* Initialize Analog to Digital Converter */
+void InitADC(void);                  /* Initialize Analog to Digital Converter */
 void InitPWM(void);              /* Initialize PWM */
 void StartADC(u16*);             /* Samples et converts the analog inputs */
 void ObjectDetection(const u16*, u16*);    /* Detect if an object is seen by one of the infrared */
-void DisplayADCIR(u16);            /* */
-void InitUART();
-void InitTimerServo();           /* Initialization of the timer for the servomotor */
+void ObjectReaction(const u16*); /* Set the flags according to IR dection */
+void DisplayADCIR(u16);          /* Convert the data into a voltage level */
+void InitUART(void);
+void InitTimerServo(void);           /* Initialization of the timer for the servomotor */
 
 #endif USER_H
