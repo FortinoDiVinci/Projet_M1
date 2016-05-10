@@ -53,18 +53,32 @@ u16 main(void)
     InitI2c();
     InitI2cCompass();
     
-    u16 x;
-    u16 y;
+    s16 x;
+    s16 y;
     
     x = 0;
     y = 0;
     
     u8 i;
-    for(i=0; i<=127; i++)
-       PutChar('G');   
+#if 0
+    LATAbits.LATA7 = 1;
+    __delay_ms(5);
+    PutChar('o');
+    LATAbits.LATA7 = 0;
+    __delay_ms(1);
+    LATAbits.LATA7 = 1;
+#endif
+    //PutChar('m');
     while(1)
     {
-
+        I2cReadData(&x, &y);
+#if 0
+        LATAbits.LATA7 = 1;
+        __delay_ms(5);
+        PutChar('k');
+        LATAbits.LATA7 = 0;
+        __delay_ms(5);
+#endif
     }
     
 #endif

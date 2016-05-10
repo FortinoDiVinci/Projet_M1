@@ -9,8 +9,13 @@
  * If person to protect define PROTECTED 
  * DO NOT DO BOTH */
 
+<<<<<<< Updated upstream
 #define BODY_GUARD
  //#define PROTECTED
+=======
+//#define BODY_GUARD
+#define PROTECTED
+>>>>>>> Stashed changes
 
 /* Variables types simplification */
 

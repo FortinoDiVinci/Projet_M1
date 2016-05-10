@@ -85,14 +85,19 @@ void InitGPIO(void)
     TRISBbits.TRISB9 = 1;       /* SDA1 set as input (will change) */
     ANSBbits.ANSB9 = 0;         /*      set as digital */
     
+    TRISAbits.TRISA7 = 0;       /* digital output RF */
+    
 #endif
     
     /* UART SETTINGS*/
     ANSBbits.ANSB2=0;           /* set RB2 as digital */
     TRISBbits.TRISB2=1;         /* set RB2 as input */
     
+#if 1
+    
     ANSBbits.ANSB7=0;           /* set RB7 as digital */
     TRISBbits.TRISB7=0;         /* set RB7 as output */
+#endif
     
     /* Initialize peripherals */
     
