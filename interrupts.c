@@ -161,12 +161,14 @@
 void __attribute__((interrupt,auto_psv))
 _U1RXInterrupt(void)
 {
+    IFS0&=0xF7FF; // clear the U1RXIF bit
+    while(IFS0bits.U1RXIF==1);
     extern u8 data;  
-    while((U1STA|0xFFFE)==0xFFFF) /* test if the bit URXDA is set, if it set read 
-                                  * the char in the UART */
-   {
+    //while((U1STA|0xFFFE)==0xFFFF) /* test if the bit URXDA is set, if it set read 
+                                  /* the char in the UART */
         data=GetChar();
-    } 
+        LcdPutch(data);
+    
     IFS0&=0xF7FF; // clear the U1RXIF bit
 }
 

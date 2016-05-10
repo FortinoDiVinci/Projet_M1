@@ -99,10 +99,9 @@ u16 main(void)
     {
         ADC_values[i]=0;
     }*/
-    
+    LcdClear();
     while(1)
     {
-        LcdWriteData(data);
     }
     while(1)
     { 
