@@ -9,8 +9,8 @@
  * If person to protect define PROTECTED 
  * DO NOT DO BOTH */
 
-#define BODY_GUARD
- //#define PROTECTED
+//#define BODY_GUARD
+#define PROTECTED
 
 /* Variables types simplification */
 

@@ -25,6 +25,7 @@
 #include "motorControl.h"
 #include "lcd.h"
 #include "i2c.h"
+#include <math.h>
 #include <libpic30.h>
 
 /******************************************************************************/
@@ -39,7 +40,7 @@
 
 u8 data;
 
-s16 angle=0;
+u16 angle=0;
 
 
 u16 main(void)
@@ -62,13 +63,16 @@ u16 main(void)
     
     x = 0;
     y = 0;
+  
     
-    u8 i;
-    for(i=0; i<=127; i++)
-       PutChar('G');   
+  
+ 
     while(1)
     {
-
+       I2cReadData(&x, &y);
+       angle=((-atan2(x,y)*180)/3.14)+180;
+       PutData16(angle);
+       __delay_ms(500);
     }
     
 #endif

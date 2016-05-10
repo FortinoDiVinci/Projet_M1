@@ -40,7 +40,7 @@ void PutString(u8 *c)
         i++;
     }
 }
-void PutData16(s16 data)
+void PutData16(u16 data)
 {
     u8 dataMSB, dataLSB;
     dataLSB=(u8)data;

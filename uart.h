@@ -24,7 +24,7 @@
 u8 GetChar();
 void PutChar(u8);
 void PutString(u8 *);
-void PutData16(s16);
+void PutData16(u16);
 // Comment a function and leverage automatic documentation with slash star star
 /**
     <p><b>Function prototype:</b></p>
