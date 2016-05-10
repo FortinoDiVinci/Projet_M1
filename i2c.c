@@ -9,7 +9,7 @@
 #include "system.h" 
 #include <libpic30.h>
 
-void I2cReadData(s16* mag_x, s16* mag_y)
+void I2cReadData(u16* mag_x, u16* mag_y)
 {
     u8 coordinates[6];
     memset(coordinates,0x00,sizeof(coordinates));
@@ -22,12 +22,11 @@ void I2cReadData(s16* mag_x, s16* mag_y)
     
     I2cReadByte(coordinates);
     
-    //*mag_x = coordinates[0];
-    *mag_x = ~coordinates[0]+1;
-    *mag_x = *mag_x * 0x0100 + ~coordinates[1]+1;
+    *mag_x = coordinates[0];
+    *mag_x = *mag_x * 0x0100 + coordinates[1];
     
-    *mag_y = ~coordinates[4]+1;
-    *mag_y = *mag_y * 0x0100 + ~coordinates[5]+1;  
+    *mag_y = coordinates[4];
+    *mag_y = *mag_y * 0x0100 + coordinates[5];  
      
         /* Moves data pointer */
 #if 0
@@ -210,7 +209,7 @@ void InitI2cCompass(void)
     while(!IFS1bits.SSP1IF);             /* Waits until the end of transmission */
     if(I2cACK()) return;                 /* detects communication failure */
 
-    SSP1BUF = 0x20;                      /* Gain = 5 */
+    SSP1BUF = 0xA0;                      /* Gain = 5 */
     IFS1bits.SSP1IF = 0;                 /* Clears the interruption  */
     while(!IFS1bits.SSP1IF);             /* Waits until the end of transmission */
     if(I2cACK()) return;                 /* detects communication failure */

@@ -11,18 +11,8 @@
     <memory name="program">
       <units>bytes</units>
       <length>16128</length>
-<<<<<<< Updated upstream
       <used>5475</used>
       <free>10653</free>
-=======
-<<<<<<< Updated upstream
-      <used>5556</used>
-      <free>10572</free>
-=======
-      <used>4407</used>
-      <free>11721</free>
->>>>>>> Stashed changes
->>>>>>> Stashed changes
     </memory>
   </executable>
 </project>

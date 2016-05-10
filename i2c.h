@@ -38,7 +38,7 @@ void InitI2cCompass(void);
  -------------------
  */
 
-void I2cReadData(s16*, s16*);
+void I2cReadData(u16*, u16*);
 /*I2cReadData function 
  -------------------
  */
