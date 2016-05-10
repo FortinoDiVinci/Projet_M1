@@ -125,13 +125,13 @@ section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x4e0           0x750  (1872)
 .const                       0x6e0                 0xc            0x12  (18)
-.text                        0x6ec               0x958           0xe04  (3588)
-.dinit                      0x1044                0x28            0x3c  (60)
-.init.delay32               0x106c                0x1c            0x2a  (42)
-.text                       0x1088                0x28            0x3c  (60)
-.shared.dinit               0x10b0                 0x2             0x3  (3)
+.text                        0x6ec               0x984           0xe46  (3654)
+.dinit                      0x1070                0x28            0x3c  (60)
+.init.delay32               0x1098                0x1c            0x2a  (42)
+.text                       0x10b4                0x28            0x3c  (60)
+.shared.dinit               0x10dc                 0x2             0x3  (3)
 
-                 Total program memory used (bytes):         0x160b  (5643) 34%
+                 Total program memory used (bytes):         0x164d  (5709) 35%
 
 
 Ivt Memory  [Origin = 0x4, Length = 0xfc]
@@ -187,8 +187,8 @@ External Symbols in Program Memory (by address):
 
                   0x000200                  __resetPRI
                   0x00022c                  __psv_init
-                  0x00023c                  __data_init_standard
                   0x00023c                  __data_init
+                  0x00023c                  __data_init_standard
                   0x0002ac                  __U1RXInterrupt
                   0x00031c                  __T1Interrupt
                   0x00034a                  __OscillatorFail
@@ -250,16 +250,17 @@ External Symbols in Program Memory (by address):
                   0x000fca                  _GetChar
                   0x000fd6                  _PutChar
                   0x000fee                  _PutString
-                  0x001010                  _main
-                  0x00106c                  ___delay32
-                  0x001088                  _TurnWheels
-                  0x0010a0                  _ConfigureOscillator
+                  0x001010                  _PutData16
+                  0x00103c                  _main
+                  0x001098                  ___delay32
+                  0x0010b4                  _TurnWheels
+                  0x0010cc                  _ConfigureOscillator
                   0xf80000                  __FBS.sec
                   0xf80004                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x0010a0                  _ConfigureOscillator
+                  0x0010cc                  _ConfigureOscillator
                   0x000e60                  _DisplayADCIR
                   0x000fca                  _GetChar
                   0x000c0e                  _I2cACK
@@ -289,10 +290,11 @@ External Symbols in Program Memory (by name):
                   0x000efc                  _MoveForward
                   0x000d18                  _ObjectDetection
                   0x000fd6                  _PutChar
+                  0x001010                  _PutData16
                   0x000fee                  _PutString
                   0x000d8e                  _StartADC
                   0x000fbc                  _StopMotor
-                  0x001088                  _TurnWheels
+                  0x0010b4                  _TurnWheels
                   0x000350                  __AddressError
                   0x000362                  __DefaultInterrupt
                   0xf80000                  __FBS.sec
@@ -303,7 +305,7 @@ External Symbols in Program Memory (by name):
                   0x00031c                  __T1Interrupt
                   0x0002ac                  __U1RXInterrupt
                   0x000368                  ___addsf3
-                  0x00106c                  ___delay32
+                  0x001098                  ___delay32
                   0x000422                  ___divsf3
                   0x0004a6                  ___eqsf2
                   0x0004aa                  ___fixunssfsi
@@ -328,7 +330,7 @@ External Symbols in Program Memory (by name):
                   0x000560                  __funpack2
                   0x00022c                  __psv_init
                   0x000200                  __resetPRI
-                  0x001010                  _main
+                  0x00103c                  _main
                   0x0006d2                  _memset
 
 Memory Configuration
@@ -495,19 +497,19 @@ __FICD
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x4640
+.debug_info       0x000000       0x4693
  *(.debug_info)
- .debug_info      0x000000         0xaa build/XC16_24FJ256GA110/production/configuration_bits.o
- .debug_info      0x0000aa        0x43d build/XC16_24FJ256GA110/production/interrupts.o
- .debug_info      0x0004e7        0x1f2 build/XC16_24FJ256GA110/production/main.o
- .debug_info      0x0006d9        0x278 build/XC16_24FJ256GA110/production/system.o
- .debug_info      0x000951        0x25c build/XC16_24FJ256GA110/production/traps.o
- .debug_info      0x000bad       0x1cf6 build/XC16_24FJ256GA110/production/user.o
- .debug_info      0x0028a3        0x788 build/XC16_24FJ256GA110/production/motorControl.o
- .debug_info      0x00302b        0x58c build/XC16_24FJ256GA110/production/lcd.o
- .debug_info      0x0035b7        0x9ea build/XC16_24FJ256GA110/production/i2c.o
- .debug_info      0x003fa1        0x380 build/XC16_24FJ256GA110/production/uart.o
- .debug_info      0x004321        0x31f build/XC16_24FJ256GA110/production/servomotor.o
+ .debug_info      0x000000         0xa9 build/XC16_24FJ256GA110/production/configuration_bits.o
+ .debug_info      0x0000a9        0x43c build/XC16_24FJ256GA110/production/interrupts.o
+ .debug_info      0x0004e5        0x1f1 build/XC16_24FJ256GA110/production/main.o
+ .debug_info      0x0006d6        0x277 build/XC16_24FJ256GA110/production/system.o
+ .debug_info      0x00094d        0x25b build/XC16_24FJ256GA110/production/traps.o
+ .debug_info      0x000ba8       0x1cf5 build/XC16_24FJ256GA110/production/user.o
+ .debug_info      0x00289d        0x787 build/XC16_24FJ256GA110/production/motorControl.o
+ .debug_info      0x003024        0x58b build/XC16_24FJ256GA110/production/lcd.o
+ .debug_info      0x0035af        0x9e9 build/XC16_24FJ256GA110/production/i2c.o
+ .debug_info      0x003f98        0x3dd build/XC16_24FJ256GA110/production/uart.o
+ .debug_info      0x004375        0x31e build/XC16_24FJ256GA110/production/servomotor.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000        0x8d2
@@ -524,7 +526,7 @@ __FICD
  .debug_abbrev    0x000700         0xf8 build/XC16_24FJ256GA110/production/uart.o
  .debug_abbrev    0x0007f8         0xda build/XC16_24FJ256GA110/production/servomotor.o
 
-.debug_line       0x000000        0x77a
+.debug_line       0x000000        0x782
  *(.debug_line)
  .debug_line      0x000000         0x1a build/XC16_24FJ256GA110/production/configuration_bits.o
  .debug_line      0x00001a         0xad build/XC16_24FJ256GA110/production/interrupts.o
@@ -535,10 +537,10 @@ __FICD
  .debug_line      0x000345         0xc4 build/XC16_24FJ256GA110/production/motorControl.o
  .debug_line      0x000409        0x10d build/XC16_24FJ256GA110/production/lcd.o
  .debug_line      0x000516        0x12c build/XC16_24FJ256GA110/production/i2c.o
- .debug_line      0x000642         0xa0 build/XC16_24FJ256GA110/production/uart.o
- .debug_line      0x0006e2         0x98 build/XC16_24FJ256GA110/production/servomotor.o
+ .debug_line      0x000642         0xa8 build/XC16_24FJ256GA110/production/uart.o
+ .debug_line      0x0006ea         0x98 build/XC16_24FJ256GA110/production/servomotor.o
 
-.debug_frame      0x000000        0x5a2
+.debug_frame      0x000000        0x5be
  *(.debug_frame)
  .debug_frame     0x000000         0x82 build/XC16_24FJ256GA110/production/interrupts.o
  .debug_frame     0x000082         0x30 build/XC16_24FJ256GA110/production/main.o
@@ -548,8 +550,8 @@ __FICD
  .debug_frame     0x00025a         0x68 build/XC16_24FJ256GA110/production/motorControl.o
  .debug_frame     0x0002c2        0x138 build/XC16_24FJ256GA110/production/lcd.o
  .debug_frame     0x0003fa        0x110 build/XC16_24FJ256GA110/production/i2c.o
- .debug_frame     0x00050a         0x68 build/XC16_24FJ256GA110/production/uart.o
- .debug_frame     0x000572         0x30 build/XC16_24FJ256GA110/production/servomotor.o
+ .debug_frame     0x00050a         0x84 build/XC16_24FJ256GA110/production/uart.o
+ .debug_frame     0x00058e         0x30 build/XC16_24FJ256GA110/production/servomotor.o
 
 .debug_str        0x000000        0x1a3
  *(.debug_str)
@@ -570,7 +572,7 @@ __FICD
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x358
+                  0x000000        0x366
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0x3c build/XC16_24FJ256GA110/production/interrupts.o
@@ -589,9 +591,9 @@ __FICD
  .debug_pubnames
                   0x00025e         0x8d build/XC16_24FJ256GA110/production/i2c.o
  .debug_pubnames
-                  0x0002eb         0x38 build/XC16_24FJ256GA110/production/uart.o
+                  0x0002eb         0x46 build/XC16_24FJ256GA110/production/uart.o
  .debug_pubnames
-                  0x000323         0x35 build/XC16_24FJ256GA110/production/servomotor.o
+                  0x000331         0x35 build/XC16_24FJ256GA110/production/servomotor.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -1540,7 +1542,7 @@ __c30_signature
 .const              0x86e0          0xc load address 0x0006e0  
  .const             0x86e0          0xc build/XC16_24FJ256GA110/production/lcd.o
 
-.text             0x0006ec        0x958
+.text             0x0006ec        0x984
  .text            0x0006ec        0x382 build/XC16_24FJ256GA110/production/lcd.o
                   0x0006ec                  _InitLcd
                   0x000742                  _LcdWriteCtrl
@@ -1574,25 +1576,26 @@ __c30_signature
                   0x000efc                  _MoveForward
                   0x000f5c                  _MoveBackward
                   0x000fbc                  _StopMotor
- .text            0x000fca         0x46 build/XC16_24FJ256GA110/production/uart.o
+ .text            0x000fca         0x72 build/XC16_24FJ256GA110/production/uart.o
                   0x000fca                  _GetChar
                   0x000fd6                  _PutChar
                   0x000fee                  _PutString
- .text            0x001010         0x34 build/XC16_24FJ256GA110/production/main.o
-                  0x001010                  _main
+                  0x001010                  _PutData16
+ .text            0x00103c         0x34 build/XC16_24FJ256GA110/production/main.o
+                  0x00103c                  _main
 
-.dinit            0x001044         0x28
- .dinit           0x001044         0x28 data_init
+.dinit            0x001070         0x28
+ .dinit           0x001070         0x28 data_init
 
-.init.delay32     0x00106c         0x1c
- .init.delay32    0x00106c         0x1c c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libpic30-elf.a(delay32.eo)
-                  0x00106c                  ___delay32
+.init.delay32     0x001098         0x1c
+ .init.delay32    0x001098         0x1c c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libpic30-elf.a(delay32.eo)
+                  0x001098                  ___delay32
 
-.text             0x001088         0x28
- .text            0x001088         0x18 build/XC16_24FJ256GA110/production/servomotor.o
-                  0x001088                  _TurnWheels
- .text            0x0010a0         0x10 build/XC16_24FJ256GA110/production/system.o
-                  0x0010a0                  _ConfigureOscillator
+.text             0x0010b4         0x28
+ .text            0x0010b4         0x18 build/XC16_24FJ256GA110/production/servomotor.o
+                  0x0010b4                  _TurnWheels
+ .text            0x0010cc         0x10 build/XC16_24FJ256GA110/production/system.o
+                  0x0010cc                  _ConfigureOscillator
 
-.shared.dinit     0x0010b0          0x2
- .shared.dinit    0x0010b0          0x2 shared_data_init
+.shared.dinit     0x0010dc          0x2
+ .shared.dinit    0x0010dc          0x2 shared_data_init

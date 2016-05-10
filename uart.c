@@ -40,7 +40,17 @@ void PutString(u8 *c)
         i++;
     }
 }
-
+void PutData16(s16 data)
+{
+    u8 dataMSB, dataLSB;
+    dataLSB=(u8)data;
+    data&=0xFF00;
+    data/=0x0100;
+    dataMSB=(u8)data;
+    PutChar(dataMSB);
+    PutChar(dataLSB);
+        
+}
 #if 0
 
 /* Fabian weird way of coding */
