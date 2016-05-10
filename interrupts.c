@@ -163,7 +163,7 @@ void __attribute__((interrupt,auto_psv))
 _U1RXInterrupt(void)
 {
     extern u8 data;  
-    extern u16 angle;
+    extern s16 angle;
     IFS0&=0xF7FF; // clear the U1RXIF bit
     while(IFS0bits.U1RXIF==1);
     
@@ -172,7 +172,7 @@ _U1RXInterrupt(void)
      data=GetChar();
      if(i==0)
      {
-         angle=(u16)data;
+         angle=(s16)data;
          angle*=0x0100;
         i++;
      }

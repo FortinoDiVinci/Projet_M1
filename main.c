@@ -39,7 +39,7 @@
 
 u8 data;
 
-u16 angle=0;
+s16 angle=0;
 
 
 u16 main(void)
