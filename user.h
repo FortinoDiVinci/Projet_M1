@@ -28,6 +28,11 @@
 #define IR3 2 /* Third infrared AN5 */
 #define US 3  /* Ultrasound AN3 */
 
+/* HF */
+
+#define NUMBER_DATA_HF 2
+
+
 #define START_SAMPLING(x)( \
 { if(x==IR2) {AD1CON1bits.ADON = 0; AD1CHSbits.CH0SA = 0X00; } \
 if(x==IR1) {AD1CON1bits.ADON = 0; AD1CHSbits.CH0SA = 0x02; } \

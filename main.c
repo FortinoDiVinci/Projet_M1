@@ -37,7 +37,11 @@
 /* Main Program                                                               */
 /******************************************************************************/
 
-u8 data='b';
+u8 data;
+
+u16 angle=0;
+
+
 u16 main(void)
 {
     /* Configure the oscillator for the device */
@@ -88,6 +92,7 @@ u16 main(void)
     u16 average[NMB_SENSORS];
     u8 i;
     u8 j;
+    
     char T[5];
     
     
@@ -102,6 +107,9 @@ u16 main(void)
     LcdClear();
     while(1)
     {
+        LcdClear();
+        LcdPutFloat(angle,0);
+        __delay_ms(500);
     }
     while(1)
     { 

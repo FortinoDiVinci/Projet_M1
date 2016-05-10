@@ -158,17 +158,29 @@
 
 /* TODO Add interrupt routine code here. */
 
+u8 i=0;
 void __attribute__((interrupt,auto_psv))
 _U1RXInterrupt(void)
 {
+    extern u8 data;  
+    extern u16 angle;
     IFS0&=0xF7FF; // clear the U1RXIF bit
     while(IFS0bits.U1RXIF==1);
-    extern u8 data;  
+    
     //while((U1STA|0xFFFE)==0xFFFF) /* test if the bit URXDA is set, if it set read 
                                   /* the char in the UART */
-        data=GetChar();
-        LcdPutch(data);
-    
+     data=GetChar();
+     if(i==0)
+     {
+         angle=(u16)data;
+         angle*=0x0100;
+        i++;
+     }
+     else if(i==1)
+     {
+         angle+=data;
+         i=0;
+     }
     IFS0&=0xF7FF; // clear the U1RXIF bit
 }
 
