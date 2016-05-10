@@ -6,10 +6,11 @@
  */
 
 #include "uart.h"
+
 /* the function GetChar() has been made to get a char from the UART */
-char GetChar()
+u8 GetChar()
 {
-    char c;
+    u8 c;
     c=U1RXREG;
     return c;
 }
@@ -22,7 +23,7 @@ void GetChar(char *c)
  */
 
 /* the function PutChar() has been made to send a char trough the UART */
-void PutChar(char c)
+void PutChar(u8 c)
 {
     while(U1STAbits.UTXBF == 1);
     U1TXREG=c;
@@ -30,7 +31,7 @@ void PutChar(char c)
 
 /* the function PutString() has been made to send a string trough the UART */
 
-void PutString(char *c)
+void PutString(u8 *c)
 {
     int i = 0;
     while(c!='\0')

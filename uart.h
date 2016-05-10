@@ -15,14 +15,15 @@
 
 // TODO Insert appropriate #include <>
 #include <string.h>
+#include "user.h"
 
 // TODO Insert C++ class definitions if appropriate
 
 // TODO Insert declarations
 
-char GetChar();
-void PutChar(char);
-void PutString(char *);
+u8 GetChar();
+void PutChar(u8);
+void PutString(u8 *);
 
 // Comment a function and leverage automatic documentation with slash star star
 /**

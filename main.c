@@ -37,7 +37,7 @@
 /* Main Program                                                               */
 /******************************************************************************/
 
-char data22 ;
+u8 data='b';
 u16 main(void)
 {
     /* Configure the oscillator for the device */
@@ -99,7 +99,11 @@ u16 main(void)
     {
         ADC_values[i]=0;
     }*/
-
+    
+    while(1)
+    {
+        LcdWriteData(data);
+    }
     while(1)
     { 
         
