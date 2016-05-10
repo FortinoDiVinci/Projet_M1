@@ -53,8 +53,8 @@ u16 main(void)
     InitI2c();
     InitI2cCompass();
     
-    u16 x;
-    u16 y;
+    s16 x;
+    s16 y;
     
     x = 0;
     y = 0;

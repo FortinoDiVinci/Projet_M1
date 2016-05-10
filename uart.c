@@ -36,7 +36,7 @@ void PutString(u8 *c)
     int i = 0;
     while(c!='\0')
     {
-        PutChar(*c+i);
+        PutChar(*c++);
         i++;
     }
 }
