@@ -25,7 +25,7 @@
 #include "motorControl.h"
 #include <libpic30.h>
 
-struct flag flags = {0, 0, 0, 0, 0, 0};
+struct flag flags = {0, 0, 0, 0};
 
 /******************************************************************************/
 /* User Functions                                                             */
@@ -78,7 +78,11 @@ void InitGPIO(void)
     ANSBbits.ANSB4 = 0;         /*           set as digital */
     TRISAbits.TRISA4 = 0;       /* Data bits set as output */
     ANSAbits.ANSA4 = 0;         /*           set as digital */
-
+    
+    
+    /* SERVOMOTOR SETTINGS */
+    TRISAbits.TRISA1 = 0;       /* Data bits set as output */
+    ANSAbits.ANSA1 = 0;         /*           set as digital */
 #endif
     
     /* I2C SETTINGS */
@@ -229,7 +233,20 @@ void InitPWM(void)
     CCP2CON1Lbits.CCPON = 1; // Turn on MCCP module  
 }
 
-
+void InitTimerServo()
+{
+    extern u16 servoPulseWidth;
+    T1CON = 0x00; //Stops the Timer1 and reset control reg.
+    TMR1 = 0x00; //Clear contents of the timer register
+    T1CONbits.TCKPS=0b01; // Set the prescaler to 1:8
+    PR1 =40083; //Load the Period register with the value for 20 ms signal
+    servoPulseWidth=3006; //Load the period of the pulse for 1.5 ms
+    IPC0bits.T1IP = 0x01; //Setup Timer1 interrupt priority level 1
+    IFS0bits.T1IF = 0; //Clear the Timer1 interrupt status flag
+    IEC0bits.T1IE = 1; //Enable Timer1 interrupts
+    T1CONbits.TON = 1; //Start Timer1 with prescaler settings at 1:8 and
+    //clock source set to the internal instruction cycle
+}
 
 #endif
 

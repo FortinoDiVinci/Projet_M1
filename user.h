@@ -64,10 +64,8 @@ struct flag{
     u8 IR_l : 1; /* 1 bit for the left IR */
     u8 IR_c : 1; /* 1 bit for the front IR */
     u8 IR_r : 1; /* 1 bit for the right IR */
-    /* 3 bits for the distance detected by the ultrasound sensor */
-    u8 US_f : 1; /* Target is too close, needs to move Forward */
-    u8 US_m : 1; /* Target is at a correct Middle position keep speed */
-    u8 US_b : 1; /* Target is too far, needs to move Backward */
+    /* 2 bits for the distance detected by the ultrasound sensor */
+    u8 US_f : 2; 
 };
 
 /******************************************************************************/

@@ -42,6 +42,7 @@ u8 data;
 
 u16 angle=0;
 
+extern struct flag flags;
 
 u16 main(void)
 {
@@ -90,7 +91,7 @@ u16 main(void)
     InitADC();
     InitPWM();
     InitLcd();
-
+    InitTimerServo();
     
     /* TODO <INSERT USER APPLICATION CODE HERE> */
     
@@ -116,12 +117,6 @@ u16 main(void)
     }*/
     LcdClear();
     while(1)
-    {
-        LcdClear();
-        LcdPutFloat(angle,0);
-        __delay_ms(500);
-    }
-    while(1)
     { 
         
         for(j=0; j<NMB_MEASURES; j++)
@@ -138,7 +133,62 @@ u16 main(void)
         DisplayADCIR(average[US]);
         LcdGoto(0,2);
         
+        if(average[US] * PIC_VOLTAGE / 1023 < D_170_CM)
+        {
+            flags.US_f = 1; /* back */
+        }
         
+        else if(average[US] * PIC_VOLTAGE / 1023 > D_120_CM)
+        {
+            flags.US_f = 2; /* move */
+        }
+        else//((average[US]* PIC_VOLTAGE / 1023 < D_120_CM)&&(average[US] * PIC_VOLTAGE / 1023 > D_170_CM))
+        {
+            flags.US_f = 0; /* stop */
+        }
+        
+        if(flags.IR_c)
+        {
+            /* All 3 sensors detects objects */
+            StopMotor();
+            LcdClear();
+            LcdPuts("Objects \reverywhere");
+        }
+        else if(flags.US_f==2 && flags.IR_l && !flags.IR_c && !flags.IR_r)
+        {
+            /* Obstacle only on the left and target is close */
+            TurnWheels(20);
+            MoveForward(MEDIUM);
+            LcdClear();
+            LcdPuts("Object on the\rright");
+        }
+        else if(flags.US_f==2 && flags.IR_r && !flags.IR_c && !flags.IR_l)
+        {
+            /* Obstacle only on the right and target is close */
+            TurnWheels(-20);
+            MoveForward(MEDIUM);
+            LcdClear();
+            LcdPuts("Object on the\rleft");
+        }
+        else if(flags.US_f==2 && !flags.IR_r && !flags.IR_c && !flags.IR_l)
+        {
+            /* no obstacle and target is close */
+            MoveForward(FAST);
+            LcdClear();
+            LcdPuts("Fast speed baby");
+        }
+        else if(flags.US_f==1)
+        {
+            /* Target is lost or too far */
+            MoveBackward(MEDIUM);
+            LcdClear();
+            LcdPuts("Going back !");
+        }
+        else if(flags.US_f==0)
+        {
+            StopMotor();
+        }
+        #if 0 
         if(average[US] * PIC_VOLTAGE / 1023 < D_170_CM)
         {
             LcdPuts("down slow");
@@ -156,6 +206,7 @@ u16 main(void)
            StopMotor(); 
         }
         
+        #endif
         
 #if 0      
         if(average[US]* PIC_VOLTAGE / 1023 > D_120_CM)
