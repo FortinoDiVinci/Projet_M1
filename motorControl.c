@@ -19,17 +19,17 @@ void MoveForward(u8 speed)
     {
         //Sets the PWM frequency to 1 kHz.
         case SLOW:
-            //Set the PWM duty cycle to 15%
-            CCP2RA = (1-DUTY_SLOW)*CCP2PRL; 
+            //Set the PWM duty cycle to 50%
+            CCP2RA = (DUTY_SLOW)*CCP2PRL; 
             
             break ;
         case MEDIUM :
-            //Set the PWM duty cycle to 30%
-           CCP2RA = (1-DUTY_MEDIUM)*CCP2PRL;
+            //Set the PWM duty cycle to 60%
+           CCP2RA = (DUTY_MEDIUM)*CCP2PRL;
             break ;
         case FAST :
-            //Set the PWM duty cycle to 50%
-            CCP2RA = (1-DUTY_FAST)*CCP2PRL; 
+            //Set the PWM duty cycle to 70%
+            CCP2RA = (DUTY_FAST)*CCP2PRL; 
            /*  */
             break ;
         default :
@@ -52,15 +52,15 @@ void MoveBackward(u8 speed)
     //Sets the PWM frequency to 1 kHz.
         case SLOW:
             //Set the PWM duty cycle to 50%
-            CCP2RB = 1.2*(1-DUTY_SLOW)*CCP2PRL;    
+            CCP2RB = (DUTY_SLOW)*CCP2PRL;    
             break ;
         case MEDIUM :
-            //Set the PWM duty cycle to 70%
-           CCP2RB = 1.2*(1-DUTY_MEDIUM)*CCP2PRL; 
+            //Set the PWM duty cycle to 60%
+           CCP2RB = (DUTY_MEDIUM)*CCP2PRL; 
             break ;
         case FAST :
-            //Set the PWM duty cycle to 80%
-            CCP2RB = 1.2*(1-DUTY_FAST)*CCP2PRL;
+            //Set the PWM duty cycle to 70%
+            CCP2RB = (DUTY_FAST)*CCP2PRL;
             break ;
         default :
             break ;

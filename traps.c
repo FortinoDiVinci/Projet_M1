@@ -17,6 +17,9 @@
 
 #include <stdint.h>        /* Includes uint16_t definition */
 #include <stdbool.h>       /* Includes true/false definition */
+#include "lcd.h"
+#include "system.h"
+#include <libpic30.h>
 
 /******************************************************************************/
 /* Trap Function Prototypes                                                   */
@@ -67,24 +70,44 @@ void __attribute__((interrupt,no_auto_psv)) _SoftTrapError(void);
 void __attribute__((interrupt,no_auto_psv)) _OscillatorFail(void)
 {
         INTCON1bits.OSCFAIL = 0;        /* Clear the trap flag */
-        while(1);
+        while (1)
+        {
+            LcdPuts("oscfail");
+            __delay_ms(1000);
+            LcdClear();
+        }
 }
 
 void __attribute__((interrupt,no_auto_psv)) _AddressError(void)
 {
         INTCON1bits.ADDRERR = 0;        /* Clear the trap flag */
-        while (1);
+        while (1)
+        {
+            LcdPuts("addrerr");
+            __delay_ms(1000);
+            LcdClear();
+        }
 }
 void __attribute__((interrupt,no_auto_psv)) _StackError(void)
 {
         INTCON1bits.STKERR = 0;         /* Clear the trap flag */
-        while (1);
+        while (1)
+        {
+            LcdPuts("stkerr");
+            __delay_ms(1000);
+            LcdClear();
+        }
 }
 
 void __attribute__((interrupt,no_auto_psv)) _MathError(void)
 {
         INTCON1bits.MATHERR = 0;        /* Clear the trap flag */
-        while (1);
+        while (1)
+        {
+            LcdPuts("math");
+            __delay_ms(1000);
+            LcdClear();
+        }
 }
 
 #if defined(__PIC24F__)||defined(__PIC24H__)
@@ -124,7 +147,12 @@ void __attribute__((interrupt,no_auto_psv)) _AltMathError(void)
 /******************************************************************************/
 void __attribute__((interrupt,no_auto_psv)) _DefaultInterrupt(void)
 {
-        while(1);
+        while(1)
+        {
+            LcdPuts("FDP");
+            __delay_ms(1000);
+            LcdClear();
+        }
 }
 
 #if defined(__PIC24E__)

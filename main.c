@@ -119,7 +119,7 @@ u16 main(void)
         ADC_values[i]=0;
     }*/
     LcdClear();
-    
+#if 0    
     while(1){
         I2cReadData(&x, &y);
        angle2=((-atan2(x,y)*180)/3.14)+180;
@@ -127,11 +127,38 @@ u16 main(void)
         * between -180° and 180°, then converts the result that is in radian
         * into degree (*180/pi) and in the end add 180° so the angle is between
         * 0° and 360° */
-       LcdPutFloat(angle2-angle,0);
+       //LcdPutFloat(angle2,0);
+       LcdGoto(1,2);
+       LcdPutFloat((s16)(angle2-angle),0);
        __delay_ms(500);
        LcdClear();
         
     }
+#endif
+
+#if 0  
+    // sensors test
+    while(1)
+    {
+        for(j=0; j<NMB_MEASURES; j++)
+        {
+            /* SENSORS SAMPLING */
+            for(i=0; i<NMB_SENSORS; i++)
+            {
+                StartADC(ADC_values);
+            }
+            ObjectDetection(ADC_values, average);
+        }
+        for(i=0; i<NMB_SENSORS-1; i++)
+        {
+            LcdPutFloat(average[i], 0);
+            LcdGoto(1,2);
+            LcdPutFloat(i,0);
+            __delay_ms(1000);
+            LcdClear();
+        }
+    }
+#endif
     
     while(1)
     { 
@@ -145,16 +172,34 @@ u16 main(void)
             }
             ObjectDetection(ADC_values, average);
         }
-        
+        DisplayADCIR(average[IR_L]);
+        LcdGoto(1,2);
+        LcdPuts("IR");
+        __delay_ms(100);
         LcdClear();
-        DisplayADCIR(average[US]);
-        LcdGoto(0,2);
+    }
+    while(1)
+    { 
+        
+        for(j=0; j<NMB_MEASURES; j++)
+        {
+            /* SENSORS SAMPLING */
+            for(i=0; i<NMB_SENSORS; i++)
+            {
+                StartADC(ADC_values);
+            }
+            ObjectDetection(ADC_values, average);
+        }
+        //ObjectReaction(average);
+        
+        //LcdGoto(0,2);
+        
+        DistanceFlag(average[US]);
         
         if(average[US] * PIC_VOLTAGE / 1023 < D_170_CM)
         {
             flags.US_f = 1; /* back */
         }
-        
         else if(average[US] * PIC_VOLTAGE / 1023 > D_120_CM)
         {
             flags.US_f = 2; /* move */
@@ -164,14 +209,19 @@ u16 main(void)
             flags.US_f = 0; /* stop */
         }
         
+#if 0
+        // IR algo
         if(flags.IR_c)
         {
             /* All 3 sensors detects objects */
-            StopMotor();
+            MoveBackward(SLOW);
             LcdClear();
-            LcdPuts("Objects \reverywhere");
+            LcdPuts("Object in front");
+            TurnWheels(10);
+            __delay_ms(1000);
         }
-        else if(flags.US_f==2 && flags.IR_l && !flags.IR_c && !flags.IR_r)
+        else if(//flags.US_f==2 && 
+                flags.IR_l && !flags.IR_c && !flags.IR_r)
         {
             /* Obstacle only on the left and target is close */
             TurnWheels(20);
@@ -179,7 +229,8 @@ u16 main(void)
             LcdClear();
             LcdPuts("Object on the\rright");
         }
-        else if(flags.US_f==2 && flags.IR_r && !flags.IR_c && !flags.IR_l)
+        else if(//flags.US_f==2 && 
+                flags.IR_r && !flags.IR_c && !flags.IR_l)
         {
             /* Obstacle only on the right and target is close */
             TurnWheels(-20);
@@ -187,13 +238,15 @@ u16 main(void)
             LcdClear();
             LcdPuts("Object on the\rleft");
         }
-        else if(flags.US_f==2 && !flags.IR_r && !flags.IR_c && !flags.IR_l)
+        else if(//flags.US_f==2 && 
+                !flags.IR_r && !flags.IR_c && !flags.IR_l)
         {
             /* no obstacle and target is close */
             MoveForward(FAST);
             LcdClear();
             LcdPuts("Fast speed baby");
         }
+#if 0
         else if(flags.US_f==1)
         {
             /* Target is lost or too far */
@@ -205,6 +258,20 @@ u16 main(void)
         {
             StopMotor();
         }
+#endif
+        else
+        {
+            MoveForward(SLOW);
+            LcdClear();
+            LcdPuts("Error ?");
+        }
+        
+        flags.IR_r = 0;
+        flags.IR_c = 0;
+        flags.IR_l = 0;
+        
+#endif
+        
         #if 0 
         if(average[US] * PIC_VOLTAGE / 1023 < D_170_CM)
         {

@@ -23,9 +23,9 @@
 
 #define PIC_VOLTAGE 3.25
 
-#define IR1 0 /* First infrared AN2 */
-#define IR2 1 /* Second infrared AN0 */
-#define IR3 2 /* Third infrared AN5 */
+#define IR_L 0 /* First infrared AN2 */
+#define IR_C 1 /* Second infrared AN0 */
+#define IR_R 2 /* Third infrared AN5 */
 #define US 3  /* Ultrasound AN3 */
 
 /* HF */
@@ -34,9 +34,9 @@
 
 
 #define START_SAMPLING(x)( \
-{ if(x==IR2) {AD1CON1bits.ADON = 0; AD1CHSbits.CH0SA = 0X00; } \
-if(x==IR1) {AD1CON1bits.ADON = 0; AD1CHSbits.CH0SA = 0x02; } \
-if(x==IR3) {AD1CON1bits.ADON = 0; AD1CHSbits.CH0SA = 0x05; } \
+{ if(x==IR_C) {AD1CON1bits.ADON = 0; AD1CHSbits.CH0SA = 0X00; } \
+if(x==IR_L) {AD1CON1bits.ADON = 0; AD1CHSbits.CH0SA = 0x02; } \
+if(x==IR_R) {AD1CON1bits.ADON = 0; AD1CHSbits.CH0SA = 0x05; } \
 if(x==US) {AD1CON1bits.ADON = 0; AD1CHSbits.CH0SA = 0x03; } \
 AD1CON1bits.ADON = 1;})
 
@@ -61,9 +61,9 @@ AD1CON1bits.ADON = 1;})
 /* TODO Application specific user parameters used in user.c may go here */
 
 struct flag{
-    u8 IR_l : 1; /* 1 bit for the left IR */
-    u8 IR_c : 1; /* 1 bit for the front IR */
-    u8 IR_r : 1; /* 1 bit for the right IR */
+    u8 IR_l : 2; /* 2 bits for the left IR */
+    u8 IR_c : 2; /* 2 bits for the front IR */
+    u8 IR_r : 2; /* 2 bits for the right IR */
     /* 2 bits for the distance detected by the ultrasound sensor */
     u8 US_f : 2; 
 };
@@ -77,7 +77,7 @@ void InitGPIO(void);             /* I/O and Peripheral Initialization */
 void InitUART(void);
 
 
-void Distance(const u16 *average);
+void DistanceFlag(const u16);
 
 void InitADC(void);                  /* Initialize Analog to Digital Converter */
 void InitPWM(void);              /* Initialize PWM */

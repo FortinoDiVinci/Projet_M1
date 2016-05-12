@@ -46,13 +46,13 @@ void InitGPIO(void)
     ANSAbits.ANSA0 = 1;         /*     set to analog : IR_2 */
     TRISBbits.TRISB0 = 1;       /* AN2 set as input : IR_1 */
     ANSBbits.ANSB0 = 1;         /*     set to analog : IR_1 */
-    TRISBbits.TRISB1 = 1;       /* AN5 set as input : IR_3 */
-    ANSBbits.ANSB1 = 1;         /*     set to analog : IR_3 */
+    TRISBbits.TRISB3 = 1;       /* AN5 set as input : IR_3 */
+    ANSBbits.ANSB3 = 1;         /*     set to analog : IR_3 */
 
     
     /* ULTRASOUND SETTINGS */
-    TRISBbits.TRISB3 = 1;       /* AN3 set as input : US*/
-    ANSBbits.ANSB3 = 1;         /* AN3 set to analog : US */
+    TRISBbits.TRISB1 = 1;       /* AN3 set as input : US*/
+    ANSBbits.ANSB1 = 1;         /* AN3 set to analog : US */
     
     
     /* PWM SETTINGS */
@@ -138,26 +138,33 @@ void ObjectDetection(const u16* ADCValues, u16* average)
         /* RESET count */
         count = 0;
     }
-    ObjectReaction(average);
 }
 
 void ObjectReaction(const u16* average)
 {
 
-        if(average[0] * PIC_VOLTAGE / 1023 >= 1.300) 
+        if(average[IR_L] * PIC_VOLTAGE / 1023 >= 0.600) 
         {
             /* If the left IR detects an object closer than x cm */
-            flags.IR_l = 1;
+            flags.IR_l = 0b01;
         }
-        if(average[1] * PIC_VOLTAGE / 1023 >= 1.300)
+        if(average[IR_C] * PIC_VOLTAGE / 1023 >= 0.600)
         {
             /* If the front IR detects an object closer than x cm */
-            flags.IR_c = 1;
+            flags.IR_c = 0b01;
         }
-        if(average[2] * PIC_VOLTAGE / 1023 >= 1.300)
+        else if((average[IR_C] * PIC_VOLTAGE / 1023 <= 0.3) && (flags.IR_c == 0b01))
+        {
+            flags.IR_c = 0b11;
+        }
+        else if((average[IR_C] * PIC_VOLTAGE / 1023 <= 0.2) && (flags.IR_c == 0b11))
+        {
+            flags.IR_c = 0b00;
+        }
+        if(average[IR_R] * PIC_VOLTAGE / 1023 >= 0.600)
         {
             /* If the right IR detects an object closer than x cm */
-            flags.IR_r = 1;
+            flags.IR_r = 0b01;
         }
 }
 
@@ -166,14 +173,14 @@ void StartADC(u16* ADCValues)
     static u8 active_sensor = 0; /* The initialization will only occurs once */
     switch(active_sensor)
     {
-        case IR1 :
-            START_SAMPLING(IR1);
+        case IR_L :
+            START_SAMPLING(IR_L);
             break;
-        case IR2 :
-            START_SAMPLING(IR2);
+        case IR_C :
+            START_SAMPLING(IR_C);
             break;
-        case IR3 :
-            START_SAMPLING(IR3);
+        case IR_R :
+            START_SAMPLING(IR_R);
             break;
         case US :
             START_SAMPLING(US);
@@ -188,17 +195,17 @@ void StartADC(u16* ADCValues)
     
     switch(active_sensor)
     {
-        case IR1 :
-            ADCValues[0] = ADC1BUF0;
+        case IR_L :
+            ADCValues[IR_L] = ADC1BUF0;
             break;
-        case IR2 :
-            ADCValues[1] = ADC1BUF0;
+        case IR_C :
+            ADCValues[IR_C] = ADC1BUF0;
             break;
-        case IR3 :
-            ADCValues[2] = ADC1BUF0;
+        case IR_R :
+            ADCValues[IR_R] = ADC1BUF0;
             break;
         case US :
-            ADCValues[3] = ADC1BUF0;
+            ADCValues[US] = ADC1BUF0;
             break;        
     }
     active_sensor = (active_sensor + 1)%4;
@@ -254,24 +261,38 @@ void InitTimerServo()
     //clock source set to the internal instruction cycle
 }
 
-void Distance(const u16 *average)
-{
-    if(average[US] * PIC_VOLTAGE / 1023 < D_170_CM)
+void DistanceFlag(const u16 us_average)
+{   
+    if(flags.IR_c == 0b00)
+    {  
+        if((us_average * PIC_VOLTAGE / 1023 < 1.36) && (us_average * PIC_VOLTAGE / 1023) > 1.32)
         {
-            LcdPuts("down slow");
-            MoveBackward(SLOW);
+            flags.US_f = 0b00;
         }
-        
-        else if(average[US] * PIC_VOLTAGE / 1023 > D_120_CM)
+        else if(us_average * PIC_VOLTAGE / 1023 < 1.25)
         {
-            MoveForward(SLOW);
-            LcdPuts("UP slow");
+            flags.US_f = 0b01;
         }
-        else//((average[US]* PIC_VOLTAGE / 1023 < D_120_CM)&&(average[US] * PIC_VOLTAGE / 1023 > D_170_CM))
+        else if(us_average * PIC_VOLTAGE / 1023 > 1.45)
         {
-            LcdPuts("stop!");
-           StopMotor(); 
+            flags.US_f = 0b10;
         }
+    }
+    else if((flags.IR_c == 0b01) || (flags.IR_c == 0b11 ))
+    {
+        if(us_average * PIC_VOLTAGE / 1023 < 2.7)
+        {
+            flags.US_f = 0b01;
+        }
+        else if(us_average * PIC_VOLTAGE / 1023 > 2.3)
+        {
+            flags.US_f = 0b10;
+        }
+        else
+        {
+            flags.US_f = 0b00;
+        }
+    }
 }
 
 #endif
