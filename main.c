@@ -26,6 +26,7 @@
 #include "lcd.h"
 #include "i2c.h"
 #include <math.h>
+#include "algorithms.h"
 #include <libpic30.h>
 
 /******************************************************************************/
@@ -135,30 +136,6 @@ u16 main(void)
         
     }
 #endif
-
-#if 0  
-    // sensors test
-    while(1)
-    {
-        for(j=0; j<NMB_MEASURES; j++)
-        {
-            /* SENSORS SAMPLING */
-            for(i=0; i<NMB_SENSORS; i++)
-            {
-                StartADC(ADC_values);
-            }
-            ObjectDetection(ADC_values, average);
-        }
-        for(i=0; i<NMB_SENSORS-1; i++)
-        {
-            LcdPutFloat(average[i], 0);
-            LcdGoto(1,2);
-            LcdPutFloat(i,0);
-            __delay_ms(1000);
-            LcdClear();
-        }
-    }
-#endif
     
     while(1)
     { 
@@ -172,43 +149,15 @@ u16 main(void)
             }
             ObjectDetection(ADC_values, average);
         }
-        DisplayADCIR(average[IR_L]);
-        LcdGoto(1,2);
-        LcdPuts("IR");
-        __delay_ms(100);
         LcdClear();
-    }
-    while(1)
-    { 
         
-        for(j=0; j<NMB_MEASURES; j++)
-        {
-            /* SENSORS SAMPLING */
-            for(i=0; i<NMB_SENSORS; i++)
-            {
-                StartADC(ADC_values);
-            }
-            ObjectDetection(ADC_values, average);
-        }
-        //ObjectReaction(average);
+        /* Set Flags */       
+        ObjectReaction(average);        
+        //DistanceFlag(average[US]);
         
-        //LcdGoto(0,2);
+
         
-        DistanceFlag(average[US]);
-        
-        if(average[US] * PIC_VOLTAGE / 1023 < D_170_CM)
-        {
-            flags.US_f = 1; /* back */
-        }
-        else if(average[US] * PIC_VOLTAGE / 1023 > D_120_CM)
-        {
-            flags.US_f = 2; /* move */
-        }
-        else//((average[US]* PIC_VOLTAGE / 1023 < D_120_CM)&&(average[US] * PIC_VOLTAGE / 1023 > D_170_CM))
-        {
-            flags.US_f = 0; /* stop */
-        }
-        
+        AutoFLeeNoLeft();
 #if 0
         // IR algo
         if(flags.IR_c)

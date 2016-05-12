@@ -142,29 +142,43 @@ void ObjectDetection(const u16* ADCValues, u16* average)
 
 void ObjectReaction(const u16* average)
 {
-
-        if(average[IR_L] * PIC_VOLTAGE / 1023 >= 0.600) 
+        /* Left IR */
+        if((average[IR_L] * PIC_VOLTAGE / 1023) >= 0.800) 
         {
-            /* If the left IR detects an object closer than x cm */
+            /* If the left IR detects an object closer than 30 cm */
             flags.IR_l = 0b01;
         }
-        if(average[IR_C] * PIC_VOLTAGE / 1023 >= 0.600)
+        if((average[IR_L] * PIC_VOLTAGE / 1023) <= 0.300)
         {
-            /* If the front IR detects an object closer than x cm */
+            flags.IR_l = 0b00;
+        }
+        
+        /* Front IR */
+        if((average[IR_C] * PIC_VOLTAGE / 1023) >= 0.800)
+        {
+            /* If the front IR detects an object closer than 30 cm */
             flags.IR_c = 0b01;
         }
-        else if((average[IR_C] * PIC_VOLTAGE / 1023 <= 0.3) && (flags.IR_c == 0b01))
+        if(((average[IR_C] * PIC_VOLTAGE / 1023) <= 0.500) && (flags.IR_c == 0b01))
         {
+            /*  If the front IR detects an object  */
             flags.IR_c = 0b11;
         }
-        else if((average[IR_C] * PIC_VOLTAGE / 1023 <= 0.2) && (flags.IR_c == 0b11))
+        if(((average[IR_C] * PIC_VOLTAGE / 1023) <= 0.300) && (flags.IR_c == 0b11))
         {
+            /*  If the front IR does not detect an object  */
             flags.IR_c = 0b00;
         }
-        if(average[IR_R] * PIC_VOLTAGE / 1023 >= 0.600)
+        
+        /* Right IR */
+        if((average[IR_R] * PIC_VOLTAGE / 1023) >= 0.800)
         {
-            /* If the right IR detects an object closer than x cm */
+            /* If the right IR detects an object closer than 30 cm */
             flags.IR_r = 0b01;
+        }
+        if((average[IR_R] * PIC_VOLTAGE / 1023) <= 0.500)
+        {
+            flags.IR_r = 0b00;
         }
 }
 
