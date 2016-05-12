@@ -56,18 +56,19 @@ u16 main(void)
     InitUART();
     InitI2c();
     InitI2cCompass();
-    
+  
     /* Program for the bracelet */
     
 #ifdef PROTECTED
     
     /* Initialize IO ports and peripherals */
 
+      InitTimerUS();
  
     /* The values of the magnetic field will be save in x and y */
     s16 x = 0;
     s16 y = 0;   
- 
+    
     while(1)
     {
        I2cReadData(&x, &y);
@@ -102,7 +103,9 @@ u16 main(void)
     
     /* The values of the magnetic field will be save in x and y */
     s16 x = 0;
-    s16 y = 0;  
+    s16 y = 0;
+    
+    u16 angle2=0;
     
     char T[5];
     
@@ -116,6 +119,20 @@ u16 main(void)
         ADC_values[i]=0;
     }*/
     LcdClear();
+    
+    while(1){
+        I2cReadData(&x, &y);
+       angle2=((-atan2(x,y)*180)/3.14)+180;
+        /* Computes the angle using the arctan2 which provides an angle
+        * between -180° and 180°, then converts the result that is in radian
+        * into degree (*180/pi) and in the end add 180° so the angle is between
+        * 0° and 360° */
+       LcdPutFloat(angle2-angle,0);
+       __delay_ms(500);
+       LcdClear();
+        
+    }
+    
     while(1)
     { 
         

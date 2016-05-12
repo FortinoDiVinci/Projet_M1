@@ -100,6 +100,12 @@ void InitGPIO(void)
     TRISBbits.TRISB7=0;         /* set RB7 as output */
     
     /* Initialize peripherals */
+#ifdef PROTECTED
+    
+    ANSAbits.ANSA2=0;  /*set RA4 as digital */
+    TRISAbits.TRISA2=0; /* set RA4 as output */
+    
+#endif
     
 }
 
@@ -248,6 +254,26 @@ void InitTimerServo()
     //clock source set to the internal instruction cycle
 }
 
+void Distance(const u16 *average)
+{
+    if(average[US] * PIC_VOLTAGE / 1023 < D_170_CM)
+        {
+            LcdPuts("down slow");
+            MoveBackward(SLOW);
+        }
+        
+        else if(average[US] * PIC_VOLTAGE / 1023 > D_120_CM)
+        {
+            MoveForward(SLOW);
+            LcdPuts("UP slow");
+        }
+        else//((average[US]* PIC_VOLTAGE / 1023 < D_120_CM)&&(average[US] * PIC_VOLTAGE / 1023 > D_170_CM))
+        {
+            LcdPuts("stop!");
+           StopMotor(); 
+        }
+}
+
 #endif
 
 void InitUART(void)
@@ -264,3 +290,19 @@ void InitUART(void)
     U1STAbits.UTXEN = 1;        /* Enable Transmit */
     IEC0bits.U1RXIE = 1;        /* Enable Receive Interrupt */
 }
+#ifdef PROTECTED
+   
+void InitTimerUS()
+{
+    T1CON = 0x00; //Stops the Timer1 and reset control reg.
+    TMR1 = 0x00; //Clear contents of the timer register
+    T1CONbits.TCKPS=0b00; // Set the prescaler to 1:1
+    PR1 =200; //Load the Period register with the value for 20 ms signal
+    IPC0bits.T1IP = 0x01; //Setup Timer1 interrupt priority level 1
+    IFS0bits.T1IF = 0; //Clear the Timer1 interrupt status flag
+    IEC0bits.T1IE = 1; //Enable Timer1 interrupts
+    T1CONbits.TON = 1; //Start Timer1 with prescaler settings at 1:8 and
+    //clock source set to the internal instruction cycle
+}
+        
+#endif

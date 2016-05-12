@@ -17,6 +17,7 @@
 
 #include <stdint.h>        /* Includes uint16_t definition */
 #include <stdbool.h>       /* Includes true/false definition */
+#include "user.h"
 #include "servomotor.h"
 
 /******************************************************************************/
@@ -183,7 +184,7 @@ _U1RXInterrupt(void)
      }
     IFS0&=0xF7FF; // clear the U1RXIF bit
 }
-
+#ifdef BODY_GUARD
 void __attribute__((interrupt,auto_psv)) _T1Interrupt(void)
 {
     extern u16 servoPulseWidth;
@@ -200,3 +201,12 @@ void __attribute__((interrupt,auto_psv)) _T1Interrupt(void)
     }
     IFS0bits.T1IF = 0; //Reset Timer1 interrupt flag and Return from ISR
 }
+#endif
+
+#ifdef PROTECTED
+void __attribute__((interrupt,auto_psv)) _T1Interrupt(void)
+{
+    LATAbits.LATA2=~LATAbits.LATA2;
+    IFS0bits.T1IF = 0; //Reset Timer1 interrupt flag and Return from ISR
+}
+#endif

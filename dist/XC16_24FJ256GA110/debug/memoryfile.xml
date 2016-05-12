@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project>
-  <executable name="dist/XC16_24FJ256GA110/production/Projet_M1.production.elf">
+  <executable name="dist/XC16_24FJ256GA110/debug/Projet_M1.debug.elf">
     <memory name="data">
       <units>bytes</units>
       <length>2048</length>
-      <used>48</used>
-      <free>2000</free>
+      <used>126</used>
+      <free>1922</free>
     </memory>
     <memory name="program">
       <units>bytes</units>
       <length>16128</length>
-      <used>6762</used>
-      <free>9366</free>
+      <used>5523</used>
+      <free>10605</free>
     </memory>
   </executable>
 </project>

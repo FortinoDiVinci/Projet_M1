@@ -73,15 +73,20 @@ struct flag{
 /******************************************************************************/
 
 /* TODO User level functions prototypes (i.e. InitApp) go here */
-
 void InitGPIO(void);             /* I/O and Peripheral Initialization */
+void InitUART(void);
+
+
+void Distance(const u16 *average);
+
 void InitADC(void);                  /* Initialize Analog to Digital Converter */
 void InitPWM(void);              /* Initialize PWM */
 void StartADC(u16*);             /* Samples et converts the analog inputs */
 void ObjectDetection(const u16*, u16*);    /* Detect if an object is seen by one of the infrared */
 void ObjectReaction(const u16*); /* Set the flags according to IR dection */
 void DisplayADCIR(u16);          /* Convert the data into a voltage level */
-void InitUART(void);
 void InitTimerServo(void);           /* Initialization of the timer for the servomotor */
 
+
+void InitTimerUS(void);
 #endif USER_H
