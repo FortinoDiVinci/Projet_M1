@@ -24,5 +24,7 @@ void AutoFlee(void);
 
 void AutoFLeeNoLeft(void);
 
+void AutoBodyGuard(void);
+
 #endif	/* ALGORITHMS_H */
 

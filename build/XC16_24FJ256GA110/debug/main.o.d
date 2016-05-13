@@ -4,4 +4,6 @@ system.h  \
 user.h  \
  motorControl.h  \
 lcd.h  \
-i2c.h 
+i2c.h  \
+algorithms.h  \
+servomotor.h 

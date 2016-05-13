@@ -229,7 +229,7 @@ void DisplayADCIR(u16 const ADCValue)
 {
     float voltage;
     voltage = (ADCValue * PIC_VOLTAGE / 1023);
-    LcdPutFloat(voltage,3);
+    LcdPutFloat(voltage,2);
 }
 
 void InitPWM(void)

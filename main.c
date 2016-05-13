@@ -122,20 +122,50 @@ u16 main(void)
     LcdClear();
 #if 0    
     while(1){
-        I2cReadData(&x, &y);
+       I2cReadData(&x, &y);
        angle2=((-atan2(x,y)*180)/3.14)+180;
         /* Computes the angle using the arctan2 which provides an angle
         * between -180° and 180°, then converts the result that is in radian
         * into degree (*180/pi) and in the end add 180° so the angle is between
         * 0° and 360° */
        //LcdPutFloat(angle2,0);
+       LcdPutFloat(angle2,0);
        LcdGoto(1,2);
-       LcdPutFloat((s16)(angle2-angle),0);
+       LcdPutFloat(angle,0);
        __delay_ms(500);
        LcdClear();
         
     }
 #endif
+    while(1)
+    { 
+        
+        for(j=0; j<NMB_MEASURES; j++)
+        {
+            /* SENSORS SAMPLING */
+            for(i=0; i<NMB_SENSORS; i++)
+            {
+                StartADC(ADC_values);
+            }
+            ObjectDetection(ADC_values, average);
+        }
+        LcdClear();
+        
+        LcdPuts("L");
+        LcdGoto(2,1);
+        DisplayADCIR(average[IR_L]);
+        
+        LcdGoto(8,1);
+        LcdPuts("C");
+        LcdGoto(10,1);
+        DisplayADCIR(average[IR_C]);
+        
+        LcdGoto(1,2);
+        LcdPuts("R");
+        LcdGoto(3,2);
+        DisplayADCIR(average[IR_R]);
+    }
+               
     
     while(1)
     { 
@@ -155,9 +185,8 @@ u16 main(void)
         ObjectReaction(average);        
         //DistanceFlag(average[US]);
         
-
         
-        AutoFLeeNoLeft();
+        AutoFLee();
 #if 0
         // IR algo
         if(flags.IR_c)
