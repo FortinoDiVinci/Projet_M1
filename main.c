@@ -25,7 +25,7 @@
 #include "motorControl.h"
 #include "lcd.h"
 #include "i2c.h"
-#include <math.h>
+//#include <math.h>
 #include "algorithms.h"
 #include <libpic30.h>
 
@@ -73,11 +73,7 @@ u16 main(void)
     while(1)
     {
        I2cReadData(&x, &y);
-       angle=((-atan2(x,y)*180)/3.14)+180;
-        /* Computes the angle using the arctan2 which provides an angle
-        * between -180° and 180°, then converts the result that is in radian
-        * into degree (*180/pi) and in the end add 180° so the angle is between
-        * 0° and 360° */
+       ComputeAngle(&angle, x, y);
        PutData16(angle);
        __delay_ms(500);
     }
@@ -120,8 +116,9 @@ u16 main(void)
         ADC_values[i]=0;
     }*/
     LcdClear();
-#if 0    
-    while(1){
+#if 1    
+    while(1)
+    {
        I2cReadData(&x, &y);
        angle2=((-atan2(x,y)*180)/3.14)+180;
         /* Computes the angle using the arctan2 which provides an angle
@@ -150,20 +147,6 @@ u16 main(void)
             ObjectDetection(ADC_values, average);
         }
         LcdClear();
-        
-        LcdPuts("L");
-        LcdGoto(2,1);
-        DisplayADCIR(average[IR_L]);
-        
-        LcdGoto(8,1);
-        LcdPuts("C");
-        LcdGoto(10,1);
-        DisplayADCIR(average[IR_C]);
-        
-        LcdGoto(1,2);
-        LcdPuts("R");
-        LcdGoto(3,2);
-        DisplayADCIR(average[IR_R]);
     }
                
     

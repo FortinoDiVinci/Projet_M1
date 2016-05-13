@@ -12,6 +12,7 @@
 
 #include "user.h"
 #include "system.h"
+#include <math.h>
 #include "motorControl.h"
 #include "servomotor.h"
 #include <xc.h> // include processor files - each processor file is guarded. 
@@ -25,6 +26,13 @@ void AutoFlee(void);
 void AutoFLeeNoLeft(void);
 
 void AutoBodyGuard(void);
+
+void DebugIR(u16*);
+/* Display the values of all the IR sensors,
+ * L = left, C = center, R = right
+ */
+
+void ComputeAngle(u16*, const s16, const s16);
 
 #endif	/* ALGORITHMS_H */
 

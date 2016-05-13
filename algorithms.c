@@ -164,3 +164,12 @@ void DebugIR(u16* average)
     LcdGoto(3,2);
     DisplayADCIR(average[IR_R]);
 }
+
+void ComputeAngle(u16* angle, const s16 x, const s16 y)
+{
+    *angle=((-atan2(x,y)*180)/3.14)+180;
+        /* Computes the angle using the arctan2 which provides an angle
+        * between -180° and 180°, then converts the result that is in radian
+        * into degree (*180/pi) and in the end add 180° so the angle is between
+        * 0° and 360° */
+}

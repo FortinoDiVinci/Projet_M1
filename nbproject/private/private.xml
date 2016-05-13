@@ -5,11 +5,11 @@
         <group>
             <file>file:/Users/vfortineau/GitHub/Projet_M1/motorControl.c</file>
             <file>file:/Users/vfortineau/GitHub/Projet_M1/main.c</file>
+            <file>file:/Users/vfortineau/GitHub/Projet_M1/i2c.c</file>
             <file>file:/Users/vfortineau/GitHub/Projet_M1/user.h</file>
             <file>file:/Users/vfortineau/GitHub/Projet_M1/algorithms.c</file>
             <file>file:/Users/vfortineau/GitHub/Projet_M1/algorithms.h</file>
             <file>file:/Users/vfortineau/GitHub/Projet_M1/user.c</file>
-            <file>file:/Users/vfortineau/GitHub/Projet_M1/lcd.c</file>
             <file>file:/Users/vfortineau/GitHub/Projet_M1/motorControl.h</file>
         </group>
     </open-files>

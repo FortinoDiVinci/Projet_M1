@@ -83,7 +83,7 @@ void I2cReadByte(u8* T)
     for(i=0; i<6; i++)
     {
         I2cIdle();
-        IFS1bits.SSP1IF = 0;             /* Clears the interruption  */
+        IFS1bits.SSP1IF = 0;                 /* Clears the interruption  */
         SSP1CON2bits.RCEN = 1;               /*  */
         while(!IFS1bits.SSP1IF);             /* Waits until the end of transmission */
 //        while(SSP1CON2bits.RCEN);             /* Waits until the end of transmission */
@@ -92,7 +92,7 @@ void I2cReadByte(u8* T)
 
         if(i==5)
         {
-            I2cIdle();
+             I2cIdle();
 //            IFS1bits.SSP1IF = 0;             /* Clears the interruption  */
              SSP1CON2bits.ACKDT = 1;
 //            while(!IFS1bits.SSP1IF);         /* Waits until the end of transmission */
