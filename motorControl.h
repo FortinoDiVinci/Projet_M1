@@ -33,7 +33,7 @@
 #define MEDIUM 2
 #define FAST 3
 
-#define DUTY_SLOW 0.35
+#define DUTY_SLOW 0.42
 #define DUTY_MEDIUM 0.60
 #define DUTY_FAST 0.70
 

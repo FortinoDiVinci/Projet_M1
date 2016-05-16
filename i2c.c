@@ -7,6 +7,7 @@
 
 #include "i2c.h"
 #include "system.h" 
+#include <string.h>
 #include <libpic30.h>
 
 void I2cReadData(s16* mag_x, s16* mag_y)

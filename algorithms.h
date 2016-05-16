@@ -31,6 +31,7 @@ void DebugIR(u16*);
 /* Display the values of all the IR sensors,
  * L = left, C = center, R = right
  */
+void DebugUS(u16* average);
 
 void ComputeAngle(u16*, const s16, const s16);
 

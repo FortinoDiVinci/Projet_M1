@@ -3,14 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/vfortineau/GitHub/Projet_M1/motorControl.c</file>
-            <file>file:/Users/vfortineau/GitHub/Projet_M1/main.c</file>
-            <file>file:/Users/vfortineau/GitHub/Projet_M1/i2c.c</file>
-            <file>file:/Users/vfortineau/GitHub/Projet_M1/user.h</file>
-            <file>file:/Users/vfortineau/GitHub/Projet_M1/algorithms.c</file>
-            <file>file:/Users/vfortineau/GitHub/Projet_M1/algorithms.h</file>
-            <file>file:/Users/vfortineau/GitHub/Projet_M1/user.c</file>
-            <file>file:/Users/vfortineau/GitHub/Projet_M1/motorControl.h</file>
+            <file>file:/C:/Users/fabian/Documents/GitHub/Projet_M1/traps.c</file>
+            <file>file:/C:/Users/fabian/Documents/GitHub/Projet_M1/main.c</file>
+            <file>file:/C:/Users/fabian/Documents/GitHub/Projet_M1/lcd.h</file>
+            <file>file:/C:/Users/fabian/Documents/GitHub/Projet_M1/system.h</file>
+            <file>file:/C:/Users/fabian/Documents/GitHub/Projet_M1/user.h</file>
+            <file>file:/C:/Users/fabian/Documents/GitHub/Projet_M1/interrupts.c</file>
+            <file>file:/C:/Users/fabian/Documents/GitHub/Projet_M1/algorithms.h</file>
+            <file>file:/C:/Users/fabian/Documents/GitHub/Projet_M1/user.c</file>
+            <file>file:/C:/Users/fabian/Documents/GitHub/Projet_M1/i2c.h</file>
+            <file>file:/C:/Users/fabian/Documents/GitHub/Projet_M1/servomotor.h</file>
+            <file>file:/C:/Users/fabian/Documents/GitHub/Projet_M1/uart.h</file>
+            <file>file:/C:/Users/fabian/Documents/GitHub/Projet_M1/algorithms.c</file>
+            <file>file:/C:/Users/fabian/Documents/GitHub/Projet_M1/motorControl.c</file>
+            <file>file:/C:/Users/fabian/Documents/GitHub/Projet_M1/i2c.c</file>
+            <file>file:/C:/Users/fabian/Documents/GitHub/Projet_M1/motorControl.h</file>
         </group>
     </open-files>
 </project-private>

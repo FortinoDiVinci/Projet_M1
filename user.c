@@ -148,7 +148,7 @@ void ObjectReaction(const u16* average)
             /* If the left IR detects an object closer than 30 cm */
             flags.IR_l = 0b01;
         }
-        if((average[IR_L] * PIC_VOLTAGE / 1023) <= 0.300)
+        if((average[IR_L] * PIC_VOLTAGE / 1023) <= 0.100)
         {
             flags.IR_l = 0b00;
         }
@@ -159,12 +159,12 @@ void ObjectReaction(const u16* average)
             /* If the front IR detects an object closer than 30 cm */
             flags.IR_c = 0b01;
         }
-        if(((average[IR_C] * PIC_VOLTAGE / 1023) <= 0.500) && (flags.IR_c == 0b01))
+        if(((average[IR_C] * PIC_VOLTAGE / 1023) <= 0.200) && (flags.IR_c == 0b01)) //0.5
         {
             /*  If the front IR detects an object  */
             flags.IR_c = 0b11;
         }
-        if(((average[IR_C] * PIC_VOLTAGE / 1023) <= 0.300) && (flags.IR_c == 0b11))
+        if(((average[IR_C] * PIC_VOLTAGE / 1023) <= 0.100) && (flags.IR_c == 0b11))
         {
             /*  If the front IR does not detect an object  */
             flags.IR_c = 0b00;
@@ -176,7 +176,7 @@ void ObjectReaction(const u16* average)
             /* If the right IR detects an object closer than 30 cm */
             flags.IR_r = 0b01;
         }
-        if((average[IR_R] * PIC_VOLTAGE / 1023) <= 0.500)
+        if((average[IR_R] * PIC_VOLTAGE / 1023) <= 0.100)
         {
             flags.IR_r = 0b00;
         }
@@ -277,6 +277,7 @@ void InitTimerServo()
 
 void DistanceFlag(const u16 us_average)
 {   
+#if 0
     if(flags.IR_c == 0b00)
     {  
         if((us_average * PIC_VOLTAGE / 1023 < 1.36) && (us_average * PIC_VOLTAGE / 1023) > 1.32)
@@ -292,13 +293,33 @@ void DistanceFlag(const u16 us_average)
             flags.US_f = 0b10;
         }
     }
+#endif
+    if(flags.IR_c == 0b00)
+    {  
+        /* No obstacle */
+        if((us_average * PIC_VOLTAGE / 1023 < 2.3) && (us_average * PIC_VOLTAGE / 1023) > 1.7)
+        {
+             /* Normal distance */
+            flags.US_f = 0b00;
+        }
+        else if(us_average * PIC_VOLTAGE / 1023 < 1.8)
+        {
+            /* Too far */
+            flags.US_f = 0b01;
+        }
+        else if(us_average * PIC_VOLTAGE / 1023 > 2.0)
+        {
+            /* Too close */
+            flags.US_f = 0b10;
+        }
+    }
     else if((flags.IR_c == 0b01) || (flags.IR_c == 0b11 ))
     {
-        if(us_average * PIC_VOLTAGE / 1023 < 2.7)
+        if(us_average * PIC_VOLTAGE / 1023 < 2.0)
         {
             flags.US_f = 0b01;
         }
-        else if(us_average * PIC_VOLTAGE / 1023 > 2.3)
+        else if(us_average * PIC_VOLTAGE / 1023 > 2.6)
         {
             flags.US_f = 0b10;
         }
@@ -306,6 +327,10 @@ void DistanceFlag(const u16 us_average)
         {
             flags.US_f = 0b00;
         }
+    }
+    else
+    {
+        LcdPuts("what the hell");
     }
 }
 

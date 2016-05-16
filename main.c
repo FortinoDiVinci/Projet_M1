@@ -25,6 +25,7 @@
 #include "motorControl.h"
 #include "lcd.h"
 #include "i2c.h"
+#include "uart.h"
 //#include <math.h>
 #include "algorithms.h"
 #include <libpic30.h>
@@ -45,7 +46,7 @@ u16 angle=0;
 
 extern struct flag flags;
 
-u16 main(void)
+int main(void)
 {
     /* Configure the oscillator both devices */
     
@@ -116,7 +117,8 @@ u16 main(void)
         ADC_values[i]=0;
     }*/
     LcdClear();
-#if 1    
+    
+#if MAGNETIC_SENSOR    
     while(1)
     {
        I2cReadData(&x, &y);
@@ -134,7 +136,9 @@ u16 main(void)
         
     }
 #endif
-    while(1)
+
+#ifdef BODY_GUARD_MODE
+   while(1)
     { 
         
         for(j=0; j<NMB_MEASURES; j++)
@@ -147,9 +151,25 @@ u16 main(void)
             ObjectDetection(ADC_values, average);
         }
         LcdClear();
+        
+        LcdPutFloat(CCP2RB, 0);
+       
+        //__delay_ms(1000);
+        
+        LcdClear();
+        
+        /* Set Flags */       
+        ObjectReaction(average);        
+        DistanceFlag(average[US]);
+        
+        /* react */
+        
+        AutoBodyGuard();
+
     }
+#endif
                
-    
+#ifdef AUTO_FLEE
     while(1)
     { 
         
@@ -167,165 +187,11 @@ u16 main(void)
         /* Set Flags */       
         ObjectReaction(average);        
         //DistanceFlag(average[US]);
-        
-        
         AutoFLee();
-#if 0
-        // IR algo
-        if(flags.IR_c)
-        {
-            /* All 3 sensors detects objects */
-            MoveBackward(SLOW);
-            LcdClear();
-            LcdPuts("Object in front");
-            TurnWheels(10);
-            __delay_ms(1000);
-        }
-        else if(//flags.US_f==2 && 
-                flags.IR_l && !flags.IR_c && !flags.IR_r)
-        {
-            /* Obstacle only on the left and target is close */
-            TurnWheels(20);
-            MoveForward(MEDIUM);
-            LcdClear();
-            LcdPuts("Object on the\rright");
-        }
-        else if(//flags.US_f==2 && 
-                flags.IR_r && !flags.IR_c && !flags.IR_l)
-        {
-            /* Obstacle only on the right and target is close */
-            TurnWheels(-20);
-            MoveForward(MEDIUM);
-            LcdClear();
-            LcdPuts("Object on the\rleft");
-        }
-        else if(//flags.US_f==2 && 
-                !flags.IR_r && !flags.IR_c && !flags.IR_l)
-        {
-            /* no obstacle and target is close */
-            MoveForward(FAST);
-            LcdClear();
-            LcdPuts("Fast speed baby");
-        }
-#if 0
-        else if(flags.US_f==1)
-        {
-            /* Target is lost or too far */
-            MoveBackward(MEDIUM);
-            LcdClear();
-            LcdPuts("Going back !");
-        }
-        else if(flags.US_f==0)
-        {
-            StopMotor();
-        }
-#endif
-        else
-        {
-            MoveForward(SLOW);
-            LcdClear();
-            LcdPuts("Error ?");
-        }
-        
-        flags.IR_r = 0;
-        flags.IR_c = 0;
-        flags.IR_l = 0;
-        
-#endif
-        
-        #if 0 
-        if(average[US] * PIC_VOLTAGE / 1023 < D_170_CM)
-        {
-            LcdPuts("down slow");
-            MoveBackward(SLOW);
-        }
-        
-        else if(average[US] * PIC_VOLTAGE / 1023 > D_120_CM)
-        {
-            MoveForward(SLOW);
-            LcdPuts("UP slow");
-        }
-        else//((average[US]* PIC_VOLTAGE / 1023 < D_120_CM)&&(average[US] * PIC_VOLTAGE / 1023 > D_170_CM))
-        {
-            LcdPuts("stop!");
-           StopMotor(); 
-        }
-        
-        #endif
-        
-#if 0      
-        if(average[US]* PIC_VOLTAGE / 1023 > D_120_CM)
-        {
-            LcdPuts("UP Fast");
-            MoveForward(FAST);
-        }
-        else if((average[US]* PIC_VOLTAGE / 1023 > D_130_CM )&&( average[US]* PIC_VOLTAGE / 1023 < D_120_CM))
-        {
-            LcdPuts("UP Medium");
-            MoveForward(MEDIUM);
-        }
-        else if(average[US]* PIC_VOLTAGE / 1023 > MIN_DISTANCE_WITHOUT_DANGER)
-        {
-            LcdPuts("UP Slow");
-            MoveForward(SLOW);
-        }
-        else if(average[US] * PIC_VOLTAGE / 1023 < D_160_CM)
-        {
-            LcdPuts("down slow");
-            MoveBackward(MEDIUM);
-        }
-        else if((average[US] * PIC_VOLTAGE / 1023 > D_160_CM)&&(average[US] * PIC_VOLTAGE / 1023 < MAX_DISTANCE_WITHOUT_DANGER))
-        {
-            LcdPuts("down medium");
-            MoveBackward(SLOW);
-        }
-        else if((average[US]* PIC_VOLTAGE / 1023 > MAX_DISTANCE_WITHOUT_DANGER)&&(average[US] * PIC_VOLTAGE / 1023 < MIN_DISTANCE_WITHOUT_DANGER))
-        {
-            LcdPuts("stop!");
-           StopMotor(); 
-        }
-        else
-        {
-            LcdPuts("error");
-            /* should not happened :
-             * print error on the LCD
-             */       
-        }
-#endif
-        
-#if 0
-        
-        /* Object detection */
-        
-        if((average[1] * PIC_VOLTAGE / 1023 >= 0.400)&&(average[1] * PIC_VOLTAGE / 1023 <= 0.800))
-        {
-            LcdGoto(1,2);
-            LcdPuts("Normal speed.");
-            MoveForward(MEDIUM);
-        }
-        else if((average[1] * PIC_VOLTAGE / 1023 >= 0.800)&&(average[1] * PIC_VOLTAGE / 1023 <= 1.300) )
-        {
-            /* If the IR detects an object closer than 30 cm, motor slows down */
-            LcdGoto(1,2);
-            LcdPuts("SLOW...");
-            MoveForward(SLOW);
-        }
-        else if(average[1] * PIC_VOLTAGE / 1023 >= 1.300)
-        {
-            /* If the IR detects an object closer than 10 cm, motor stops  */
-            LcdGoto(1,2);
-            LcdPuts("STOP !");
-            StopMotor();
-        }
-        else 
-        {
-            LcdGoto(1,2);
-            LcdPuts("Fast speed baby !");
-            MoveForward(FAST);
-        }
 
-#endif
     }
+    
+#endif
 #endif
     return 0;
 }

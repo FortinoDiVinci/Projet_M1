@@ -5,5 +5,6 @@ user.h  \
  motorControl.h  \
 lcd.h  \
 i2c.h  \
+uart.h  \
 algorithms.h  \
 servomotor.h 

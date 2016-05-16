@@ -12,6 +12,14 @@
 #define BODY_GUARD
 //#define PROTECTED
 
+
+/* select the way that we want to use the device */
+
+//#define MAGNETIC_SENSOR
+//#define AUTO_FLEE
+#define BODY_GUARD_MODE
+
+
 /* Variables types simplification */
 
 #define u8 unsigned char
@@ -89,4 +97,4 @@ void InitTimerServo(void);           /* Initialization of the timer for the serv
 
 
 void InitTimerUS(void);
-#endif USER_H
+#endif /*USER_H */

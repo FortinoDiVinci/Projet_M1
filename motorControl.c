@@ -20,7 +20,7 @@ void MoveForward(u8 speed)
         //Sets the PWM frequency to 1 kHz.
         case SLOW:
             //Set the PWM duty cycle to 50%
-            CCP2RA = (DUTY_SLOW)*CCP2PRL; 
+            CCP2RA = (1-DUTY_SLOW)*CCP2PRL; 
             
             break ;
         case MEDIUM :
@@ -52,7 +52,7 @@ void MoveBackward(u8 speed)
     //Sets the PWM frequency to 1 kHz.
         case SLOW:
             //Set the PWM duty cycle to 50%
-            CCP2RB = (1-DUTY_SLOW)*CCP2PRL;    
+            CCP2RB = 1.2*(DUTY_SLOW*CCP2PRL);    
             break ;
         case MEDIUM :
             //Set the PWM duty cycle to 60%

@@ -18,6 +18,7 @@
 #include <stdint.h>        /* Includes uint16_t definition */
 #include <stdbool.h>       /* Includes true/false definition */
 #include "user.h"
+#include "uart.h"
 #include "servomotor.h"
 
 /******************************************************************************/

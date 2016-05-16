@@ -62,5 +62,9 @@ s8 I2cACK(void);
 /*I2cACK function 
  -------------------
  */
+void I2cMode(void);
+/*I2cMode function 
+ -------------------
+ */
 #endif	/* I2C_H */
 
